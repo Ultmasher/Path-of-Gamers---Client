@@ -16,6 +16,24 @@
     padding: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.RegisterInput {
+    margin: 1rem 0rem;
+    padding: 0.5rem 1rem;
+    width: 300px;
+    border: 2px solid var(--main-orange-color);
+    border-radius: 0.9rem;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    text-transform: capitalize;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 1.3rem;
+    transition: 0.3s;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .registerButton {
@@ -52,6 +70,11 @@
     cursor: pointer; 
 }
 .registerButton:hover {
+    transition: 0.3s;
+    border: 2px solid var(--main-text-color)
+}
+
+.discordButton:hover {
     transition: 0.3s;
     border: 2px solid var(--main-text-color)
 }
