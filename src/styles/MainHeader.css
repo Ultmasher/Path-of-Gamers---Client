@@ -1,0 +1,15 @@
+
+.mainHeaderContainer {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--main-bg-color-darkest);
+}
+
+.mainHeaderImg {
+    height: 70%;
+    width: auto;
+    margin-left: 2rem;
+}

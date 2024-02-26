@@ -1,45 +1,52 @@
 .registerContainer {
-    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.formInputsWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.registerImg {
-    width: 60%;
-    height: auto;
-    margin: 2rem 0rem;
-    }
-
-.registerButtonsWrapper{
-    padding: 1rem;
+.formInputsWrapper label {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 0.5rem 0rem;
 }
 
-.RegisterInput {
-    margin: 1rem 0rem;
-    padding: 0.5rem 1rem;
-    width: 300px;
+.formInputsWrapper input {
+    border-radius: 0.8rem;
     border: 2px solid var(--main-orange-color);
-    border-radius: 0.9rem;
-    background-color: var(--main-bg-color);
-    color: var(--main-text-color);
-    text-transform: capitalize;
-    font-style: italic;
-    font-weight: 900;
-    font-size: 1.3rem;
-    transition: 0.3s;
-    font-family: 'Noto Sans', sans-serif;
+    padding: 0.4rem 0.8rem;
+    margin: 0.4rem 0rem;
+    width: 200px;
 }
 
-.registerButton {
-    margin: 1rem 1rem;
-    padding: 0.2rem 0rem;
-    width: 180px;
+.formInputsWrapper input:focus {
+    outline: none;
+    border: 2px solid var(--main-text-color);
+}
+
+.registerButtonsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.registerButton, .discordButton {
+    width: 100%;
+    margin: 1rem 0rem;
     border: 2px solid var(--main-orange-color);
     border-radius: 0.8rem;
     background-color: var(--main-orange-color);
@@ -51,31 +58,26 @@
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
     cursor: pointer; 
+    color: white;
 }
 
 .discordButton {
-    margin: 1rem 1rem;
-    padding: 0.2rem 0rem;
-    width: 180px;
     border: 2px solid var( --main-discord-color);
-    border-radius: 0.8rem;
     background-color: var( --main-discord-color);
-    color: var(--main-text-color);
-    text-transform: capitalize;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 1.2rem;
-    transition: 0.3s;
-    font-family: 'Noto Sans', sans-serif;
-    cursor: pointer; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.registerButton:hover {
+
+.discordLogo {
+    width: auto;
+    height: 15px;
+    margin-left: 0.5rem;
+}
+
+.registerButton:hover, .discordButton:hover {
     transition: 0.3s;
     border: 2px solid var(--main-text-color)
 }
 
-.discordButton:hover {
-    transition: 0.3s;
-    border: 2px solid var(--main-text-color)
-}
 
