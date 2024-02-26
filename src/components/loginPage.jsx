@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import '../styles/LoginPage.css';
@@ -9,7 +9,7 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm();
+    const { handleSubmit } = useForm();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -50,7 +50,6 @@ return (
             <div className='loginButtonsWrapper'>
             <button className="discordButton" onClick={handleDiscordLogin}>Login with Discord</button>
             <button className='LoginButton' onClick={handleLoginClick}>Sign In</button>
-
             </div>
 
         </form>
