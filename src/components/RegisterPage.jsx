@@ -16,7 +16,7 @@ import { useState } from 'react';
       // Handle form submission logic here
     };
 
-    const handleRegisterClick = (path) => {
+    const handleRegisterClick = () => {
             // Handle Discord registration logic here
     };
   
