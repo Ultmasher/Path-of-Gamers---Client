@@ -1,34 +1,36 @@
-//import React from 'react';
-import { useForm } from 'react-hook-form';
-//import { BrowserRouter } from 'react-router-dom';
-
-const RegisterForm = () => {
-    const { register, handleSubmit } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
+import { useState } from 'react';
+  function RegisterForm() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      // Handle form submission logic here
     };
-    
+  
+    const handleDiscordRegister = () => {
+      // Handle Discord registration logic here
+    };
+  
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>
-            Email:
-            <input type="email" {...register("email", { required: true })} />
-          </label>
-          <label>
-            Username:
-            <input type="text" {...register("username", { required: true })} />
-          </label>
-          <label>
-            Password:
-            <input type="password" {...register("password", { required: true })} />
-          </label>
-          <button type="button" >Register with Discord</button>
-          <button type="submit">Register</button>
-        </form>
-      );
-    }
-
-
-
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={e => setUsername(e.target.value)} required />
+        </label>
+        <label>
+          Password:
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+        </label>
+        <label>
+          Email:
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+        </label>
+        <button type="button" onClick={handleDiscordRegister}>Register with Discord</button>
+        <button type="submit">Register</button>
+      </form>
+    );
+  }
+  
 export default RegisterForm;
