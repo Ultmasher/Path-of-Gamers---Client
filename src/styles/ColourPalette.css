@@ -1,0 +1,12 @@
+:root {
+    --main-bg-color-darkest: #333333;
+    --main-bg-color-dark: #525050;
+    --main-text-color: #D9D9D9;
+    --main-orange-color: #CE761E;
+
+    --container-light-color: #B0B0B0;
+    --container-text-colour-dark: #333333;
+    --container-text-colour-light: #D9D9D9;
+
+    --second-orange-color: #FFA500;
+}
