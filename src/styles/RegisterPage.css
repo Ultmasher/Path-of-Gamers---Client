@@ -34,6 +34,23 @@
     font-family: 'Noto Sans', sans-serif;
     cursor: pointer; 
 }
+
+.discordButton {
+    margin: 1rem 1rem;
+    padding: 0.2rem 0rem;
+    width: 180px;
+    border: 2px solid var( --main-discord-color);
+    border-radius: 0.8rem;
+    background-color: var( --main-discord-color);
+    color: var(--main-text-color);
+    text-transform: capitalize;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    font-family: 'Noto Sans', sans-serif;
+    cursor: pointer; 
+}
 .registerButton:hover {
     transition: 0.3s;
     border: 2px solid var(--main-text-color)

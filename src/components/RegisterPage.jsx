@@ -44,7 +44,7 @@ import { useState } from 'react';
         </label>
 
         <div className='landingButtonsWrapper'>
-        <button className="registerButton" onClick={handleDiscordRegister}>Register with Discord</button>
+        <button className="discordButton" onClick={handleDiscordRegister}>Register with Discord</button>
         <button className='registerButton' onClick={handleRegisterClick}>CREATE ACCOUNT</button>
         </div>
       </form>
