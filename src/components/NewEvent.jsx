@@ -4,6 +4,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router';
 import '../styles/NewEvent.css';
+import LandingHeader from './LandingHeader';
+
 const NewEvent = () => {
 
     const navigate = useNavigate();
@@ -23,13 +25,12 @@ const NewEvent = () => {
 };
 
   return (
-    <div className='eventContainer'>
-    <img className='eventImg' src='https://cdn.discordapp.com/attachments/1208068435725262938/1208070511322603551/POGLogo.png?ex=65eb2cd6&is=65d8b7d6&hm=fc26c274366064190fcbc3ffb82ef1538b3a7bfe73e4f71e3609aa83f7d96a3e&' alt='POG Logo' />
-
+    <>
+    <LandingHeader />
     <div className='eventContainer'>
     <form onSubmit={handleSubmit(onSubmit)}>
 
-<div className='eventInput'>
+<div className='eventInputsWrapper'>
         Game:
         <label>
         <select {...register("chosenGame", { required: true })}>
@@ -72,7 +73,7 @@ const NewEvent = () => {
       </div>
     </form>
     </div>
-    </div>
+    </>
   );
 };
 
