@@ -1,9 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import '../styles/AccountSettings.css';
 
 const AccountSettings = () => {
+
+    const navigate = useNavigate()
+
+    const navigateToGameSettings = () => {
+        navigate('/account/game-settings')
+    };
+
   return (
-    <>
+    <div className='accountSettingsContainer'>
     <div className='accountSettingsLeft'>
         <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
         </img>
@@ -25,15 +33,15 @@ const AccountSettings = () => {
                     <label htmlFor='password'>Password:</label>
                     <input type='password' id='password' name='password' placeholder="Enter New Password"/>
 
-                    <button className='saveChangesButton'>Save Changes</button>
+                    <button className='saveChangesButton' >Save Changes</button>
 
             </div>       
         </div>
         <div className='gameSettingsButtonDiv'>
-            <button className='gameSettingsButton'>Game Settings ▸</button>
+            <button className='gameSettingsButton' onClick={navigateToGameSettings}>Game Settings ▸</button>
         </div>
     </div>
-    </>
+    </div>
   )
 }
 
