@@ -66,9 +66,9 @@ const NewEvent = () => {
         <DatePicker selected={watchEndDate} onChange={date => register('endDate').onChange(date)} />
       </label>
       </div>
-      
+
     <div className='eventButtonsWrapper'>
-    <button className='eventButton' onClick={handleNewEventClick}>Sign In</button>
+    <button className='eventButton' onClick={handleNewEventClick}>Create Event</button>
       </div>
     </form>
     </div>
