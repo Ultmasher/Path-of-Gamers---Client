@@ -17,5 +17,9 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--container-light-color) var(--main-bg-color-dark);
+    scroll-behavior: smooth;
+    
 }

@@ -11,5 +11,12 @@ body {
     font-family: 'Noto Sans', sans-serif;
     background-color: var(--main-bg-color-darkest);
     color: var(--main-text-color);
-    
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
