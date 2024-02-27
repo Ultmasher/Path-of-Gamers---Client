@@ -3,6 +3,18 @@ import { useNavigate } from 'react-router';
 import '../styles/AccountSettings.css';
 
 const AccountSettings = () => {
+    
+    const [file, setFile] = useState();
+    const upload = () => {
+        const formData = new FormData();
+        formData.append('file', file);
+        fetch('http://localhost:3000/upload', {
+        })
+        .then(response => ())
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
     const navigate = useNavigate()
 
@@ -13,9 +25,9 @@ const AccountSettings = () => {
   return (
     <div className='accountSettingsContainer'>
     <div className='accountSettingsLeft'>
-        <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
-        </img>
-        <button className='changeAvatarButton'>Change Avatar</button>
+        <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' />
+        <input type="file" onChange={function(e) { setFile(e.target.files[0]) }} />
+        <button className='changeAvatarButton' onClick={upload}>Change Avatar</button>
         <h2>PoG Username #117</h2>
     </div>
 

@@ -15,10 +15,10 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
 
 
-  const onSubmit = data => {
-    console.log(data);
+  //const onSubmit = data => {
+    //console.log(data);
     // Here you would typically send the data to your server
-  };
+  //};
 
   const handleDiscordLogin = () => {
     console.log('Discord login clicked');
