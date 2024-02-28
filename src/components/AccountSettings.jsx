@@ -12,12 +12,18 @@ const AccountSettings = () => {
         navigate('/account/game-settings')
     };
 
+    const [file, setFile] = useState();
+    function handleChange(e) {
+        console.log(e.target.files);
+        setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
   return (
     <div className='accountSettingsContainer'>
     <div className='accountSettingsLeft'>
-        <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
+        <img className='userAvatarSettingsImg' src={file} alt='blankProfile' >
         </img>
-        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" />
+        <input type="file" onChange={handleChange} id="profile-picture" name="profile-picture" accept="image/*" />
         <button className='changeAvatarButton'onClick={() => setIsOpen(true)}>Change Avatar</button>
         <Modal className= 'Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
         Your avatar picture has been changed!
