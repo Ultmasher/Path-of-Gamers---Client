@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .accountSettingsRight {
@@ -23,13 +24,14 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    box-sizing: border-box;
 }
 
 .userAvatarSettingsImg {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
 
 .changeAvatarButton {
@@ -48,14 +50,27 @@
     cursor: pointer; 
 }
 
-.accountSettingsContent, .gameSettingsButtonDiv {
-    padding: 5rem;
+.accountSettingsContent, .gameSettingsDiv {
+    padding: 0rem;
+}
+
+.accountSettingsContent {
+    background-color:  var(--main-bg-color-darkest);
+    margin: 2rem;
+    margin-top: 2rem;
+    margin: 3rem 3rem 1.4rem 0rem;
+    padding: 2rem;
+    border-radius: 0.8rem;
 }
 
 .accountSettingsContent h1 {
     padding: 0;
     margin: 0;
-    text-decoration: underline;
+    padding-left: 0.4rem;
+    border-bottom: 2px solid var(--main-orange-color);
+    margin-right: 1.2rem;
+    font-size: 1.6rem;
+    text-transform: uppercase;
 }
 
 .accountSettingsForm {
@@ -63,18 +78,31 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
-.accountSettingsForm input {
+.accountSettingsFormInputs {
+    display: flex;
+    width: 100%;
+}
+
+.accountSettingsFormLeft, .accountSettingsFormRight {
+    display: flex;
+    flex-direction: column;
     width: 50%;
+    padding: 0.4rem;
+    padding-right: 2rem;
+}
+
+
+.accountSettingsForm input {
     padding: 0.5rem;
-    margin: 0.5rem 0;
+    margin: 0.4rem 0;
     border: 2px solid var(--main-orange-color);
     border-radius: 0.5rem;
     font-size: 1rem;
     font-family: 'Noto Sans', sans-serif;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1rem;
 
 }
 
@@ -86,6 +114,20 @@
 .accountSettingsForm label {
     text-transform: uppercase;
     font-size: 1.2rem;
+    cursor: pointer;
+    width: auto;
+}
+
+.regionSelect {
+    padding: 0.5rem;
+    margin: 0.4rem 0;
+    border: 2px solid var(--main-orange-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: 'Noto Sans', sans-serif;
+    margin-bottom: 1rem;
+    width: 100%;
+
 }
 
 .saveChangesButton {
@@ -102,12 +144,48 @@
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
     cursor: pointer; 
-    margin-top: 1.4rem;
+    margin-right: 2rem;
+}
+
+.accountSettingsFormButton {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.gameSettingsDiv {
+    background-color: var(--main-bg-color-darkest);
+    border-radius: 0.8rem;
+    margin-right: 3rem;
+    padding: 1rem 2rem 1.4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.gameSettingsButtonDiv {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+
+.gameSettingsDiv h2 {
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.gameSettingsDiv p {
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 200;
+    padding-top: 0.2rem;
 }
 
 .gameSettingsButton{
-    padding: 0.4rem;
-    width: 80%;
+    padding: 0.2rem 0.6rem;
     border: 2px solid var(--main-orange-color);
     border-radius: 0.8rem;
     background-color: var(--main-orange-color);
@@ -115,7 +193,7 @@
     text-transform: uppercase;
     font-style: italic;
     font-weight: 700;
-    font-size: 1.6rem;
+    font-size: 1rem;
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
     cursor: pointer; 

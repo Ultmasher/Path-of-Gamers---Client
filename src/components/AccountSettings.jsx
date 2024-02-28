@@ -24,6 +24,9 @@ const AccountSettings = () => {
             <h1>Account Settings</h1>
             <div className='accountSettingsForm'>
 
+                <div className='accountSettingsFormInputs'>
+
+                <div className='accountSettingsFormLeft'>
                     <label htmlFor='username'>Username:</label>
                     <input type='text' id='username' name='username' placeholder='PoG Username #117' />
 
@@ -32,13 +35,36 @@ const AccountSettings = () => {
 
                     <label htmlFor='password'>Password:</label>
                     <input type='password' id='password' name='password' placeholder="Enter New Password"/>
+                </div>
 
+                <div className='accountSettingsFormRight'>
+                    <label htmlFor='region'>Region:</label>
+                    <select className='regionSelect' id='region' name='region'>
+                        <option value='na'>North America</option>
+                        <option value='eu'>Europe</option>
+                        <option value='asia'>Asia</option>
+                    </select>
+
+                    <label htmlFor='firstName'>First Name:</label>
+                    <input type='text' id='firstName' name='firstName' placeholder='John' />
+
+                    <label htmlFor='lastName'>Last Name:</label>
+                    <input type='text' id='lastName' name='lastName' placeholder='Doe' />
+                </div>
+
+                </div>
+                <div className='accountSettingsFormButton'>
                     <button className='saveChangesButton' >Save Changes</button>
+                </div>
 
             </div>       
         </div>
-        <div className='gameSettingsButtonDiv'>
+        <div className='gameSettingsDiv'>
+            <h2>Do you want to link a new game to your account?</h2>
+            <p>Click the button below to access your Game Settings!</p>
+            <div className='gameSettingsButtonDiv'>
             <button className='gameSettingsButton' onClick={navigateToGameSettings}>Game Settings ▸</button>
+            </div>
         </div>
     </div>
     </div>
