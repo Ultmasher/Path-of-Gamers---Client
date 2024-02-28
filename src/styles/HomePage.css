@@ -21,5 +21,4 @@
     scrollbar-width: thin;
     scrollbar-color: var(--container-light-color) var(--main-bg-color-dark);
     scroll-behavior: smooth;
-    
 }

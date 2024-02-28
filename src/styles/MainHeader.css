@@ -68,4 +68,5 @@
 .dropdownArrow.open {
     transform: rotate(90deg);
     transition: transform 0.2s;
+    color: var(--main-orange-color);
   }
