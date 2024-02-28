@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import MainHeader from './MainHeader';
 import HomeFeed from './HomeFeed';
 import AccountSettings from './AccountSettings';
