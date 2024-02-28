@@ -147,6 +147,10 @@
     margin-right: 2rem;
 }
 
+.saveChangesButton:hover {
+    border: 2px solid var(--main-text-color);
+}
+
 .accountSettingsFormButton {
     width: 100%;
     display: flex;
