@@ -1,0 +1,44 @@
+.blockTabs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid var(--second-orange-color);
+    padding-left: 1rem;
+    margin-right: 1rem;
+}
+
+.profileTab {
+    border: 2px solid var(--second-orange-color);
+    border-bottom: none;
+    background-color: var(--main-orange-color);
+    cursor: pointer;
+    padding: 0.4rem 3rem 0rem 1rem;
+    border-radius: 1rem 1rem 0rem 0rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: -0.4rem; /* Adjust the value as needed */
+    transition: 0.3s;
+}
+
+.activeProfileTab {
+    background-color: var(--container-light-color);
+    color: var(--main-orange-color-darkest);
+    border: 2px solid var(--main-text-color);
+    border-bottom: none;
+    z-index: 1;
+    transition: 0.3s;
+}
+
+.profileTab:hover {
+    border: 2px solid var(--main-text-color);
+    border-bottom: none;
+    transition: 0.3s;
+}
+
+.tabContent {
+    display: none;
+}
+
+.activeTabContent {
+    display: block;
+}
