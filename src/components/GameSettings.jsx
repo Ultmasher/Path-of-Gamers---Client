@@ -18,6 +18,7 @@ const GameSettings = () => {
 
   const handleAddGame = () => {
     console.log('Add Game');
+    navigate('/addgame');
   };
 
   const navigateToAccountSettings = () => {

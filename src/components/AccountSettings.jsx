@@ -40,9 +40,8 @@ const AccountSettings = () => {
                 <div className='accountSettingsFormRight'>
                     <label htmlFor='region'>Region:</label>
                     <select className='regionSelect' id='region' name='region'>
-                        <option value='na'>North America</option>
-                        <option value='eu'>Europe</option>
-                        <option value='asia'>Asia</option>
+                        <option value='na'>EU: West</option>
+                        <option value='eu'>EU: East</option>
                     </select>
 
                     <label htmlFor='firstName'>First Name:</label>

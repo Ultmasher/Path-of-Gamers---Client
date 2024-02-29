@@ -4,6 +4,7 @@ import HomeFeed from './HomeFeed';
 import AccountSettings from './AccountSettings';
 import GameSettings from './GameSettings';
 import ProfilePage from './ProfilePage';
+import AddGameInformation from '../styles/AddGameInformation';
 import Footer from './Footer';
 import { Route, Routes } from 'react-router';
 
@@ -21,6 +22,7 @@ const HomePage = () => {
                     <Route path='/account' element={<AccountSettings />} />
                     <Route path='/account/game-settings' element={<GameSettings />} />
                     <Route path='/profile' element={<ProfilePage />} />
+                    <Route path='/addgame' element={<AddGameInformation />} />
 
                 </Routes>
             </div>
