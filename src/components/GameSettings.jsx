@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router';
 import '../styles/GameSettings.css';
 
 import legaueOfLegendsLogo from '../assets/GameAssets/leagueoflegends.png';
@@ -6,6 +7,23 @@ import fifa24Logo from '../assets/GameAssets/eafc24.png';
 import fortniteLogo from '../assets/GameAssets/fortnite.png';
 
 const GameSettings = () => {
+
+  const [selectedGame, setSelectedGame] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleSelectGame = (game) => {
+    selectedGame === game.name ? setSelectedGame('') : setSelectedGame(game.name);
+  };
+
+  const handleAddGame = () => {
+    console.log('Add Game');
+    navigate('/addgame');
+  };
+
+  const navigateToAccountSettings = () => {
+    navigate('/account');
+  };
 
   const gameList = [
 
@@ -31,8 +49,22 @@ const GameSettings = () => {
     <div className='gameSettingsContainer'>
       <div className='gameSettingsContent'>
 
+          <h1 className='gameSettingsTitle'>Game Settings</h1>
+
+          <div className='gameSettingsColumns'>
+
           <div className='gameSettingsLeft'>
-            <img src='https://example.com/assets/GameAssets/fortnite.png' alt='League of Legends' />
+            <div className='gameSettingsInstructions'>
+              <ol>
+                <li>Click on the game from the list below that you want to add to your profile</li>
+                <li>Click on the 'ADD GAME +' button beaneath the list</li>
+                <li>You will then be directed on how to link your PoG account to the game!</li>
+              </ol>
+            </div>
+
+            <div className='gameSettingsBackBtnDiv'>
+            <button className='backBtn' onClick={navigateToAccountSettings} >⏴&nbsp;&nbsp; Account Settings</button>
+            </div>
           </div>
 
           <div className='gameSettingsRight'>
@@ -40,7 +72,7 @@ const GameSettings = () => {
             <div className='gameSettingsGameList'>
                 {gameList.map((game, index) => {
                   return (
-                    <div key={index} className='gameSettingsGameItem'>
+                    <div key={index} className={selectedGame === game.name ? 'selectedGameItem gameSettingsGameItem' : 'gameSettingsGameItem'} onClick={() => handleSelectGame(game)} >
                       <img src={game.logo} alt={game.name} />
                       <p className='gameSettingsGameTitle'>{game.name}</p>
                     </div>
@@ -49,8 +81,10 @@ const GameSettings = () => {
             </div>
 
             <div className='gameSettingsAddGameBtnDiv'>
-              <button className='addGameBtn'>Add Game&nbsp;&nbsp;+</button>
+              <button disabled={!selectedGame ?  true : false} className={!selectedGame ? 'addGameBtn disabledBtn' : 'addGameBtn activeAddGameBtn'} onClick={handleAddGame}>Add Game&nbsp;&nbsp;+</button>
             </div>
+
+          </div>
 
           </div>
 
