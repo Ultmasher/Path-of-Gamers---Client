@@ -20,6 +20,9 @@ const AccountSettings = () => {
         bio: "",
         password: ""
     });
+    const [avatarData, setAvatarData] = useState({
+        avatar: "",
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,14 +45,25 @@ const AccountSettings = () => {
         }
     };
 
+    const avatarSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await modifyAvatar(avatarData);
+            console.log("Avatar submitted:", avatarData);
+        } catch (error) {
+            console.error("Error submitting Avatar:", error);
+        }
+    };
 
     return (
         <div className='accountSettingsContainer'>
             <div className='accountSettingsLeft'>
                 <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
                 </img>
-                <input type="file" id="profile-picture" name="profile-picture" accept="image/*" />
-                <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Change Avatar</button>
+                <form onSubmit={avatarSubmit}>
+                    <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar} accept="image/*" />
+                    <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Change Avatar</button>
+                </form>
                 <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
                     Your avatar picture has been changed!
                 </Modal>
