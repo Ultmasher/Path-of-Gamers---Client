@@ -1,9 +1,7 @@
 import React from 'react'
 
-const API = () => {
 
-
-
+export const API = () => {
     const getLoLData = async () => {
         try {
             const res = await fetch("http://localhost:8000/getinfo")
@@ -77,14 +75,7 @@ const API = () => {
     };
 
 
-
-
-
-
-
-
-
-
     return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser };
-}
+};
+
 export default API;
