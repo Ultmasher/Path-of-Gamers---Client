@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 export const API = () => {
     const getLoLData = async () => {
         try {
@@ -23,8 +22,7 @@ export const API = () => {
             console.error('Error fetching data:', error);
         }
     }
-
-
+    
     const modifyUser = async (userData) => {
         try {
             const res = await fetch("http://localhost:8000/user/65dc65e3c92b7f3839eb1565", {
@@ -34,13 +32,13 @@ export const API = () => {
                 },
                 body: JSON.stringify(userData)
             });
+
             const data = await res.json();
             return data;
         } catch (error) {
             console.log(error);
         }
     };
-
     const registerUser = async (userData) => {
         try {
             const res = await fetch("http://localhost:8000/user", {
@@ -73,7 +71,6 @@ export const API = () => {
             throw new Error('Error uploading profile picture');
         }
     };
-
 
     return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser };
 };

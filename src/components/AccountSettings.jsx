@@ -4,10 +4,14 @@ import '../styles/AccountSettings.css';
 import Modal from './Modal';
 import axios from 'axios';
 
+
 const AccountSettings = () => {
     const [previewSrc, setPreviewSrc] = useState(null);
     const [avatar, setAvatar] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [base64Image, setBase64Image] = useState('');
+
+    
 
     const navigate = useNavigate();
 
@@ -20,6 +24,7 @@ const AccountSettings = () => {
         bio: "",
         password: ""
     });
+
     const [avatarData, setAvatarData] = useState({
         avatar: "",
     });
@@ -36,56 +41,79 @@ const AccountSettings = () => {
         navigate('/account/game-settings');
     };
 
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const newAvatarData = new FormData();
         newAvatarData.append('avatar', formData.avatar);
+        if (avatar) {
+            try {
+              await avatarSubmit(avatar);
+              console.log('Avatar updated successfully');
+            } catch (error) {
+              console.error('Error updating avatar:', error);
+            }
+          }
+        };
+
+    const avatarSubmit = async (e) => {
+        e.preventDefault();
+        if (!avatarData.avatar) {
+            console.error("No avatar file selected");
+            return;
+        }
+    
+        const newAvatarData = new FormData();
+        newAvatarData.append('avatar', avatarData.avatar);
+    
         try {
-            const response = await axios.post('http://localhost:3001/api/v1/users/avatar', newAvatarData, {
+            const response = await axios.put('http://localhost:8000/user/avatar/65dc65e3c92b7f3839eb1565', newAvatarData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            setAvatar([...avatar, response.data]);
-        } catch (error) {
-            console.error(error.response.data);
-        }
-    };
-
-    const avatarSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            // TODO: Implement modifyAvatar function
-            console.log("Avatar submitted:", avatarData);
+            setAvatar(response.data);
+            console.log("Avatar submitted:", response.data);
         } catch (error) {
             console.error("Error submitting Avatar:", error);
         }
     };
 
-    return (
-        <div className='accountSettingsContainer'>
-            <div className='accountSettingsLeft'>
-                <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' >
-                </img>
-                <form onSubmit={avatarSubmit}>
-                    <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar}  accept="image/*" onChange={(e) => {
-                        const file = e.target.files[0];
-                        setAvatarData({
-                            ...avatarData,
-                            avatar: file,
-                        });
-                        setPreviewSrc(URL.createObjectURL(file));
-                        setIsPhotoUploaded(true);
-                    }} />
-                    <button className='changeAvatarButton' onClick={() => setIsOpen(true) }>Change Avatar</button>
-                </form>
-                <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
-                    Your avatar picture has been changed!
-                </Modal>
-                <h2>PoG Username #117</h2>
-            </div>
-
-            <div className='accountSettingsRight'>
+    // const handleFileChange = (event) => {
+    //     if (event.target.files.length > 0) {
+    //       const file = event.target.files[0];
+    //       const reader = new FileReader();
+    
+    //       reader.onloadend = () => {
+    //         setBase64Image(reader.result);
+    //       };1q   
+    
+            return (
+                <div className='accountSettingsContainer'>
+                <div className='accountSettingsLeft'>
+                    <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' >
+                    {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
+                    </img>
+                    <form onSubmit={avatarSubmit}>
+                        <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar}  accept="image/*" onChange={(e) => {
+                            const file = e.target.files[0];
+                            setAvatarData({
+                                ...avatarData,
+                                avatar: file,
+                            });
+                            setPreviewSrc(URL.createObjectURL(file));
+                            // setIsPhotoUploaded(true);
+                        }} />
+                        <button className='changeAvatarButton' onClick={() => setIsOpen(true) }>Change Avatar</button>
+                    </form>
+                    <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
+                        Your avatar picture has been changed!
+                    </Modal>
+                    <h2>PoG Username #117</h2>
+                </div>
+                <div>
+                    </div>
+                    <div className='accountSettingsRight'>
                 <form onSubmit={handleFormSubmit}>
                     <div className='accountSettingsContent'>
                         <h1>Account Settings</h1>
@@ -131,8 +159,10 @@ const AccountSettings = () => {
                 </div>
             </div>
         </div>
-    )
-}
+                );
+            }
+
+
 
 
 
