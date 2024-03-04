@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import "../styles/MainHeader.css";
 import DropdownSettings from "./DropdownSettings";
+import HamburgerMenu from "./HamburgerMenu";
 
 const MainHeader = () => {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -74,6 +75,13 @@ const MainHeader = () => {
             />
             <p className={`dropdownArrow ${showDropdown ? "open" : ""}`}>⏵</p>
             </span>
+
+            <span className="accountSettingsHamburger material-symbols-outlined">
+            menu
+            </span>
+
+            <HamburgerMenu />
+
         </div>
 
         {showDropdown && <DropdownSettings dropdownRef={dropdownRef} setShowDropdown={setShowDropdown}/>}

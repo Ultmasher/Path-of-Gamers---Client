@@ -1,10 +1,12 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { useNavigate } from 'react-router';
 import '../styles/AccountSettings.css';
+import Modal from './Modal';
 
 const AccountSettings = () => {
 
     const navigate = useNavigate()
+    const [isOpen, setIsOpen] = useState(false);
 
     const navigateToGameSettings = () => {
         navigate('/account/game-settings')
@@ -15,7 +17,12 @@ const AccountSettings = () => {
     <div className='accountSettingsLeft'>
         <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
         </img>
-        <button className='changeAvatarButton'>Change Avatar</button>
+        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" />
+        <button className='changeAvatarButton'onClick={() => setIsOpen(true)}>Change Avatar</button>
+        <Modal className= 'Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
+        Your avatar picture has been changed!
+        </Modal>
+
         <h2>PoG Username #117</h2>
     </div>
 
@@ -40,9 +47,8 @@ const AccountSettings = () => {
                 <div className='accountSettingsFormRight'>
                     <label htmlFor='region'>Region:</label>
                     <select className='regionSelect' id='region' name='region'>
-                        <option value='na'>North America</option>
-                        <option value='eu'>Europe</option>
-                        <option value='asia'>Asia</option>
+                        <option value='na'>EU: West</option>
+                        <option value='eu'>EU: East</option>
                     </select>
 
                     <label htmlFor='firstName'>First Name:</label>
@@ -70,5 +76,6 @@ const AccountSettings = () => {
     </div>
   )
 }
+
 
 export default AccountSettings

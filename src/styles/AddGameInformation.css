@@ -1,0 +1,138 @@
+.addGameInfoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.addGameForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--main-text-color);
+    background-color: var(--main-bg-color-darkest);
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border-radius: 0.8rem;
+}
+
+.closeGameBtnDiv {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.closeAddGameInfoBtn {
+    position: relative;
+    font-size: 1rem;
+    color: var(--main-text-color);
+    margin-right: 1rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 700;
+    font-family: 'Helvetica', sans-serif;   
+    margin-left: -0.6rem; 
+}
+
+.closeAddGameInfoBtn:hover {
+    color: var(--main-orange-color);
+}
+
+.addGameInfoTop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 0.6rem 1rem 0rem 1rem;
+}
+
+.addRegionDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    height: auto;
+    box-sizing: border-box;
+
+}
+
+.addGameForm label {
+    font-size: 1.2rem;
+    margin-right: 0.4rem;
+    color: var(--main-text-color);
+    text-transform: uppercase;
+}
+
+.addGameForm input {
+    font-size: 1rem;
+    padding: 0.2rem 0.2rem 0.2rem 0.6rem;
+    border: 2px solid var(--main-orange-color);
+    border-radius: 0.8rem;
+    font-family: 'Noto Sans', sans-serif;
+    text-align: left;
+    margin-right: 2rem;
+}
+
+.addGameForm select {
+    font-size: 1rem;
+    padding: 0.2rem;
+    border: 2px solid var(--main-orange-color);
+    border-radius: 0.8rem;
+    font-family: 'Noto Sans', sans-serif;
+    text-align: center;
+}
+
+
+.confirmBtnDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+.gameAddedSuccessWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.gameAddedSuccessTitle {
+    text-transform: uppercase;
+    margin: 0.6rem 0rem 0.6rem 0rem;
+}
+
+.gameAddedSuccessBtns {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+}
+

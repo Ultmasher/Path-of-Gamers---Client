@@ -1,0 +1,60 @@
+.profilePageContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.profilePageLeft {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.profilePageRight {
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.profilePageTopContent {
+    background-color:  var(--main-bg-color-darkest);
+    margin: 2rem;
+    margin-top: 2rem;
+    margin: 3rem 3rem 1.4rem 0rem;
+    padding: 2rem;
+    border-radius: 0.8rem;
+}
+
+.profilePageTopContent h1 {
+    padding: 0;
+    margin: 0;
+    padding-left: 0.4rem;
+    border-bottom: 2px solid var(--main-orange-color);
+    margin-right: 1.2rem;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+
+.lastSeenTitle {
+    font-weight: 700;
+    color: var(--main-orange-color);
+    margin: 0.5rem 0;
+}
+
+.profilePageTabMenu {
+    background-color:  var(--main-bg-color-darkest);
+    border-radius: 0.8rem;
+    padding: 2rem;
+    margin: 0rem 3rem 2rem 0rem;
+}

@@ -103,7 +103,6 @@
     font-size: 1rem;
     font-family: 'Noto Sans', sans-serif;
     margin-bottom: 1rem;
-
 }
 
 .accountSettingsForm input:focus {
@@ -145,6 +144,10 @@
     font-family: 'Noto Sans', sans-serif;
     cursor: pointer; 
     margin-right: 2rem;
+}
+
+.saveChangesButton:hover {
+    border: 2px solid var(--main-text-color);
 }
 
 .accountSettingsFormButton {

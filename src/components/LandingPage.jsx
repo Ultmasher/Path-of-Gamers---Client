@@ -28,7 +28,7 @@ const LandingPage = () => {
             <div className='landingButtonsWrapper'>
                 <button className='landingButton' onClick={handleSignInClick}>SIGN IN</button>
                 <button className='landingButton' onClick={handleRegisterClick}>CREATE ACCOUNT</button>
-                <button className='landingButton' onClick={handleNewEventClick}>New Event</button>
+                {/* <button className='landingButton' onClick={handleNewEventClick}>New Event</button> */}
 
             </div>
         </div>
