@@ -6,11 +6,20 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const MainHeader = () => {
     const [showDropdown, setShowDropdown] = useState(false);
+
+    const [showMenuClass, setShowMenuClass] = useState("hamburgerMenuWrapperClosed");
+
+    const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+    const [hamburgerClass, setHamburgerClass] = useState("hamburgerMenuClosed");
+
     const [notifications, setNotifications] = useState(false);
+
     const navigate = useNavigate();
 
     const dropdownRef = useRef(null);
     const dropdownArrowRef = useRef(null);
+
+    const hamburgerRef = useRef(null);
 
     const handleDropdownClick = (e) => {
         setShowDropdown(!showDropdown);
@@ -34,6 +43,19 @@ const MainHeader = () => {
     const navigateToHome = () => {
         navigate("/");
     };
+
+    const handleHamburgerClick = () => {
+        if(!showHamburgerMenu){
+            setHamburgerClass("hamburgerMenuOpen");
+            setShowMenuClass("hamburgerMenuWrapperOpen");
+            setShowHamburgerMenu(true);
+        } else {
+            setHamburgerClass("hamburgerMenuClosed");
+            setShowMenuClass("hamburgerMenuWrapperClosed");
+            setShowHamburgerMenu(false);
+        }
+    };
+        
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -76,14 +98,12 @@ const MainHeader = () => {
             <p className={`dropdownArrow ${showDropdown ? "open" : ""}`}>⏵</p>
             </span>
 
-            <span className="accountSettingsHamburger material-symbols-outlined">
+
+            <span className="accountSettingsHamburger material-symbols-outlined" onClick={handleHamburgerClick}>
             menu
             </span>
-
-            <HamburgerMenu />
-
         </div>
-
+        <HamburgerMenu handleHamburgerClick={handleHamburgerClick} showMenuClass={showMenuClass} setShowHamburgerMenu={setShowHamburgerMenu} hamburgerClass={hamburgerClass}/>
         {showDropdown && <DropdownSettings dropdownRef={dropdownRef} setShowDropdown={setShowDropdown}/>}
         </div>
     );
