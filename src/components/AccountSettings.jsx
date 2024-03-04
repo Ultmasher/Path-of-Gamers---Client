@@ -6,12 +6,34 @@ import axios from 'axios';
 
 
 const AccountSettings = () => {
-    const [previewSrc, setPreviewSrc] = useState(null);
+    // const [avatarUrl, setAvatarUrl] = useState(null);
     const [avatar, setAvatar] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [base64Image, setBase64Image] = useState('');
+    // const [base64Image, setBase64Image] = useState('');
+    const [user,setUser] = useState("")
 
+    useEffect(() => {
+
+
+      const fetchUser = async () => {
+          
+        try {
+          const response = await axios.get(`http://localhost:8000/user/65dc65e3c92b7f3839eb1565`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          setUser(response.data);
+          console.log(response)
+        } catch (err) {
+            console.log(err)
+         
+        }
+      };
+      fetchUser();
+    }, []); 
     
+    //   const defaultAvatarUrl = 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png';
 
     const navigate = useNavigate();
 
@@ -72,13 +94,14 @@ const AccountSettings = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            setAvatar(response.data);
+            setUser(response.data);
             console.log("Avatar submitted:", response.data);
         } catch (error) {
             console.error("Error submitting Avatar:", error);
         }
     };
 
+    console.log("THE USER! ",user)
     // const handleFileChange = (event) => {
     //     if (event.target.files.length > 0) {
     //       const file = event.target.files[0];
@@ -91,9 +114,10 @@ const AccountSettings = () => {
             return (
                 <div className='accountSettingsContainer'>
                 <div className='accountSettingsLeft'>
-                    <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' >
+                    {user && user?.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'/> }
+                    {/* <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.data.avatar}`} alt='blankProfile' >} */}
                     {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
-                    </img>
+                    
                     <form onSubmit={avatarSubmit}>
                         <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar}  accept="image/*" onChange={(e) => {
                             const file = e.target.files[0];
@@ -101,8 +125,8 @@ const AccountSettings = () => {
                                 ...avatarData,
                                 avatar: file,
                             });
-                            setPreviewSrc(URL.createObjectURL(file));
-                            // setIsPhotoUploaded(true);
+                            //setPreviewSrc(URL.createObjectURL(file));
+                            //setIsPhotoUploaded(true);
                         }} />
                         <button className='changeAvatarButton' onClick={() => setIsOpen(true) }>Change Avatar</button>
                     </form>
@@ -158,6 +182,7 @@ const AccountSettings = () => {
                     </div>
                 </div>
             </div>
+           
         </div>
                 );
             }
@@ -167,3 +192,4 @@ const AccountSettings = () => {
 
 
 export default AccountSettings;
+
