@@ -7,7 +7,7 @@ const LoLView = () => {
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-    const getUserData = API();
+    const { getLoLData } = API();
 
 
 

@@ -8,6 +8,7 @@ const API = () => {
         try {
             const res = await fetch("http://localhost:8000/getinfo")
             const data = await res.json();
+            console.log(data)
             return data;
 
         } catch (error) {
