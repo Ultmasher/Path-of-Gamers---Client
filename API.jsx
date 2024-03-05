@@ -6,9 +6,8 @@ const API = () => {
 
     const getLoLData = async () => {
         try {
-            const res = await fetch("http://localhost:8000/getinfo")
+            const res = await fetch("http://localhost:8000/getInfo/lol")
             const data = await res.json();
-            console.log(data)
             return data;
 
         } catch (error) {

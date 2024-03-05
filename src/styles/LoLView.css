@@ -1,0 +1,29 @@
+.userData {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userData img {
+    width: 250px;
+    border-radius: 20px;
+}
+
+.userLevel {
+    width: 50px;
+    height: 25px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: var(--main-text-color);
+    margin-top: -10px;
+    font-size: 20px;
+    color: var(--main-orange-color);
+    font-weight: 700;
+}
+
+.summonerName {
+    color: var(--main-orange-color);
+    font-size: 44px;
+    margin-top: -5px;
+}
