@@ -1,0 +1,36 @@
+.singleCommentContainer * {
+    margin: 0;
+    padding: 0;
+}
+
+.singleCommentContainer {
+    border-radius: 0.8rem;
+    display: flex;
+    padding: 0.6rem 1rem;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.commentAuthorAvatar {
+    height: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    margin-right: 1rem;
+}
+
+.commentAvatar {
+    border-radius: 50%;
+    height: 100%;
+}
+
+.commentBody {
+    width: 100%;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 4px solid var(--main-bg-color-dark);
+}
