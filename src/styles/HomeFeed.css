@@ -42,3 +42,24 @@ body {
     margin: 0.5rem 0rem;
 }
 
+.postButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    margin: 0.5rem 0rem;
+    background-color: var(--main-orange-color);
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.postButton:hover {
+    background-color: var(--main-orange-color-dark);
+}
+
+.postButton:-ms-input-placeholder {
+    color: var(--main-bg-color);
+}

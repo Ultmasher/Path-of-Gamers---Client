@@ -31,7 +31,7 @@ const NewEvent = () => {
 
   return (
     <>
-    <LandingHeader />
+    
     <div className='eventContainer'>
     <form onSubmit={handleSubmit(onSubmit)}>
 

@@ -29,10 +29,11 @@ const HomeFeed = () => {
     <div>
       
       <form  className='eventInputsWrapper' onSubmit={handlePostSubmit}>
-      <label htmlFor="bio"> Create a post:</label>
-      <textarea rows="8" cols="100" maxLength="150" id='bio' name='bio'  placeholder='What are you thinking about?' />
+      <label className='' htmlFor="bio"> Create a post:</label>
+      <textarea className='textarea' rows="8" cols="100" maxLength="150" id='bio' name='bio'  placeholder='What are you thinking about?' />
       <div htmlFor="profile-picture" style={{backgroundImage: `url('')`}}>
         <input
+        className='changeAvatarButton'
           src=''
           type="file"
           id="profile-picture"
@@ -43,8 +44,7 @@ const HomeFeed = () => {
       </div>
         <div className=''>
         <button className='changeAvatarButton'onClick={() => setIsOpen(true)}>Post</button>
-        <button className='gameSettingsButton' >Like</button>
-      <button className='gameSettingsButton' >Share</button>
+
       </div>
       </form>
 
