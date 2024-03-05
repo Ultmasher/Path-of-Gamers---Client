@@ -1,9 +1,9 @@
+
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import '../styles/AccountSettings.css';
 import Modal from './Modal';
 import axios from 'axios';
-
 
 const AccountSettings = () => {
     // const [avatarUrl, setAvatarUrl] = useState(null);
@@ -36,6 +36,7 @@ const AccountSettings = () => {
     //   const defaultAvatarUrl = 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png';
 
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
 
     const [formData, setFormData] = useState({
         username: "",
@@ -62,7 +63,6 @@ const AccountSettings = () => {
     const navigateToGameSettings = () => {
         navigate('/account/game-settings');
     };
-
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -192,4 +192,7 @@ const AccountSettings = () => {
 
 
 export default AccountSettings;
+
+
+export default AccountSettings
 

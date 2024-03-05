@@ -4,7 +4,7 @@ import HomeFeed from './HomeFeed';
 import AccountSettings from './AccountSettings';
 import GameSettings from './GameSettings';
 import ProfilePage from './ProfilePage';
-import AddGameInformation from '../styles/AddGameInformation';
+import AddGameInformation from './AddGameInformation';
 import Footer from './Footer';
 import { Route, Routes } from 'react-router';
 
