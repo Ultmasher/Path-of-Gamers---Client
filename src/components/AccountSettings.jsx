@@ -63,7 +63,6 @@ const AccountSettings = () => {
         navigate('/account/game-settings');
     };
 
-
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const newAvatarData = new FormData();
