@@ -51,20 +51,26 @@ const LoLView = () => {
                             <p className='summonerName'>{data.userId.name}</p>
                         </div>
                         <h2>User League Data</h2>
-                        {data.userData.map((entry, index) => (
-                            <div key={index}>
-                                <p>Queue Type: {entry.queueType}</p>
-                                <p>Tier: {entry.tier}</p>
-                                <p>Rank: {entry.rank}</p>
-                                <p>League Points: {entry.leaguePoints}</p>
-                                <p>Wins: {entry.wins}</p>
-                                <p>Losses: {entry.losses}</p>
-                                <p>Veteran: {entry.veteran ? "Yes" : "No"}</p>
-                                <p>Inactive: {entry.inactive ? "Yes" : "No"}</p>
-                                <p>Fresh Blood: {entry.freshBlood ? "Yes" : "No"}</p>
-                                <p>Hot Streak: {entry.hotStreak ? "Yes" : "No"}</p>
+                        {data.userData.length === 0 ? (
+                            <div>
+                                <p>No user data available.</p>
                             </div>
-                        ))}
+                        ) : (
+                            data.userData.map((entry, index) => (
+                                <div key={index}>
+                                    <p>Queue Type: {entry.queueType}</p>
+                                    <p>Tier: {entry.tier}</p>
+                                    <p>Rank: {entry.rank}</p>
+                                    <p>League Points: {entry.leaguePoints}</p>
+                                    <p>Wins: {entry.wins}</p>
+                                    <p>Losses: {entry.losses}</p>
+                                    <p>Veteran: {entry.veteran ? "Yes" : "No"}</p>
+                                    <p>Inactive: {entry.inactive ? "Yes" : "No"}</p>
+                                    <p>Fresh Blood: {entry.freshBlood ? "Yes" : "No"}</p>
+                                    <p>Hot Streak: {entry.hotStreak ? "Yes" : "No"}</p>
+                                </div>
+                            ))
+                        )}
                         <h2>Games</h2>
                         {data.matchData.map((game, index) => (
                             <div key={index} style={{ backgroundColor: 'gray' }}>

@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/DropdownSettings.css';
 import { useNavigate } from 'react-router';
 
-const DropdownSettings = ({dropdownRef, setShowDropdown}) => {
+const DropdownSettings = ({ dropdownRef, setShowDropdown }) => {
 
     const navigate = useNavigate();
 
@@ -17,15 +17,21 @@ const DropdownSettings = ({dropdownRef, setShowDropdown}) => {
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem("jwt");
+        navigate("/login")
+    }
+
+
     return (
         <div className='dropdownSettings' ref={dropdownRef}>
             <ul>
                 <li onClick={handleNavClick}>SETTINGS</li>
                 <li onClick={handleNavClick}>PROFILE</li>
-                <li className='logoutDropdownLink'>SIGN OUT <span className="material-symbols-outlined logoutSymbol">logout</span></li>
+                <li onClick={logout} className='logoutDropdownLink'>SIGN OUT <span className="material-symbols-outlined logoutSymbol">logout</span></li>
             </ul>
 
-        </div>
+        </div >
     )
 }
 
