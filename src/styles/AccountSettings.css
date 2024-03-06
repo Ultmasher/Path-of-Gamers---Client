@@ -1,5 +1,5 @@
 .accountSettingsContainer {
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -27,11 +27,12 @@
     box-sizing: border-box;
 }
 
-.userAvatarSettingsImg {
+.accountSettingsLeft img {
     width: 140px;
     height: 140px;
     border-radius: 50%;
     margin-top: 2rem;
+
 }
 
 #profile-picture::-webkit-file-upload-button {
@@ -221,4 +222,70 @@
 
 .gameSettingsButton:hover, .saveChangesButton:hover, .changeAvatarButton:hover {
     border: 2px solid var(--main-text-color);
+}
+
+@media (max-width: 768px) {
+    .accountSettingsContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-y: scroll;
+        padding-bottom: 2rem;
+    }
+
+    .accountSettingsLeft {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .accountSettingsRight {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-sizing: border-box;
+    }
+
+    .accountSettingsContent {
+        margin: 0.6rem;
+        padding: 1rem;
+    }
+
+    .accountSettingsFormInputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+    }
+
+    .accountSettingsFormLeft, .accountSettingsFormRight {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .saveChangesButton {
+        margin-right: 0;
+    }
+
+    .gameSettingsDiv {
+        padding: 1rem;
+        margin-right: 0;
+        margin: 0.6rem;
+    }
+
+    .gameSettingsButtonDiv {
+        padding-right: 0;
+        margin-top: 1rem;
+    }
+
+    .gameSettingsButton {
+        margin-right: 0;
+    }
 }

@@ -6,7 +6,8 @@
     justify-content: center;
     background-color: var(--main-bg-color-darkest);
     box-sizing: border-box;
-
+    background-color: #333333;
+    border-top:  4px solid #969292;
 }
 
 .footer p {
