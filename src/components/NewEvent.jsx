@@ -5,8 +5,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router';
 import '../styles/NewEvent.css';
 import LandingHeader from './LandingHeader';
+import Modal from './Modal';
+import { useState } from 'react';
+
 
 const NewEvent = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -26,7 +31,7 @@ const NewEvent = () => {
 
   return (
     <>
-    <LandingHeader />
+    
     <div className='eventContainer'>
     <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -69,7 +74,10 @@ const NewEvent = () => {
       </div>
 
     <div className='eventButtonsWrapper'>
-    <button className='eventButton' onClick={handleNewEventClick}>Create Event</button>
+    <button className='changeAvatarButton'onClick={() => setIsOpen(true)}>Post Event</button>
+    <Modal className= 'Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
+        Your event has been posted!
+    </Modal>
       </div>
     </form>
     </div>

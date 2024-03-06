@@ -44,9 +44,10 @@ const AccountSettings = () => {
     });
   };
 
-  const navigateToGameSettings = () => {
-    navigate('/account/game-settings');
-  };
+    const navigateToGameSettings = () => {
+        navigate('/account/game-settings');
+    };
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -158,4 +159,9 @@ const AccountSettings = () => {
                 );
             }
 
-export default AccountSettings
+
+
+
+
+export default AccountSettings;
+
