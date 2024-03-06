@@ -12,9 +12,6 @@ import fortniteLogo from '../assets/GameAssets/fortnite.png';
 const GameSettings = () => {
   const [selectedGame, setSelectedGame] = useState('');
   const [showAddGameInfo, setShowAddGameInfo] = useState(false);
-  const navigate = useNavigate();
-
-  const [selectedGame, setSelectedGame] = useState('');
 
   const navigate = useNavigate();
 

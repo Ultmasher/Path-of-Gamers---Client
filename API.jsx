@@ -72,21 +72,7 @@ export const API = () => {
         }
     };
 
-    function getGame(req, res) {
-        const { id } = req.params;
-        try {
-            const data = await Games.findById(id)
-            if (!data) {
-                return res.status(404).json({ message: "Game not found" });
-            } else {
-                res.status(200).json(data)
-            }
-        } catch (error) {
-            res.sendStatus(500)
-        }
-    }
-
-    return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser , getGame };
+    return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser };
 };
 
 export default API;
