@@ -27,12 +27,14 @@
     box-sizing: border-box;
 }
 
-.userAvatarSettingsImg {
+.accountSettingsLeft img {
     width: 140px;
     height: 140px;
     border-radius: 50%;
     margin-top: 2rem;
+
 }
+
 
 .changeAvatarButton {
     padding: 0.2rem 0.8rem;

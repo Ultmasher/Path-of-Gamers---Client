@@ -17,7 +17,7 @@ const ProfileTabMenu = () => {
           className={toggleState === 1 ? 'profileTab activeProfileTab' : 'profileTab'}
           onClick={() => toggleTab(1)}
         >
-          User Feed
+          Posts
         </div>
         <div 
         className={toggleState === 2 ? 'profileTab activeProfileTab' : 'profileTab'}

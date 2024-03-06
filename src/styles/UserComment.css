@@ -9,6 +9,13 @@
     padding: 0.6rem 1rem;
     box-sizing: border-box;
     margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border: 4px solid var(--main-bg-color-darkest);
+
+}
+
+.singleCommentContainer:hover {
+    border: 4px solid var(--main-bg-color-dark);
 }
 
 .commentAuthorAvatar {
@@ -33,4 +40,70 @@
     margin-bottom: 0.6rem;
     padding-bottom: 0.2rem;
     border-bottom: 4px solid var(--main-bg-color-dark);
+}
+
+.commentLower {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--main-text-color);
+    border-radius: 0.8rem;
+    margin-top: 1rem;
+}
+
+.commentMediaImg {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.8rem 0.8rem 0rem 0rem;
+}
+
+.commentBody p {
+    margin: 0;
+    padding: 0.8rem 1rem;
+    padding: 0.4rem 1rem 1rem 1rem;
+    background-color: var(--main-bg-color-dark);
+}
+
+.textAndImgComment {
+    border-radius: 0rem 0rem 0.6rem 0.6rem;
+}
+
+.soloTextComment {
+    border-radius: 0.6rem 0.6rem 0.6rem 0.6rem;
+}
+
+.commentActions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.6rem 1rem;
+}
+
+.commentLikeButtonDiv {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.commentCommentButtonDiv {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.likeSymbol {
+    margin-right: 0.2rem;
+}
+
+.commentLikeButtonDiv:hover {
+    color: red;
+}
+
+.commentSymbol {
+    margin-right: 0.3rem;
+}
+
+.commentCommentButtonDiv:hover {
+    color: var(--main-orange-color);
+    cursor: pointer;
 }

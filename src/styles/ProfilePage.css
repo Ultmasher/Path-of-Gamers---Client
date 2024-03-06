@@ -25,6 +25,8 @@
     flex-direction: column;
     justify-content: flex-start;
     box-sizing: border-box;
+    overflow-y: scroll;
+
 }
 
 .profilePageTopContent {

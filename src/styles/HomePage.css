@@ -21,4 +21,9 @@
     scrollbar-width: thin;
     scrollbar-color: var(--container-light-color) var(--main-bg-color-dark);
     scroll-behavior: smooth;
+    background-color: #525050;
+    opacity: 1;
+    background: radial-gradient(circle, transparent 20%, #525050 20%, #525050 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #525050 20%, #525050 80%, transparent 80%, transparent) 20px 20px, linear-gradient(#4b4a4a 1.6px, transparent 1.6px) 0 -0.8px, linear-gradient(90deg, #4b4a4a 1.6px, #525050 1.6px) -0.8px 0;
+    background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
+    
 }
