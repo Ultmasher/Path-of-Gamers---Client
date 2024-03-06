@@ -1,111 +1,86 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router';
-import '../styles/AccountSettings.css';
-import Modal from './Modal';
-import axios from 'axios';
+const AccountSettings = () => {
+  const [avatar, setAvatar] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState("");
 
-const AccountSettings = () => { 
-    // const [avatarUrl, setAvatarUrl] = useState(null);
-    const [avatar, setAvatar] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
-    // const [base64Image, setBase64Image] = useState('');
-    const [user,setUser] = useState("")
-
-    useEffect(() => {
-
-
-      const fetchUser = async () => {
-          
-        try {
-          const response = await axios.get(`http://localhost:8000/user/65dc65e3c92b7f3839eb1565`, {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          setUser(response.data);
-          console.log(response)
-        } catch (err) {
-            console.log(err)
-         
-        }
-      };
-      fetchUser();
-    }, []); 
-    
-    const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({
-        username: "",
-        name: "",
-        surname: "",
-        birthdate: "",
-        birthplace: "",
-        bio: "",
-        password: ""
-    });
-
-    const [avatarData, setAvatarData] = useState({
-        avatar: "",
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/user/65dc65e3c92b7f3839eb1565`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
+        setUser(response.data);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
     };
+    fetchUser();
+  }, []);
 
-    const navigateToGameSettings = () => {
-        navigate('/account/game-settings');
-    };
+  const navigate = useNavigate();
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        const newAvatarData = new FormData();
-        newAvatarData.append('avatar', formData.avatar);
-        if (avatar) {
-            try {
-              await avatarSubmit(avatar);
-              console.log('Avatar updated successfully');
-            } catch (error) {
-              console.error('Error updating avatar:', error);
-            }
-          }
-        };
+  const [formData, setFormData] = useState({
+    username: "",
+    name: "",
+    surname: "",
+    birthdate: "",
+    birthplace: "",
+    bio: "",
+    password: ""
+  });
 
-    const avatarSubmit = async (e) => {
-        e.preventDefault();
-        if (!avatarData.avatar) {
-            console.error("No avatar file selected");
-            return;
-        }
-    
-        const newAvatarData = new FormData();
-        newAvatarData.append('avatar', avatarData.avatar);
-    
-        try {
-            const response = await axios.put('http://localhost:8000/user/avatar/65dc65e3c92b7f3839eb1565', newAvatarData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            setUser(response.data);
-            console.log("Avatar submitted:", response.data);
-        } catch (error) {
-            console.error("Error submitting Avatar:", error);
-        }
-    };
+  const [avatarData, setAvatarData] = useState({
+    avatar: "",
+  });
 
-    console.log("THE USER! ",user)
-    // const handleFileChange = (event) => {
-    //     if (event.target.files.length > 0) {
-    //       const file = event.target.files[0];
-    //       const reader = new FileReader();
-    
-    //       reader.onloadend = () => {
-    //         setBase64Image(reader.result);
-    //       };1q   
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const navigateToGameSettings = () => {
+    navigate('/account/game-settings');
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (avatar) {
+      try {
+        await avatarSubmit();
+        console.log('Avatar updated successfully');
+      } catch (error) {
+        console.error('Error updating avatar:', error);
+      }
+    }
+  };
+
+  const avatarSubmit = async () => {
+    if (!avatarData.avatar) {
+      console.error("No avatar file selected");
+      return;
+    }
+
+    const newAvatarData = new FormData();
+    newAvatarData.append('avatar', avatarData.avatar);
+
+    try {
+      const response = await axios.put('http://localhost:8000/user/avatar/65dc65e3c92b7f3839eb1565', newAvatarData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setUser(response.data);
+      console.log("Avatar submitted:", response.data);
+    } catch (error) {
+      console.error("Error submitting Avatar:", error);
+    }
+  };
     
             return (
                 <div className='accountSettingsContainer'>
@@ -183,9 +158,4 @@ const AccountSettings = () => {
                 );
             }
 
-
-
-
-
-export default AccountSettings;
-
+export default AccountSettings

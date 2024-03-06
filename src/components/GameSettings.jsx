@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 import '../styles/GameSettings.css';
 
@@ -13,6 +14,10 @@ const GameSettings = () => {
   const [showAddGameInfo, setShowAddGameInfo] = useState(false);
   const navigate = useNavigate();
 
+  const [selectedGame, setSelectedGame] = useState('');
+
+  const navigate = useNavigate();
+
   const handleSelectGame = (game) => {
     selectedGame === game.name ? setSelectedGame('') : setSelectedGame(game.name);
   };
@@ -20,6 +25,7 @@ const GameSettings = () => {
   const handleAddGame = () => {
     console.log('Add Game');
     setShowAddGameInfo(true);
+    navigate('/addgame');
   };
 
   const navigateToAccountSettings = () => {
@@ -77,6 +83,14 @@ const GameSettings = () => {
                   <p className='gameSettingsGameTitle'>{game.name}</p>
                 </div>
               ))}
+                {gameList.map((game, index) => {
+                  return (
+                    <div key={index} className={selectedGame === game.name ? 'selectedGameItem gameSettingsGameItem' : 'gameSettingsGameItem'} onClick={() => handleSelectGame(game)} >
+                      <img src={game.logo} alt={game.name} />
+                      <p className='gameSettingsGameTitle'>{game.name}</p>
+                    </div>
+                  )
+                })}
             </div>
             <div className='gameSettingsAddGameBtnDiv'>
               <button
@@ -86,9 +100,11 @@ const GameSettings = () => {
               >
                 Add Game&nbsp;&nbsp;+
               </button>
+
             </div>
           </div>
         </div>
+
       </div>
     </div>
     {showAddGameInfo && <AddGameInformation closeGame={handleAddGameInfoClose}/>}
