@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import "../styles/UserComment.css";
+import React, { useState } from 'react';
 
 const UserComment = () => {
+  const [commentLikes, setCommentLikes] = useState(0);
   const [showComments, setShowComments] = useState(false);
 
-  // WILL TAKE THESE VALUES BELOW AS PROPS
-  const [commentAuthorAvatar, setCommentAuthorAvatar] = useState("https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png");
-  const [commentId, setCommentId] = useState(1);
-  const [commentText, setCommentText] = useState("Thrilling matchups and strategic plays at the League of Legends event! The intense competition showcased top-tier skills and kept us on the edge of our seats. Can't wait for the next showdown in the Summoner's Rift! #LeagueOfLegends #EsportsExcitement");
-  const [commentAuthor, setCommentAuthor] = useState(117);
-  const [commentDate, setCommentDate] = useState("2023-03-01 12:02:53");
-  const [commentImg, setCommentImg] = useState("https://nexus.leagueoflegends.com/wp-content/uploads/2019/11/ase1920clear_xzacpjebut2xunpks7x1.jpg");
-  const [commentComments, setCommentComments] = useState(3);
-  const [listOfComments, setListOfComments] = useState([
+  const [commentAuthorAvatar] = useState("https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png");
+  const [commentId] = useState(1);
+  const [commentText] = useState("Thrilling matchups and strategic plays at the League of Legends event! The intense competition showcased top-tier skills and kept us on the edge of our seats. Can't wait for the next showdown in the Summoner's Rift! #LeagueOfLegends #EsportsExcitement");
+  const [commentAuthor] = useState(117);
+  const [commentDate] = useState("2023-03-01 12:02:53");
+  const [commentImg] = useState("https://nexus.leagueoflegends.com/wp-content/uploads/2019/11/ase1920clear_xzacpjebut2xunpks7x1.jpg");
+  const [commentComments] = useState(3);
+  const [listOfComments] = useState([
     {
       commentId: 2,
       commentText:
@@ -35,17 +34,14 @@ const UserComment = () => {
       commentDate: "2023-03-01 12:02:53",
     },
   ]);
-  const [commentLikes, setCommentLikes] = useState(12);
-
 
   const likePost = () => {
-    setCommentLikes(commentLikes - 1);
+    setCommentLikes(commentLikes + 1);
   };
 
-  const showHideComments = () => {
+  const toggleComments = () => {
     setShowComments(!showComments);
   };
-
 
   return (
     <div className="singleCommentContainer">
@@ -76,13 +72,13 @@ const UserComment = () => {
             {commentText}
           </p>
           <div className="commentActions">
-            <div className="commentLikeButtonDiv">
-              <span className="material-symbols-outlined likeSymbol" onClick={likePost}>
+            <div className="commentLikeButtonDiv" onClick={likePost}>
+              <span className="material-symbols-outlined likeSymbol">
                 favorite
               </span>
               {commentLikes}
             </div>
-            <div className="commentCommentButtonDiv" onClick={showHideComments}>
+            <div className="commentCommentButtonDiv" onClick={toggleComments}>
               <span className="material-symbols-outlined commentSymbol">
                 comment
               </span>
@@ -93,7 +89,7 @@ const UserComment = () => {
           {showComments && (
             <div className="commentComments">
               {listOfComments.map((comment) => (
-                <div className="singleComment">
+                <div className="singleComment" key={comment.commentId}>
                   <div className="commentAuthorAvatar">
                     <img
                       src={commentAuthorAvatar}
@@ -103,7 +99,9 @@ const UserComment = () => {
                   </div>
                   <div className="commentBody">
                     <div className="commentHeader">
-                      <h3 className="commentAuthor">PoG Username #{comment.commentAuthor}</h3>
+                      <h3 className="commentAuthor">
+                        PoG Username #{comment.commentAuthor}
+                      </h3>
                       <h4 className="commentDate">{comment.commentDate}</h4>
                     </div>
                     <p className="commentText">{comment.commentText}</p>
@@ -112,9 +110,7 @@ const UserComment = () => {
               ))}
             </div>
           )}
-
         </div>
-
       </div>
     </div>
   );

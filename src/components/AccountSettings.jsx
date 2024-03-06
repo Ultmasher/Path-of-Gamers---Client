@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import '../styles/AccountSettings.css';
 import Modal from './Modal';
 import API from '../../API';
+import axios from 'axios';
+
 
 const AccountSettings = () => {
+  // const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  // const [base64Image, setBase64Image] = useState('');
+  const [user, setUser] = useState("")
+
+  useEffect(() => {
+
+
+    const fetchUser = async () => {
+
+      try {
+        const response = await axios.get(`http://localhost:8000/user/65dc65e3c92b7f3839eb1565`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setUser(response.data);
+        console.log(response)
+      } catch (err) {
+        console.log(err)
+
+      }
+    };
+    fetchUser();
+  }, []);
 
   const navigate = useNavigate()
-  const [isOpen, setIsOpen] = useState(false);
   const { modifyUser } = API();
-  const { modifyAvatar } = API();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -29,31 +55,73 @@ const AccountSettings = () => {
     });
   };
 
+  const [avatarData, setAvatarData] = useState({
+    avatar: "",
+  });
+
   const navigateToGameSettings = () => {
     navigate('/account/game-settings')
   };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (avatar) {
+      try {
+        await avatarSubmit();
+        console.log('Avatar updated successfully');
+      } catch (error) {
+        console.error('Error updating avatar:', error);
+      }
+    }
+  };
+
+  const avatarSubmit = async () => {
+    if (!avatarData.avatar) {
+      console.error("No avatar file selected");
+      return;
+    }
+
+    const newAvatarData = new FormData();
+    newAvatarData.append('avatar', avatarData.avatar);
+
     try {
-      await modifyUser(formData);
-      console.log("Form data submitted:", formData);
+      const response = await axios.put('http://localhost:8000/user/avatar/65dc65e3c92b7f3839eb1565', newAvatarData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setUser(response.data);
+      console.log("Avatar submitted:", response.data);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting Avatar:", error);
     }
   };
 
   return (
     <div className='accountSettingsContainer'>
       <div className='accountSettingsLeft'>
-        <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
-        </img>
-        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" />
-        <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Change Avatar</button>
+        {user && user?.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+        {/* <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.data.avatar}`} alt='blankProfile' >} */}
+        {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
+
+        <form onSubmit={avatarSubmit}>
+          <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar} accept="image/*" onChange={(e) => {
+            const file = e.target.files[0];
+            setAvatarData({
+              ...avatarData,
+              avatar: file,
+            });
+            //setPreviewSrc(URL.createObjectURL(file));
+            //setIsPhotoUploaded(true);
+          }} />
+          <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Change Avatar</button>
+        </form>
         <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
           Your avatar picture has been changed!
         </Modal>
-
         <h2>PoG Username #117</h2>
+      </div>
+      <div>
       </div>
       <div className='accountSettingsRight'>
         <form onSubmit={handleFormSubmit}>
@@ -92,16 +160,17 @@ const AccountSettings = () => {
             </div>
           </div>
         </form>
-      </div>
-      <div className='gameSettingsDiv'>
-        <h2>Do you want to link a new game to your account?</h2>
-        <p>Click the button below to access your Game Settings!</p>
-        <div className='gameSettingsButtonDiv'>
-          <button className='gameSettingsButton' onClick={navigateToGameSettings}>Game Settings ▸</button>
+        <div className='gameSettingsDiv'>
+          <h2>Do you want to link a new game to your account?</h2>
+          <p>Click the button below to access your Game Settings!</p>
+          <div className='gameSettingsButtonDiv'>
+            <button className='gameSettingsButton' onClick={navigateToGameSettings}>Game Settings ▸</button>
+          </div>
         </div>
       </div>
+
     </div>
-  )
+  );
 }
 
 export default AccountSettings;
