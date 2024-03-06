@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/UserComment.css";
 
 const UserComment = () => {
-    const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   // WILL TAKE THESE VALUES BELOW AS PROPS
   const [commentAuthorAvatar, setCommentAuthorAvatar] = useState("https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png");
@@ -39,13 +39,13 @@ const UserComment = () => {
 
 
   const likePost = () => {
-      setCommentLikes(commentLikes - 1);
+    setCommentLikes(commentLikes - 1);
   };
 
   const showHideComments = () => {
     setShowComments(!showComments);
   };
-  
+
 
   return (
     <div className="singleCommentContainer">
@@ -76,42 +76,42 @@ const UserComment = () => {
             {commentText}
           </p>
           <div className="commentActions">
-          <div className="commentLikeButtonDiv">
-            <span className="material-symbols-outlined likeSymbol" onClick={likePost}>
-              favorite
-            </span>
-            {commentLikes}
+            <div className="commentLikeButtonDiv">
+              <span className="material-symbols-outlined likeSymbol" onClick={likePost}>
+                favorite
+              </span>
+              {commentLikes}
+            </div>
+            <div className="commentCommentButtonDiv" onClick={showHideComments}>
+              <span className="material-symbols-outlined commentSymbol">
+                comment
+              </span>
+              {commentComments}
+            </div>
           </div>
-          <div className="commentCommentButtonDiv" onClick={showHideComments}>
-            <span className="material-symbols-outlined commentSymbol">
-              comment
-            </span>
-            {commentComments}
-          </div>
-        </div>
 
-        {showComments && (
-          <div className="commentComments">
-            {listOfComments.map((comment) => (
-              <div className="singleComment">
-                <div className="commentAuthorAvatar">
-                  <img
-                    src={commentAuthorAvatar}
-                    alt="userAvatar"
-                    className="commentAvatar"
-                  />
-                </div>
-                <div className="commentBody">
-                  <div className="commentHeader">
-                    <h3 className="commentAuthor">PoG Username #{comment.commentAuthor}</h3>
-                    <h4 className="commentDate">{comment.commentDate}</h4>
+          {showComments && (
+            <div className="commentComments">
+              {listOfComments.map((comment) => (
+                <div className="singleComment">
+                  <div className="commentAuthorAvatar">
+                    <img
+                      src={commentAuthorAvatar}
+                      alt="userAvatar"
+                      className="commentAvatar"
+                    />
                   </div>
-                  <p className="commentText">{comment.commentText}</p>
+                  <div className="commentBody">
+                    <div className="commentHeader">
+                      <h3 className="commentAuthor">PoG Username #{comment.commentAuthor}</h3>
+                      <h4 className="commentDate">{comment.commentDate}</h4>
+                    </div>
+                    <p className="commentText">{comment.commentText}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
         </div>
 
@@ -121,39 +121,3 @@ const UserComment = () => {
 };
 
 export default UserComment;
-=======
-import React from 'react'
-import '../styles/UserComment.css'
-
-const UserComment = () => {
-
-    // WILL TAKE THESE VALUES BELOW AS PROPS
-    const commentAuthorAvatar = "https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png";
-    const commentId = 1;
-    const commentText = "This is a comment!";
-    const commentAuthor = 117;
-    const commentDate = "2023-03-01 12:02:53";
-
-
-
-  return (
-    <div className='singleCommentContainer'>
-
-        <div className='commentAuthorAvatar'>
-            <img src={commentAuthorAvatar} alt='userAvatar' className='commentAvatar'/>
-        </div>
-
-        <div className='commentBody'>
-            <div className='commentHeader'>
-                <h3 className='commentAuthor'>PoG Username #{commentAuthor}</h3>
-                <h4 className='commentDate'>{commentDate}</h4>
-            </div>
-            <p className='commentText'>{commentText}</p>
-        </div>
-
-
-    </div>
-  )
-}
-
-export default UserComment
