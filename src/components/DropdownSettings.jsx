@@ -1,10 +1,11 @@
 import React from 'react';
 import '../styles/DropdownSettings.css';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../context/AuthContext';
+
 
 const DropdownSettings = ({ dropdownRef, setShowDropdown }) => {
 
-    const navigate = useNavigate();
 
     const handleNavClick = (e) => {
         let target = e.target.innerText;
@@ -17,11 +18,10 @@ const DropdownSettings = ({ dropdownRef, setShowDropdown }) => {
         }
     }
 
-    const logout = () => {
-        localStorage.removeItem("jwt");
-        navigate("/login")
-    }
 
+    const { logout } = useAuth();
+
+    const navigate = useNavigate();
 
     return (
         <div className='dropdownSettings' ref={dropdownRef}>

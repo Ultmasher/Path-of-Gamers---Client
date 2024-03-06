@@ -4,10 +4,11 @@ import { useState } from 'react';
 import '../styles/LoginPage.css';
 import { useNavigate } from 'react-router';
 import LandingHeader from './LandingHeader';
-import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 
 const LoginForm = () => {
+
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -16,9 +17,8 @@ const LoginForm = () => {
     email: "",
     password: ""
   });
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
 
+  const { login } = useAuth();
 
 
   const handleChange = (e) => {
@@ -36,27 +36,8 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await axios.post("http://localhost:8000/user/login", formData, { headers: { 'Content-Type': 'application/json' } })
-      const { token, user } = response.data;
-      localStorage.setItem("jwt", token)
-      sessionStorage.removeItem("jwt");
-      setToken(token);
-      setUser(user);
+    await login(formData, setLoading, setError)
 
-      setTimeout(() => {
-        navigate("/")
-      }, 2000)
-    } catch (e) {
-      console.log(e)
-      setError(e.response.data)
-      setTimeout(() => {
-        setError(null)
-      }, 3000)
-    } finally {
-      setLoading(false);
-    }
   }
 
 
