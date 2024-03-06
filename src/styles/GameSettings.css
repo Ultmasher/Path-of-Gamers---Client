@@ -1,5 +1,5 @@
 .gameSettingsContainer {
-    width: 100%;
+    width: 80%;
     height: 100%;
     box-sizing: border-box;
     display: flex;
@@ -16,11 +16,80 @@
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     padding: 3rem;
+}
+
+.gameSettingsTitle {
+    font-size: 2rem;
+    margin-left: 2rem;
+    padding-left: 1rem;
+    margin-right: 1rem;
+    letter-spacing: 0.1rem;
+    color: var(--main-text-color);
+    border-bottom: 2px solid var(--main-orange-color);
+
+}
+
+.gameSettingsColumns {
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+    height: 100%;
+    box-sizing: border-box;
+
 }
 
 .gameSettingsLeft {
     width: 40%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.gameSettingsInstructions {
+    border-radius: 0.8rem;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.gameSettingsBackBtnDiv {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    align-items: center;
+    margin-left: 2rem;
+    padding: 1rem 0;
+}
+
+.backBtn {
+    padding: 0.2rem 1rem;
+    border: 2px solid var(--main-orange-color);
+    border-radius: 0.8rem;
+    background-color: var(--main-orange-color);
+    color: var(--main-text-color);
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    font-family: 'Noto Sans', sans-serif;
+    cursor: pointer; 
+}
+
+.backBtn:hover {
+    transition: 0.3s;
+    border: 2px solid var(--main-text-color);
+}
+
+.gameSettingsInstructions li {
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 2rem;
+    color: var(--main-text-color);
 }
 
 .gameSettingsRight {
@@ -38,17 +107,25 @@
     height: 100%;
     border-radius: 0.8rem;  
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 .gameSettingsGameItem {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-    background-color: rgb(48, 40, 33);
+    background-color: var(--main-bg-color-darkest);
+    border: 2px solid var(--main-bg-color-darkest);
     border-radius: 0.8rem;
     padding: 0.8rem 1.8rem;
     transition: 0.3s;
     cursor: pointer;
+    box-sizing: border-box;
+
+}
+
+.selectedGameItem {
+    border: 2px solid var(--main-orange-color);
 }
 
 .gameSettingsGameItem:hover {
@@ -74,6 +151,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    box-sizing: border-box;
+
 }
 
 .addGameBtn {
@@ -92,7 +171,56 @@
     cursor: pointer; 
 }
 
-.addGameBtn:hover {
+.activeAddGameBtn:hover {
     transition: 0.3s;
     border: 2px solid var(--main-text-color);
+}
+
+.disabledBtn {
+    opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+    .gameSettingsContainer {
+        padding: 1rem;
+        overflow-y: scroll;
+    }
+
+    .gameSettingsContent {
+        padding: 1rem;
+        flex-direction: column;
+    }
+
+    .gameSettingsTitle {
+        font-size: 1.6rem;
+    }
+
+    .gameSettingsColumns {
+        flex-direction: column;
+    }
+
+    .gameSettingsLeft {
+        width: 100%;
+    }
+
+    .gameSettingsRight {
+        width: 100%;
+    }
+
+    .gameSettingsGameItem img {
+        height: 40px;
+    }
+
+    .gameSettingsGameItem p {
+        font-size: 1.4rem;
+    }
+
+    .gameSettingsAddGameBtnDiv {
+        padding: 0.5rem 0;
+    }
+
+    .addGameBtn {
+        width: 140px;
+        font-size: 1rem;
+    }
 }

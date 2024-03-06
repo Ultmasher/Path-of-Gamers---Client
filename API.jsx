@@ -1,5 +1,6 @@
 import React from 'react'
 
+<<<<<<< HEAD
 const API = () => {
 
 
@@ -7,6 +8,12 @@ const API = () => {
     const getLoLData = async () => {
         try {
             const res = await fetch("http://localhost:8000/getInfo/lol")
+=======
+export const API = () => {
+    const getLoLData = async () => {
+        try {
+            const res = await fetch("http://localhost:8000/getinfo")
+>>>>>>> main
             const data = await res.json();
             return data;
 
@@ -25,8 +32,12 @@ const API = () => {
             console.error('Error fetching data:', error);
         }
     }
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> main
     const modifyUser = async (userData) => {
         try {
             const res = await fetch("http://localhost:8000/user/65dc65e3c92b7f3839eb1565", {
@@ -36,13 +47,20 @@ const API = () => {
                 },
                 body: JSON.stringify(userData)
             });
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
             const data = await res.json();
             return data;
         } catch (error) {
             console.log(error);
         }
     };
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     const registerUser = async (userData) => {
         try {
             const res = await fetch("http://localhost:8000/user", {
@@ -76,6 +94,7 @@ const API = () => {
         }
     };
 
+<<<<<<< HEAD
 
 
 
@@ -87,4 +106,9 @@ const API = () => {
 
     return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser };
 }
+=======
+    return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser };
+};
+
+>>>>>>> main
 export default API;
