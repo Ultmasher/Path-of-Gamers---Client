@@ -7,7 +7,7 @@ import '../styles/HomeFeed.css';
 
 
 const HomeFeed = () => {
-  const [postText, setPostText] = useState('');
+  const [posts, setPosts] = useState([]);
   const [postImage, setPostImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [user,setUser] = useState("")
@@ -15,6 +15,9 @@ const HomeFeed = () => {
    const [postData, setpostData] = useState({
     content: '',
     image: "",
+    user: user.id,
+    game: user.game,
+    
     });
 
     const handlePostSubmit = async (e) => {
@@ -35,13 +38,13 @@ const HomeFeed = () => {
     const postSubmit = async (e) => {
       e.preventDefault();
       const newPostData = new FormData();
-      newPostData.append('post', postData.post);
+      newPostData.append('post', postData.content); // Update 'postData.post' to 'postData.content'
       if (postImage) {
         newPostData.append('image', postImage);
       }
-    
+
       try {
-        const response = await axios.post('http://localhost:8000/post', newPostData, {
+        const response = await axios.post('http://localhost:8000/posts', newPostData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -84,12 +87,22 @@ const HomeFeed = () => {
   <div className=''>
     <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Post</button>
   </div>
+  <div>
+      {posts.map((post) => (
+        <div key={post.id}>
+          <img src={post.image} alt="Post" />
+          <p>{post.content}</p>
+        </div>
+      ))}
+    </div>
 </form>
 
       <Modal className= 'Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
         Your post has been posted!
       </Modal>
     </div>
+
+    
   );
 };
 
