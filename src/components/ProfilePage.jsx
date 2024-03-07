@@ -6,10 +6,12 @@ const ProfilePage = () => {
   return (
     <div className='profilePageContainer'>
         <div className='profilePageLeft'>
-            <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
-            </img>
-            <h2>PoG Username #117</h2>
-            <button className='followBtn pogBtn'>Follow +</button>
+            <div className='profilePageUserCard'>
+                <img className='userAvatarSettingsImg' src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' alt='blankProfile' >
+                </img>
+                <h2>PoG Username #117</h2>
+                <button className='followBtn pogBtn'>Follow +</button>
+            </div>
         </div>
 
         <div className='profilePageRight'>

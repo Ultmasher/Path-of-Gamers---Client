@@ -34,6 +34,29 @@
     margin-top: 2rem;
 }
 
+.userAvatarSettingsImg {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+#profile-picture::-webkit-file-upload-button {
+    padding: 0.2rem 0.8rem;
+    width: auto;
+    border: 2px solid var(--main-orange-color);
+    border-radius: 0.8rem;
+    background-color: var(--main-orange-color);
+    color: var(--main-text-color);
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: 0.3s;
+    font-family: 'Noto Sans', sans-serif;
+    cursor: pointer; 
+    margin-right: 2rem;
+}
+
 .changeAvatarButton {
     padding: 0.2rem 0.8rem;
     width: auto;
