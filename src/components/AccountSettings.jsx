@@ -11,7 +11,6 @@ const AccountSettings = () => {
   const [avatar, setAvatar] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   // const [base64Image, setBase64Image] = useState('');
-  const [user1, setUser1] = useState("")
   const { user, token } = useAuth();
 
   const navigate = useNavigate()
