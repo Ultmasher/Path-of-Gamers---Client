@@ -4,6 +4,7 @@ import '../styles/AccountSettings.css';
 import Modal from './Modal';
 import API from '../../API';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 
 const AccountSettings = () => {
@@ -11,31 +12,14 @@ const AccountSettings = () => {
   const [avatar, setAvatar] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   // const [base64Image, setBase64Image] = useState('');
-  const [user, setUser] = useState("")
+  const [user1, setUser1] = useState("")
+  const { user, token } = useAuth();
 
-  useEffect(() => {
 
 
-    const fetchUser = async () => {
 
-      try {
-        const response = await axios.get(`http://localhost:8000/user/65dc65e3c92b7f3839eb1565`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        setUser(response.data);
-        console.log(response)
-      } catch (err) {
-        console.log(err)
-
-      }
-    };
-    fetchUser();
-  }, []);
 
   const navigate = useNavigate()
-  const { modifyUser } = API();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -62,16 +46,22 @@ const AccountSettings = () => {
   const navigateToGameSettings = () => {
     navigate('/account/game-settings')
   };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (avatar) {
-      try {
-        await avatarSubmit();
-        console.log('Avatar updated successfully');
-      } catch (error) {
-        console.error('Error updating avatar:', error);
-      }
+
+    try {
+      const response = await axios.put(`http://localhost:8000/user/${user._id}`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : null,
+
+
+        },
+      });
+
+      console.log('User data updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating user data:', error);
     }
   };
 
@@ -85,7 +75,7 @@ const AccountSettings = () => {
     newAvatarData.append('avatar', avatarData.avatar);
 
     try {
-      const response = await axios.put('http://localhost:8000/user/avatar/65dc65e3c92b7f3839eb1565', newAvatarData, {
+      const response = await axios.put(`http://localhost:8000/user/avatar/${user._id}`, newAvatarData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -100,7 +90,7 @@ const AccountSettings = () => {
   return (
     <div className='accountSettingsContainer'>
       <div className='accountSettingsLeft'>
-        {user && user?.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+        {user1 && user1?.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user1.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
         {/* <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.data.avatar}`} alt='blankProfile' >} */}
         {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
 
