@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
-import axios from 'axios';
-import '../styles/HomeFeed.css';
-
-
-
+import React, { useState } from "react";
+import Modal from "./Modal";
+import axios from "axios";
+import "../styles/HomeFeed.css";
+import API from "../../API";
 
 const HomeFeed = () => {
-  const [posts, setPosts] = useState([]);
   const [postImage, setPostImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [user,setUser] = useState("")
@@ -101,8 +98,6 @@ const HomeFeed = () => {
         Your post has been posted!
       </Modal>
     </div>
-
-    
   );
 };
 

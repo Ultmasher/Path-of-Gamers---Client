@@ -42,6 +42,23 @@ const API = () => {
         }
     };
 
+    const postPost = async (postData) => {
+        try {
+            const res = await fetch("http://localhost:8000/posts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(postData)
+            });
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.log(error);
+            throw new Error('Error uploading profile picture');
+        }
+    };
+
     const modifyAvatar = async (file) => {
         const formData = new FormData();
         formData.append('profile-picture', file);
@@ -59,8 +76,9 @@ const API = () => {
         }
     };
 
-    return { getLoLData, getUserData, modifyAvatar, registerUser };
-}
 
+
+    return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser, postPost };
+};
 
 export default API;
