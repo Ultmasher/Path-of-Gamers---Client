@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import '../styles/AccountSettings.css';
 import Modal from './Modal';
-import API from '../../API';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+
+
 const AccountSettings = () => {
   // const [avatarUrl, setAvatarUrl] = useState(null);
   const [avatar, setAvatar] = useState(null);
@@ -13,21 +14,7 @@ const AccountSettings = () => {
   const [user1, setUser1] = useState("")
   const { user, token } = useAuth();
 
-
-
-
-
   const navigate = useNavigate()
-
-  const [formData, setFormData] = useState({
-    username: "",
-    name: "",
-    surname: "",
-    birthdate: "",
-    birthplace: "",
-    bio: "",
-    password: ""
-  });
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
@@ -37,8 +24,6 @@ const AccountSettings = () => {
       [name]: value
     });
   };
-
-
 
 
   const [avatarData, setAvatarData] = useState({
@@ -68,6 +53,7 @@ const AccountSettings = () => {
     }
     const newAvatarData = new FormData();
     newAvatarData.append('avatar', avatarData.avatar);
+
     try {
       const response = await axios.put(`http://localhost:8000/user/avatar/${user._id}`, newAvatarData, {
         headers: {
@@ -80,10 +66,10 @@ const AccountSettings = () => {
       console.error("Error submitting Avatar:", error);
     }
   };
+
   return (
     <div className='accountSettingsContainer'>
       <div className='accountSettingsLeft'>
-        {user1 && user1?.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user1.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
         {user && user.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
         {/* <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.data.avatar}`} alt='blankProfile' >} */}
         {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
@@ -115,33 +101,26 @@ const AccountSettings = () => {
               <div className='accountSettingsFormInputs'>
                 <div className='accountSettingsFormLeft'>
                   <label htmlFor='username'>Username:</label>
-                  <input type='text' id='username' name='username' value={formData.username} onChange={handleChange} placeholder='PoG Username #117' />
                   <input type='text' id='username' name='username' defaultValue={user.username} onChange={handleChange} placeholder='PoG Username #117' />
 
                   <label htmlFor='birthplace'>Birthplace:</label>
-                  <input type='text' id='birthplace' name='birthplace' value={formData.birthplace} onChange={handleChange} placeholder="Somewhere" />
-
-                  <label htmlFor='password'>Password:</label>
-                  <input type='password' id='password' name='password' value={formData.password} onChange={handleChange} placeholder="Enter New Password" />
                   <input type='text' id='birthplace' name='birthplace' defaultValue={user.birthplace} onChange={handleChange} placeholder='Johanseburg' />
 
 
                   <label htmlFor="bio"> Bio:</label>
-                  <textarea rows="5" cols="50" maxLength="150" id='bio' name='bio' value={formData.bio} onChange={handleChange} placeholder='Write something about yourself' />
                   <textarea rows="5" cols="50" maxLength="150" id='bio' name='bio' defaultValue={user.bio} onChange={handleChange} placeholder='Write something about yourself' />
                 </div>
 
                 <div className='accountSettingsFormRight'>
                   <label htmlFor='birthdate'>Birth Date:</label>
-                  <input type='text' id='birthdate' name='birthdate' value={formData.birthdate} onChange={handleChange} placeholder='11.11.1111' />
                   <input type='text' id='birthdate' name='birthdate' defaultValue={user.birthdate} onChange={handleChange} placeholder='11.11.1111' />
 
                   <label htmlFor='name'>First Name:</label>
-                  <input type='text' value={formData.name} id='name' name='name' onChange={handleChange} placeholder='John' />
+
                   <input type='text' defaultValue={user.name} id='name' name='name' onChange={handleChange} placeholder='John' />
 
                   <label htmlFor='surname'>Last Name:</label>
-                  <input type='text' value={formData.surname} id='surname' name='surname' onChange={handleChange} placeholder='Doe' />
+
                   <input type='text' defaultValue={user.surname} id='surname' name='surname' onChange={handleChange} placeholder='Doe' />
                 </div>
               </div>
