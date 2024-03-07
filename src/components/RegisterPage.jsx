@@ -3,9 +3,12 @@ import '../styles/RegisterPage.css';
 import LandingHeader from './LandingHeader';
 import { useState } from 'react';
 import API from '../../API';
+import { useNavigate } from 'react-router';
 
 function RegisterPage() {
   const { registerUser } = API();
+
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     username: "",
@@ -25,11 +28,13 @@ function RegisterPage() {
     e.preventDefault();
     try {
       await registerUser(formData);
-      console.log("Form data submitted:", formData);
+      navigate('/login');
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
+
 
 
   return (

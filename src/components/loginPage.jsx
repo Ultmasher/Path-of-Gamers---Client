@@ -55,7 +55,7 @@ const LoginForm = () => {
 
               <label>
                 Password:
-                <input type="password" name='password' value={formData.password} onChange={handleChange} required />
+                <input type="password" name='password' value={formData.password} onChange={handleChange} />
               </label>
 
             </div>

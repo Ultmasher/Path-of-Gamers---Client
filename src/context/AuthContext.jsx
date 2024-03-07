@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("jwt") || null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
 
     const login = async (formData, setLoading, setError) => {
         setLoading(true);
