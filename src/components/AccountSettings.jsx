@@ -13,10 +13,6 @@ const AccountSettings = () => {
   const [isOpen, setIsOpen] = useState(false);
   // const [base64Image, setBase64Image] = useState('');
   const { user, token } = useAuth();
-
-
-
-
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({});
@@ -28,8 +24,6 @@ const AccountSettings = () => {
       [name]: value
     });
   };
-
-
 
 
   const [avatarData, setAvatarData] = useState({
@@ -102,7 +96,7 @@ const AccountSettings = () => {
         <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
           Your avatar picture has been changed!
         </Modal>
-        <h2>PoG Username #117</h2>
+        <h2>{user.username}</h2>
       </div>
       <div>
       </div>
