@@ -26,6 +26,11 @@
     align-items: center;
     margin-top: 2rem;
     z-index: 1;
+    border: 2px solid red;
+}
+
+.userAvatarSettingsImg {
+    border: 2px solid cyan;
 }
 
 .profilePageRight {
