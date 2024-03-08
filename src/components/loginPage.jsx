@@ -4,58 +4,70 @@ import { useState } from 'react';
 import '../styles/LoginPage.css';
 import { useNavigate } from 'react-router';
 import LandingHeader from './LandingHeader';
+import { useAuth } from '../context/AuthContext';
 
 
 const LoginForm = () => {
 
-    const navigate = useNavigate();
 
-    const { handleSubmit } = useForm();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const { login } = useAuth();
 
 
-  const onSubmit = data => {
-    console.log(data);
-    // Here you would typically send the data to your server
-  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }))
+  }
 
   const handleDiscordLogin = () => {
     console.log('Discord login clicked');
     // Here you would typically send the data to your server
   };
 
-  const handleLoginClick = (path) => {
-    console.log(path);
-    navigate('/login');
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(formData, setLoading, setError)
+
+  }
 
 
-return (
+  return (
     <>
-    <LandingHeader />
-    <div className='registerContainer'>
-    <form onSubmit={handleSubmit}>
-      <div className='formInputsWrapper'>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} required />
-        </label>
+      <LandingHeader />
+      {error ? <p>Error: {error}</p> : (
+        <div className='registerContainer'>
+          <form onSubmit={handleSubmit}>
+            <div className='formInputsWrapper'>
+              <label>
+                Email:
+                <input type="email" value={formData.email} name="email" onChange={handleChange} required />
+              </label>
 
-        <label>
-          Password:
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-        </label>
+              <label>
+                Password:
+                <input type="password" name='password' value={formData.password} onChange={handleChange} />
+              </label>
 
-      </div>
+            </div>
+            <button disabled={loading} className='registerButton' type='submit'>Login</button>
+            <div className='registerButtonsWrapper'>
+              <button className="discordButton" onClick={handleDiscordLogin}>Login with Discord <img className='discordLogo' src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png" alt='discordLogo' /></button>
 
-      <div className='registerButtonsWrapper'>
-        <button className="discordButton" onClick={handleDiscordLogin}>Login with Discord <img className='discordLogo' src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png" alt='discordLogo' /></button>
-        <button className='registerButton' onClick={handleLoginClick}>SIGN IN</button>
-      </div>
-    </form>
+            </div>
+          </form>
 
-    </div>
+        </div>
+      )}
     </>
   );
 };

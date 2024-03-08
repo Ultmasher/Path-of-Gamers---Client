@@ -100,32 +100,32 @@ const UserComment = () => {
           {showComments && (
             <div className="commentComments">
               <div className="subcommentList">
-              {listOfComments.map((comment) => (
-                <div className="singleSubcomment" key={comment.commentId}>
-                  <div className="subcommentBody">
-                    <div className="subcommentHeader">
-                      <div className="subcommentAuthorAvatar">
-                        <img
-                          src={commentAuthorAvatar}
-                          alt="userAvatar"
-                          className="subcommentAvatar"
-                        />
+                {listOfComments.map((comment) => (
+                  <div className="singleSubcomment" key={comment.commentId}>
+                    <div className="subcommentBody">
+                      <div className="subcommentHeader">
+                        <div className="subcommentAuthorAvatar">
+                          <img
+                            src={commentAuthorAvatar}
+                            alt="userAvatar"
+                            className="subcommentAvatar"
+                          />
+                        </div>
+                        <div className="subcommentHeaderInfo">
+                          <h3 className="subcommentAuthor">
+                            PoG Username #{comment.commentAuthor}
+                          </h3>
+                          <h4 className="subcommentDate">
+                            {comment.commentDate}
+                          </h4>
+                        </div>
                       </div>
-                      <div className="subcommentHeaderInfo">
-                        <h3 className="subcommentAuthor">
-                          PoG Username #{comment.commentAuthor}
-                        </h3>
-                        <h4 className="subcommentDate">
-                          {comment.commentDate}
-                        </h4>
+                      <div className="subcommentTextDiv">
+                        <p className="subcommentText">{comment.commentText}</p>
                       </div>
-                    </div>
-                    <div className="subcommentTextDiv">
-                    <p className="subcommentText">{comment.commentText}</p>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
               </div>
 
               <div className="subcommentInputDiv">

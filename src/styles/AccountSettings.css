@@ -88,15 +88,16 @@
     font-size: 1rem;
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
-.accountSettingsContent, .gameSettingsDiv {
+.accountSettingsContent,
+.gameSettingsDiv {
     padding: 0rem;
 }
 
 .accountSettingsContent {
-    background-color:  var(--main-bg-color-darkest);
+    background-color: var(--main-bg-color-darkest);
     margin: 2rem;
     margin-top: 2rem;
     margin: 3rem 3rem 1.4rem 0rem;
@@ -127,7 +128,8 @@
     width: 100%;
 }
 
-.accountSettingsFormLeft, .accountSettingsFormRight {
+.accountSettingsFormLeft,
+.accountSettingsFormRight {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -136,7 +138,8 @@
 }
 
 
-.accountSettingsForm input {
+.accountSettingsForm input,
+textarea {
     padding: 0.5rem;
     margin: 0.4rem 0;
     border: 2px solid var(--main-orange-color);
@@ -183,7 +186,7 @@
     font-size: 1rem;
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
-    cursor: pointer; 
+    cursor: pointer;
     margin-right: 2rem;
 }
 
@@ -228,7 +231,7 @@
     padding-top: 0.2rem;
 }
 
-.gameSettingsButton{
+.gameSettingsButton {
     padding: 0.2rem 0.6rem;
     border: 2px solid var(--main-orange-color);
     border-radius: 0.8rem;
@@ -240,10 +243,12 @@
     font-size: 1rem;
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
-.gameSettingsButton:hover, .saveChangesButton:hover, .changeAvatarButton:hover {
+.gameSettingsButton:hover,
+.saveChangesButton:hover,
+.changeAvatarButton:hover {
     border: 2px solid var(--main-text-color);
 }
 
