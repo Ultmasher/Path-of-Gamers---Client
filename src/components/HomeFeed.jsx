@@ -230,8 +230,9 @@ const HomeFeed = () => {
                       ))}
                     </div>
 
+
                     <div className="subcommentInputDiv">
-                      <img src={post.commentAuthorAvatar} alt="userAvatar" className="subcommentSubmitAvatar" />
+                      {post && post.image ? <img className="subcommentSubmitAvatar" src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
                       <input type="text" placeholder="Write a comment..." className="subcommentInput" />
                       <button className="subcommentSubmitButton">Submit</button>
                     </div>
