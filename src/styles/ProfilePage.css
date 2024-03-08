@@ -1,5 +1,5 @@
 .profilePageContainer {
-    width: 80%;
+    width: 70%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -9,31 +9,58 @@
 }
 
 .profilePageLeft {
-    width: 25%;
     height: 100%;
+    width: 30%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
     box-sizing: border-box;
 }
 
+
+.profilePageUserCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    z-index: 1;
+}
+
 .profilePageRight {
-    width: 75%;
     height: 100%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     box-sizing: border-box;
     overflow-y: scroll;
+    padding-right: 2rem;
+    position: relative;
+    padding-bottom: 2rem;
+    margin-left: 3rem;
+}
 
+
+@media (min-width: 760px) {
+    .profilePageContainer {
+        width: 70%;
+    }
+
+    .profilePageLeft {
+        width: 20%;
+    } 
+    
+    .profilePageRight {
+        width: 80%;
+    }
 }
 
 .profilePageTopContent {
     background-color:  var(--main-bg-color-darkest);
-    margin: 2rem;
     margin-top: 2rem;
-    margin: 3rem 3rem 1.4rem 0rem;
+    margin-bottom: 2rem;
     padding: 2rem;
     border-radius: 0.8rem;
 }
