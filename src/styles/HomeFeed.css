@@ -9,12 +9,12 @@ body {
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     font-size: 1rem;
-
     line-height: 1.6;
     font-weight: 400;
     margin: 0;
     padding: 0;
     transition: 0.3s;
+
 }
 
 .eventPostWrapper {
@@ -23,7 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 1rem 0rem;
-    margin-top: -320px;
+    margin-top: 60px;
     width: 100%;
     padding: 0.5rem;
     background-color: var(--main-bg-color-dark);
@@ -41,16 +41,6 @@ body {
     left: -9999px;
 }
 
-.eventPostWrapper.custom-file-upload {
-    background-color: red;
-    color: var(--main-bg-color);
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-
 .eventPostWrapper label {
     display: flex;
     flex-direction: column;
@@ -58,6 +48,19 @@ body {
     font-weight: 500;
     font-size: 1.2rem;
     margin: 0.5rem 0rem;
+}
+
+.custom-file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--container-text-colour-dark);
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .postButton {
@@ -89,6 +92,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 2rem 0rem;
+    margi3n-top: 100px;
     width: 100%;
     padding: 0.5rem;
     background-color: var(--main-bg-color-dark);
@@ -99,4 +103,32 @@ body {
     font-family: 'Noto Sans', sans-serif;
     font-size: 1.2rem;
     gap: 10px;
+    height: 500px;
+    /* Set the desired height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+#game {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Style the options */
+#game option {
+    padding: 10px;
+    font-size: 16px;
+
+}
+
+#game:focus {
+    outline: none;
+    border-color: var(--main-orange-color);
+
+
 }

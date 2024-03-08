@@ -48,7 +48,7 @@
     font-size: 1rem;
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
-    cursor: pointer; 
+    cursor: pointer;
     margin-right: 2rem;
 }
 
@@ -71,7 +71,7 @@
     font-size: 1rem;
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
-    cursor: pointer; 
+    cursor: pointer;
     margin-right: 2rem;
 }
 
@@ -252,6 +252,7 @@ textarea {
     border: 2px solid var(--main-text-color);
 }
 
+
 @media (max-width: 768px) {
     .accountSettingsContainer {
         flex-direction: column;
@@ -293,7 +294,8 @@ textarea {
         width: 100%;
     }
 
-    .accountSettingsFormLeft, .accountSettingsFormRight {
+    .accountSettingsFormLeft,
+    .accountSettingsFormRight {
         width: 100%;
         padding-right: 0;
     }
@@ -316,4 +318,10 @@ textarea {
     .gameSettingsButton {
         margin-right: 0;
     }
+}
+
+.hidden-input {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
 }

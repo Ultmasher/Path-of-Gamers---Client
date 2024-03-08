@@ -75,21 +75,22 @@ const AccountSettings = () => {
         {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
 
         <form onSubmit={avatarSubmit}>
-          <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar} accept="image/*" onChange={(e) => {
+          <label htmlFor="profile-picture" className="custom-file-upload">
+            Upload Picture
+          </label>
+          <input type="file" id="profile-picture" name="profile-picture" className="profile hidden-input" value={formData.avatar} accept="image/*" onChange={(e) => {
             const file = e.target.files[0];
             setAvatarData({
               ...avatarData,
               avatar: file,
             });
-            //setPreviewSrc(URL.createObjectURL(file));
-            //setIsPhotoUploaded(true);
           }} />
           <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Change Avatar</button>
         </form>
         <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
           Your avatar picture has been changed!
         </Modal>
-        <h2>PoG Username #117</h2>
+        <h2> #{user.username}</h2>
       </div>
       <div>
       </div>
