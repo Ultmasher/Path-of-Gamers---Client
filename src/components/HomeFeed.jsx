@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Modal from './Modal';
 import axios from 'axios';
 import '../styles/HomeFeed.css';
-
-
 
 
 const HomeFeed = () => {
@@ -11,11 +9,27 @@ const HomeFeed = () => {
   const [postImage, setPostImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [user,setUser] = useState("")
+   const [games, setGames] = useState([]);
 
    const [postData, setpostData] = useState({
     content: '',
     image: "",
-    });
+    user: user.id,
+    game: user.game,
+  });
+
+     useEffect(() => {
+    // Fetch games data when the component mounts
+    axios.get('http://localhost:8000/games')
+      .then(response => {
+        setGames(response.data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  }, []);
+
+
 
     const handlePostSubmit = async (e) => {
       e.preventDefault();
@@ -25,12 +39,14 @@ const HomeFeed = () => {
       if (post) {
           try {
             await postSubmit(post);
-            console.log('Avatar updated successfully');
+            console.log('post updated successfully');
           } catch (error) {
-            console.error('Error updating avatar:', error);
+            console.error('Error updating post:', error);
           }
         }
       };
+
+
 
     const postSubmit = async (e) => {
       e.preventDefault();
@@ -39,7 +55,6 @@ const HomeFeed = () => {
       if (postImage) {
         newPostData.append('image', postImage);
       }
-    
       try {
         const response = await axios.post('http://localhost:8000/post', newPostData, {
           headers: {
@@ -55,9 +70,7 @@ const HomeFeed = () => {
   const handlePostImageChange = (event) => {
     setPostImage(event.target.files[0]);
   };
-
-
-
+  
   return (
     <div>
       
@@ -65,11 +78,11 @@ const HomeFeed = () => {
   <label className='' htmlFor="bio"> Create a post:</label>
   <textarea className='textarea' rows="8" cols="100" maxLength="150" id='bio' name='bio' value={postData.post} onChange={(e) => setpostData({ ...postData, post: e.target.value })} placeholder='What are you thinking about?' />
   <label htmlFor="game">Choose Post Game:</label>
-  <select id="game" name="game">
-    <option value="Fortnite">Fortnite</option>
-    <option value="FIFA24">FIFA24</option>
-    <option value="League of Legends">League of Legends</option>
-  </select>
+  <select id="game" name="game" value={postData.game} onChange={(e) => setpostData({ ...postData, game: e.target.value })}>
+          {games.map(game => (
+            <option key={game._id} value={game.name}>{game.name}</option>
+          ))}
+        </select>
   <div htmlFor="profile-picture" style={{backgroundImage: `url('')`}}>
     <input
       className='changeAvatarButton'
