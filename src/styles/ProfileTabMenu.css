@@ -38,7 +38,6 @@
 
 .tabContent {
     display: none;
-    border: 2px solid var(--main-orange-color);
     border-radius: 0.8rem;
     padding: 1rem;
     margin: 1rem 1rem 1rem 0rem;

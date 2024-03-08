@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { useNavigate } from 'react-router';
 import '../styles/AddGameInformation.css';
 
@@ -82,11 +83,12 @@ const AddGameInformation = ({closeGame}) => {
             </div>
 
             </div>
-        
+
             <div className='confirmBtnDiv'>
                 <p className='apiInstructions'>You can find your League of Legends Summoner in-game.</p>
                 <button type="submit" className='pogBtn addGameConfirmBtn' onClick={handleSubmit}>Confirm</button>
             </div>
+
             </>
             )}
 

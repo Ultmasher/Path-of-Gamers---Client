@@ -77,6 +77,7 @@ const AccountSettings = () => {
       console.error("No avatar file selected");
       return;
     }
+
     const newAvatarData = new FormData();
     newAvatarData.append("avatar", avatarData.avatar);
     try {

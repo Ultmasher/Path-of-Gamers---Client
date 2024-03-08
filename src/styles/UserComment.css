@@ -15,6 +15,7 @@
 }
 
 .singleCommentContainer:hover {
+    display: flex;
 }
 
 .commentAuthorAvatar {
