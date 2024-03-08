@@ -9,21 +9,23 @@ body {
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     font-size: 1rem;
-    
+
     line-height: 1.6;
     font-weight: 400;
     margin: 0;
     padding: 0;
     transition: 0.3s;
 }
+
 .eventPostWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin: 1rem 0rem;
+    margin-top: -320px;
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: var(--main-bg-color-dark);
     border-radius: 0.8rem;
     border: 2px solid var(--main-orange-color);
@@ -31,7 +33,23 @@ body {
     transition: 0.3s;
     font-family: 'Noto Sans', sans-serif;
     font-size: 1.2rem;
+    gap: 10px;
 }
+
+.eventPostWrapper input[type="file"] {
+    position: absolute;
+    left: -9999px;
+}
+
+.eventPostWrapper.custom-file-upload {
+    background-color: red;
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
 
 .eventPostWrapper label {
     display: flex;
@@ -62,4 +80,23 @@ body {
 
 .postButton:-ms-input-placeholder {
     color: var(--main-bg-color);
+}
+
+
+.postsWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0rem;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--main-bg-color-dark);
+    border-radius: 0.8rem;
+    border: 2px solid var(--main-orange-color);
+    box-shadow: 0px 0px 10px 0px var(--main-orange-color);
+    transition: 0.3s;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1.2rem;
+    gap: 10px;
 }
