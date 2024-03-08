@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+
+import { useNavigate } from 'react-router';
 import '../styles/AddGameInformation.css';
 
-const AddGameInformation = () => {
+const AddGameInformation = ({closeGame}) => {
     const [summonerName, setSummonerName] = useState('');
     const [region, setRegion] = useState('');
 
-    const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleSummonerNameChange = (event) => {
         setSummonerName(event.target.value);
@@ -30,18 +33,27 @@ const AddGameInformation = () => {
         event.preventDefault();
         console.log('Summoner Name:', summonerName);
         console.log('Region:', region);
-        setLoading(true);
-        checkIfValidSummoner(summonerName, region);
         setSubmitted(true);
     }
-
 
     return (
         <div className='addGameInfoWrapper'>
             <form className='addGameForm'>
-
+            {submitted ? (
+                <div className='gameAddedSuccessWrapper'> 
+                    <h2 className='gameAddedSuccessTitle'>Game Added Successfully!</h2>
+                    <p className='gameAddedSuccessText'>Add new Game?</p>
+                    <div className='gameAddedSuccessBtns'>
+                        <button className='pogBtn addGameSuccessBtn' onClick={() => closeGame()}>Yes</button>
+                        <button className='pogBtn addGameSuccessBtn' onClick={() => navigate('/')}>No</button>
+                    </div>
+                 </div>
+            ) : (
+            <>
+            <div className='closeGameBtnDiv'>
+            <button className='closeAddGameInfoBtn' onClick={closeGame}><span className="material-symbols-outlined">close</span></button>
+            </div>
             <div className='addGameInfoTop'>
-
             <div className='addSummonerDiv'>
                 <label htmlFor="summonerName">Summoner Name:</label>
                 <input
@@ -76,6 +88,10 @@ const AddGameInformation = () => {
                 <p className='apiInstructions'>You can find your League of Legends Summoner in-game.</p>
                 <button type="submit" className='pogBtn addGameConfirmBtn' onClick={handleSubmit}>Confirm</button>
             </div>
+
+            </>
+            )}
+
             </form>
         </div>
     );

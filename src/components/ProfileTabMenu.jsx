@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AboutTab from "./ProfileTabs/AboutTab";
+import UserComment from "./UserComment";
 import "../styles/ProfileTabMenu.css";
 
 const ProfileTabMenu = () => {
@@ -15,7 +17,7 @@ const ProfileTabMenu = () => {
           className={toggleState === 1 ? 'profileTab activeProfileTab' : 'profileTab'}
           onClick={() => toggleTab(1)}
         >
-          User Feed
+          Posts
         </div>
         <div 
         className={toggleState === 2 ? 'profileTab activeProfileTab' : 'profileTab'}
@@ -44,8 +46,9 @@ const ProfileTabMenu = () => {
         <div className="tabContentWrapper">
 
             <div className={toggleState === 1 ? 'tabContent activeTabContent' : 'tabContent'}>
-                <h2>Content 1</h2>
-                <p>Here is some content!</p>
+               
+                <UserComment /> 
+                <UserComment />
             </div>
 
             <div className={toggleState === 2 ? 'tabContent activeTabContent' : 'tabContent'}>
@@ -54,8 +57,7 @@ const ProfileTabMenu = () => {
             </div>
 
             <div className={toggleState === 3 ? 'tabContent activeTabContent' : 'tabContent'}>
-                <h2>Content 3</h2>
-                <p>Here is even more content!</p>
+                <AboutTab />
             </div>
 
             <div className={toggleState === 4 ? 'tabContent activeTabContent' : 'tabContent'}>

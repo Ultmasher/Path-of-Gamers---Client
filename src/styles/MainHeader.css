@@ -1,4 +1,15 @@
 
+.mainHeaderWrapper {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 4px solid #969292;
+    box-sizing: border-box;
+
+}
+
 .mainHeaderContainer {
     width: 100%;
     height: 80px;
@@ -6,7 +17,12 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--main-bg-color-darkest);
+    border-bottom: 4px solid var(--main-orange-color);
+    padding-right: 7.5%;
+    padding-left: 7.5%;
+    box-sizing: border-box;
 }
+
 
 .mainHeaderImg {
     height: 70%;
@@ -48,10 +64,6 @@
     cursor: pointer;
 }
 
-/* .notificationIcon:hover {
-    color: white;
-} */
-
 .notificationUnread {
     color: var(--main-orange-color);
 }
@@ -69,4 +81,34 @@
     transform: rotate(90deg);
     transition: transform 0.2s;
     color: var(--main-orange-color);
-  }
+}
+
+.accountSettingsHamburger {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mainHeaderImg {
+        margin-left: 1rem;
+    }
+
+    .mainHeaderRight {
+        margin-right: 1rem;
+    }
+
+    .notificationIcon {
+        font-size: 2rem;
+    }
+
+    .accountSettingsIcon {
+        display: none;
+    }
+
+    .accountSettingsHamburger {
+        font-size: 2rem;
+        cursor: pointer;
+        margin-left: 1rem;
+        display: flex;
+        z-index: 1;
+    }
+}

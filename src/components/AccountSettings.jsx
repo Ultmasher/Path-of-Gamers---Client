@@ -80,7 +80,6 @@ const AccountSettings = () => {
 
     const newAvatarData = new FormData();
     newAvatarData.append("avatar", avatarData.avatar);
-
     try {
       const response = await axios.put(
         "http://localhost:8000/user/avatar/65dc65e3c92b7f3839eb1565",
