@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "../styles/UserComment.css";
 
 const UserComment = () => {
   const [showComments, setShowComments] = useState(false);
@@ -46,7 +47,7 @@ const UserComment = () => {
     setCommentLikes(commentLikes - 1);
   };
 
-  const toggleComments = () => {
+  const showHideComments = () => {
     setShowComments(!showComments);
   };
 
