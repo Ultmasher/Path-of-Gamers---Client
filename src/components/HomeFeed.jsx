@@ -50,6 +50,7 @@ const HomeFeed = () => {
   };
 
   const showHideComments = () => {
+    console.log(showComments)
     setShowComments(!showComments);
   };
 
@@ -122,18 +123,23 @@ const HomeFeed = () => {
     }
   };
 
-  console.log(posts)
+  const formattedDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
+    return date.toLocaleDateString(undefined, options);
+  };
 
+  console.log(posts)
   return (
     <div>
       <form onSubmit={handlePostSubmit} className='eventPostWrapper'>
-        <label htmlFor="bio">Create a post:</label>
+        <label htmlFor="post">Create a post:</label>
         <textarea
           rows="1"
           cols="100"
           maxLength="150"
-          id='bio'
-          name='bio'
+          id='post'
+          name='post'
           value={postData.content}
           onChange={(e) => setPostData({ ...postData, content: e.target.value })}
           placeholder='What are you thinking about?'
@@ -166,6 +172,7 @@ const HomeFeed = () => {
           <button className='changeAvatarButton'>Post</button>
         </div>
       </form>
+
       <div className='postsWrap'>
         {posts.map((post, index) => (
           <div className="singleCommentContainer" key={index}>
@@ -175,7 +182,7 @@ const HomeFeed = () => {
             <div className="commentBody">
               <div className="commentHeader">
                 <h3 className="commentAuthor">PoG Username #{post.user.name}</h3>
-                <h4 className="commentDate">{post.created}</h4>
+                <h4 className="commentDate">{formattedDate(post.created)}</h4>
               </div>
               <div className="commentLower">
                 {post && post.image ? <img className="commentMediaImg" src={`data:image/jpeg;base64,${post.image}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
@@ -190,20 +197,20 @@ const HomeFeed = () => {
                     <span className="material-symbols-outlined likeSymbol" onClick={likePost}>
                       favorite
                     </span>
-                    {post.commentLikes}
+                    {post.likes.length}
                   </div>
                   <div className="commentCommentButtonDiv" onClick={showHideComments}>
                     <span className="material-symbols-outlined commentSymbol">
                       comment
                     </span>
-                    {post.commentComments}
+                    {post.comments.length}
                   </div>
                 </div>
 
-                {post.showComments && (
+                {showComments && (
                   <div className="commentComments">
                     <div className="subcommentList">
-                      {comment.listOfComments.map(subcomment => (
+                      {post.comments.map(subcomment => (
                         <div className="singleSubcomment" key={subcomment.commentId}>
                           <div className="subcommentBody">
                             <div className="subcommentHeader">
@@ -224,7 +231,7 @@ const HomeFeed = () => {
                     </div>
 
                     <div className="subcommentInputDiv">
-                      <img src={comment.commentAuthorAvatar} alt="userAvatar" className="subcommentSubmitAvatar" />
+                      <img src={post.commentAuthorAvatar} alt="userAvatar" className="subcommentSubmitAvatar" />
                       <input type="text" placeholder="Write a comment..." className="subcommentInput" />
                       <button className="subcommentSubmitButton">Submit</button>
                     </div>
