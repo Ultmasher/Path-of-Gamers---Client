@@ -78,7 +78,7 @@ const API = () => {
 
 
 
-    return { getLoLData, getUserData, modifyUser, modifyAvatar, registerUser, postPost };
+    return { getLoLData, getUserData, modifyAvatar, registerUser, postPost };
 };
 
 export default API;

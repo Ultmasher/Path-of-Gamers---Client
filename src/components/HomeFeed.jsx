@@ -4,6 +4,8 @@ import axios from 'axios';
 import '../styles/HomeFeed.css';
 import { useAuth } from '../context/AuthContext';
 
+import UserComment from './UserComment';
+
 const HomeFeed = () => {
   const [loading, setLoading] = useState(true);
   const [postImage, setPostImage] = useState(null);
@@ -76,7 +78,7 @@ const HomeFeed = () => {
 
 
   return (
-    <div>
+    <div className='homefeedContainer'>
       <form onSubmit={handlePostSubmit} className='eventPostWrapper'>
         <label htmlFor="bio">Create a post:</label>
         <textarea
@@ -119,16 +121,20 @@ const HomeFeed = () => {
       </form>
       <div className='postsWrap'>
         {posts.map((post, index) => (
-          <div key={index}>
+          <>
+          {/* <div key={index}>
             <p>ID: {post._id}</p>
             <p>Content: {post.content}</p>
             <p>Type: {post.type}</p>
-          </div>
+          </div> */}
+          <UserComment props={post}/>
+          </>
         ))}
       </div>
       <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
         Your post has been posted!
       </Modal>
+      <UserComment />
     </div>
   );
 };

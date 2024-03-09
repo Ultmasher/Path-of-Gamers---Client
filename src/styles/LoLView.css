@@ -27,3 +27,17 @@
     font-size: 44px;
     margin-top: -5px;
 }
+
+.matchHistoryCardLoL {
+    border: 2px solid cyan;
+}
+
+.matchHistoryLoLPlayerCard {
+    border: 2px solid red;
+    width: auto;
+    display: flex;
+}
+
+.matchHistoryLoLPlayerCard {
+    height: 30px;
+}

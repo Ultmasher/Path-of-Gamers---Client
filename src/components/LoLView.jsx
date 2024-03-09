@@ -72,11 +72,14 @@ const LoLView = () => {
                             ))
                         )}
                         <h2>Games</h2>
+                        {console.log(data)}
                         {data.matchData.map((game, index) => (
-                            <div key={index} style={{ backgroundColor: 'gray' }}>
+                            console.log(game),
+                            <div key={index} style={{ backgroundColor: 'gray' }} className='matchHistoryCardLoL'>
                                 <h2>Game: {index + 1}</h2>
                                 {game.info.participants.map((participant, participantIndex) => (
-                                    <p key={participantIndex}>
+                                
+                                    <p key={participantIndex} className='matchHistoryLoLPlayerCard'>
                                         Player {participantIndex + 1}: {participant.summonerName}, KDA: {participant.kills}/{participant.deaths}/{participant.assists} champion name: {participant.championName}
                                         <img src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${participant.championName}.png`} />
                                     </p>
