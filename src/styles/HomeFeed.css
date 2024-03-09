@@ -4,12 +4,16 @@
     box-sizing: border-box;
 }
 
+.homefeedContainer {
+    width: 70%;
+    height: 100%;
+}
+
 body {
     font-family: 'Noto Sans', sans-serif;
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     font-size: 1rem;
-
     line-height: 1.6;
     font-weight: 400;
     margin: 0;
@@ -23,7 +27,6 @@ body {
     justify-content: center;
     align-items: center;
     margin: 1rem 0rem;
-    margin-top: -320px;
     width: 100%;
     padding: 0.5rem;
     background-color: var(--main-bg-color-dark);
@@ -100,3 +103,4 @@ body {
     font-size: 1.2rem;
     gap: 10px;
 }
+

@@ -1,18 +1,7 @@
 import React, { useState } from "react";
 import "../styles/UserComment.css";
 
-const UserComment = ({props}) => {
-
-
-  let commentData = props;
-
-  if (!commentData) {
-    return <div>Loading...</div>;
-  }
-
-  console.log(commentData);
-
-
+const UserEventPost = () => {
   const [showComments, setShowComments] = useState(false);
 
   // WILL TAKE THESE VALUES BELOW AS PROPS
@@ -20,6 +9,11 @@ const UserComment = ({props}) => {
     "https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png"
   );
   const [commentId, setCommentId] = useState(1);
+  const [commentText, setCommentText] = useState(
+    "Thrilling matchups and strategic plays at the League of Legends event! The intense competition showcased top-tier skills and kept us on the edge of our seats. Can't wait for the next showdown in the Summoner's Rift! #LeagueOfLegends #EsportsExcitement"
+  );
+  const [commentAuthor, setCommentAuthor] = useState(117);
+  const [commentDate, setCommentDate] = useState("2023-03-01 12:02:53");
   const [commentImg, setCommentImg] = useState(
     "https://nexus.leagueoflegends.com/wp-content/uploads/2019/11/ase1920clear_xzacpjebut2xunpks7x1.jpg"
   );
@@ -48,6 +42,7 @@ const UserComment = ({props}) => {
     },
   ]);
   const [commentLikes, setCommentLikes] = useState(12);
+  const [eventTime, setEventTime] = useState("2023-03-01 12:02:53");
 
   const likePost = () => {
     setCommentLikes(commentLikes - 1);
@@ -56,8 +51,6 @@ const UserComment = ({props}) => {
   const showHideComments = () => {
     setShowComments(!showComments);
   };
-
-  console.log(commentData.likes.length);
 
   return (
     <div className="singleCommentContainer">
@@ -71,8 +64,8 @@ const UserComment = ({props}) => {
 
       <div className="commentBody">
         <div className="commentHeader">
-          <h3 className="commentAuthor">{commentData.user.name}</h3>
-          <h4 className="commentDate">{commentData.created}</h4>
+          <h3 className="commentAuthor">PoG Username #{commentAuthor}</h3>
+          <h4 className="commentDate">{commentDate}</h4>
         </div>
         <div className="commentLower">
           {commentImg && (
@@ -85,7 +78,8 @@ const UserComment = ({props}) => {
                 : "commentText textAndImgComment"
             }
           >
-            {commentData.content}
+            {commentText}         
+
           </p>
           <div className="commentActions">
             <div className="commentLikeButtonDiv">
@@ -95,13 +89,13 @@ const UserComment = ({props}) => {
               >
                 favorite
               </span>
-              {commentData.likes.length}
+              {commentLikes}
             </div>
             <div className="commentCommentButtonDiv" onClick={showHideComments}>
               <span className="material-symbols-outlined commentSymbol">
                 comment
               </span>
-              {commentData.comments.length}
+              {commentComments}
             </div>
           </div>
 
@@ -153,4 +147,4 @@ const UserComment = ({props}) => {
   );
 };
 
-export default UserComment;
+export default UserEventPost;
