@@ -7,64 +7,50 @@ import { useAuth } from '../context/AuthContext';
 const HomeFeed = () => {
   const [showComments, setShowComments] = useState(false);
 
-  // WILL TAKE THESE VALUES BELOW AS PROPS
-  const [commentAuthorAvatar, setCommentAuthorAvatar] = useState(
-    "https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png"
-  );
-  const [commentId, setCommentId] = useState(1);
-  const [commentText, setCommentText] = useState(
-    "Thrilling matchups and strategic plays at the League of Legends event! The intense competition showcased top-tier skills and kept us on the edge of our seats. Can't wait for the next showdown in the Summoner's Rift! #LeagueOfLegends #EsportsExcitement"
-  );
-  const [commentAuthor, setCommentAuthor] = useState(117);
-  const [commentDate, setCommentDate] = useState("2023-03-01 12:02:53");
-  const [commentImg, setCommentImg] = useState(
-    "https://nexus.leagueoflegends.com/wp-content/uploads/2019/11/ase1920clear_xzacpjebut2xunpks7x1.jpg"
-  );
-  const [commentComments, setCommentComments] = useState(3);
-  const [listOfComments, setListOfComments] = useState([
-    {
-      commentId: 2,
-      commentText:
-        "I was there too! It was an amazing event and I can't wait for the next one. The energy in the stadium was electrifying!",
-      commentAuthor: 118,
-      commentDate: "2023-03-01 12:02:53",
-    },
-    {
-      commentId: 3,
-      commentText:
-        "Let's GOOOOOOOOOO! #PoG #LeagueOfLegends #EsportsExcitement",
-      commentAuthor: 119,
-      commentDate: "2023-03-01 12:02:53",
-    },
-    {
-      commentId: 4,
-      commentText:
-        "I'm so glad I got to see this live! The crowd was amazing and the games were intense! #LeagueOfLegends #EsportsExcitement #PoG",
-      commentAuthor: 120,
-      commentDate: "2023-03-01 12:02:53",
-    },
-  ]);
   const [commentLikes, setCommentLikes] = useState(12);
   const likePost = () => {
     setCommentLikes(commentLikes - 1);
   };
 
-  const showHideComments = () => {
-    console.log(showComments)
-    setShowComments(!showComments);
-  };
+
 
   const [loading, setLoading] = useState(true);
+  const [showCommentsId, setShowCommentsId] = useState(null);
   const [postImage, setPostImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   const [games, setGames] = useState([]);
+  const [comment, setComment] = useState("");
   const { user, token } = useAuth();
   const [selectedGame, setSelectedGame] = useState('');
   const [postData, setPostData] = useState({
     content: '',
     game: '',
   });
+
+  const handleCommentInputChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleSubmitComment = async (postId) => {
+    try {
+      const response = await axios.post(`http://localhost:8000/user/comment`, {
+        content: comment,
+        userId: user._id,
+        postId: postId
+
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : null,
+        },
+      });
+      setComment('');
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+    }
+  };
+
 
   useEffect(() => {
     axios.get('http://localhost:8000/games')
@@ -84,7 +70,38 @@ const HomeFeed = () => {
         console.error('There was a problem with the fetch operation:', error);
         setLoading(false); // Set loading to false in case of error
       });
-  }, []);
+  }, [posts]);
+
+  const handleLikePost = async (postId) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/user/like',
+        { postId }, // Include postId in the request body
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token ? `Bearer ${token}` : null,
+          },
+        }
+      );
+
+      // Assuming the response contains the updated post data
+      const updatedPost = response.data.post;
+
+      // Update the posts state with the updated post data
+      const updatedPosts = posts.map(post => {
+        if (post._id === updatedPost._id) {
+          return updatedPost;
+        }
+        return post;
+      });
+
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.error("Error liking post:", error);
+    }
+  };
+
 
   const handleGameChange = (e) => {
     setSelectedGame(e.target.value);
@@ -113,7 +130,6 @@ const HomeFeed = () => {
           'Authorization': token ? `Bearer ${token}` : null,
         },
       });
-      console.log("Post submitted:", response.data);
       // Clear the form after successful submission
       setPostData({ content: '', game: '' });
       setPostImage(null);
@@ -122,7 +138,7 @@ const HomeFeed = () => {
       console.error("Error submitting post:", error);
     }
   };
-
+  //formating for date
   const formattedDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
@@ -130,6 +146,12 @@ const HomeFeed = () => {
   };
 
   console.log(posts)
+
+  const handleToggleComments = (postId) => {
+    setShowCommentsId(showCommentsId === postId ? null : postId);
+  };
+
+
   return (
     <div>
       <form onSubmit={handlePostSubmit} className='eventPostWrapper'>
@@ -185,7 +207,7 @@ const HomeFeed = () => {
                 <h4 className="commentDate">{formattedDate(post.created)}</h4>
               </div>
               <div className="commentLower">
-                {post && post.image ? <img className="commentMediaImg" src={`data:image/jpeg;base64,${post.image}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+                {post && post.image ? <img className="commentMediaImg" src={`data:image/jpeg;base64,${post.image}`} alt='blankProfile' /> : null}
 
                 <p
                   className={!post.commentImg ? "commentText soloTextComment" : "commentText textAndImgComment"}
@@ -194,12 +216,12 @@ const HomeFeed = () => {
                 </p>
                 <div className="commentActions">
                   <div className="commentLikeButtonDiv">
-                    <span className="material-symbols-outlined likeSymbol" onClick={likePost}>
+                    <span className="material-symbols-outlined likeSymbol" onClick={() => handleLikePost(post._id)}>
                       favorite
                     </span>
                     {post.likes.length}
                   </div>
-                  <div className="commentCommentButtonDiv" onClick={showHideComments}>
+                  <div className="commentCommentButtonDiv" onClick={() => handleToggleComments(post._id)}>
                     <span className="material-symbols-outlined commentSymbol">
                       comment
                     </span>
@@ -207,23 +229,25 @@ const HomeFeed = () => {
                   </div>
                 </div>
 
-                {showComments && (
+                {showCommentsId === post._id && (
                   <div className="commentComments">
                     <div className="subcommentList">
-                      {post.comments.map(subcomment => (
-                        <div className="singleSubcomment" key={subcomment.commentId}>
+                      {post.comments.map(comment => (
+                        <div className="singleSubcomment" key={comment._id}>
                           <div className="subcommentBody">
+
                             <div className="subcommentHeader">
                               <div className="subcommentAuthorAvatar">
-                                <img src={subcomment.commentAuthorAvatar} alt="userAvatar" className="subcommentAvatar" />
+                                {comment && post.image ? <img className="commentMediaImg" src={`data:image/jpeg;base64,${comment.userId.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
                               </div>
                               <div className="subcommentHeaderInfo">
-                                <h3 className="subcommentAuthor">PoG Username #{subcomment.commentAuthor}</h3>
-                                <h4 className="subcommentDate">{subcomment.commentDate}</h4>
+                                <h3 className="subcommentAuthor">PoG Username #{comment.userId.name}</h3>
+
+                                <h4 className="subcommentDate">{formattedDate(comment.created)}</h4>
                               </div>
                             </div>
                             <div className="subcommentTextDiv">
-                              <p className="subcommentText">{subcomment.commentText}</p>
+                              <p className="subcommentText">{comment.content}</p>
                             </div>
                           </div>
                         </div>
@@ -233,8 +257,20 @@ const HomeFeed = () => {
 
                     <div className="subcommentInputDiv">
                       {post && post.image ? <img className="subcommentSubmitAvatar" src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
-                      <input type="text" placeholder="Write a comment..." className="subcommentInput" />
-                      <button className="subcommentSubmitButton">Submit</button>
+                      <input
+                        type="text"
+                        placeholder="Write a comment..."
+                        className="subcommentInput"
+                        value={comment}
+                        onChange={handleCommentInputChange}
+                      />
+                      <button
+                        className="subcommentSubmitButton"
+                        onClick={() => handleSubmitComment(post._id)}
+                        disabled={!comment.trim()}
+                      >
+                        Submit
+                      </button>
                     </div>
                   </div>
                 )}
