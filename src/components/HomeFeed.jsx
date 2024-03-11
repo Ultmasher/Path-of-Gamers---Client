@@ -70,7 +70,7 @@ const HomeFeed = () => {
         console.error('There was a problem with the fetch operation:', error);
         setLoading(false); // Set loading to false in case of error
       });
-  }, [posts]);
+  }, []);
 
   const handleLikePost = async (postId) => {
     try {
