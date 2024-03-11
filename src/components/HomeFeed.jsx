@@ -5,13 +5,6 @@ import '../styles/HomeFeed.css';
 import { useAuth } from '../context/AuthContext';
 
 const HomeFeed = () => {
-  const [showComments, setShowComments] = useState(false);
-
-  const [commentLikes, setCommentLikes] = useState(12);
-  const likePost = () => {
-    setCommentLikes(commentLikes - 1);
-  };
-
 
 
   const [loading, setLoading] = useState(true);
@@ -53,24 +46,23 @@ const HomeFeed = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8000/games')
-      .then(response => {
-        setGames(response.data);
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
+    const fetchData = async () => {
+      try {
+        const gamesResponse = await axios.get('http://localhost:8000/games');
+        setGames(gamesResponse.data);
 
-    axios.get('http://localhost:8000/post')
-      .then(response => {
-        setPosts(response.data);
+        const postsResponse = await axios.get('http://localhost:8000/post');
+        setPosts(postsResponse.data);
         setLoading(false); // Set loading to false once data is fetched
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         setLoading(false); // Set loading to false in case of error
-      });
+      }
+    };
+
+    fetchData();
   }, []);
+
 
   const handleLikePost = async (postId) => {
     try {
