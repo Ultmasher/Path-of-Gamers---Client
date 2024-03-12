@@ -8,27 +8,29 @@ import AddGameInformation from './AddGameInformation';
 import Footer from './Footer';
 import { Route, Routes } from 'react-router';
 
+
 import '../styles/HomePage.css';
 
 const HomePage = () => {
   return (
     <>
-        <div className='homepageWrapper'>
+      <div className='homepageWrapper'>
         <MainHeader />
 
-            <div className='homepageContent'>
-                <Routes>
-                    <Route path='/' element={<HomeFeed />} />
-                    <Route path='/account' element={<AccountSettings />} />
-                    <Route path='/account/game-settings' element={<GameSettings />} />
-                    <Route path='/profile' element={<ProfilePage />} />
-                    <Route path='/addgame' element={<AddGameInformation />} />
+        <div className='homepageContent'>
+          <Routes>
+            <Route path='/' element={<HomeFeed />} />
+            <Route path='/account' element={<AccountSettings />} />
+            <Route path='/account/game-settings' element={<GameSettings />} />
+            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/profile/:id' element={<ProfilePage />} />
+            <Route path='/addgame' element={<AddGameInformation />} />
 
-                </Routes>
-            </div>
+          </Routes>
+        </div>
 
         <Footer />
-        </div>
+      </div>
 
     </>
   )

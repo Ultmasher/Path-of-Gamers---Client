@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import "../styles/UserComment.css";
 
-const UserComment = () => {
+const UserComment = ({props}) => {
+
+
+  let commentData = props;
+
+  if (!commentData) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(commentData);
+
+
   const [showComments, setShowComments] = useState(false);
 
   // WILL TAKE THESE VALUES BELOW AS PROPS
@@ -9,11 +20,6 @@ const UserComment = () => {
     "https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png"
   );
   const [commentId, setCommentId] = useState(1);
-  const [commentText, setCommentText] = useState(
-    "Thrilling matchups and strategic plays at the League of Legends event! The intense competition showcased top-tier skills and kept us on the edge of our seats. Can't wait for the next showdown in the Summoner's Rift! #LeagueOfLegends #EsportsExcitement"
-  );
-  const [commentAuthor, setCommentAuthor] = useState(117);
-  const [commentDate, setCommentDate] = useState("2023-03-01 12:02:53");
   const [commentImg, setCommentImg] = useState(
     "https://nexus.leagueoflegends.com/wp-content/uploads/2019/11/ase1920clear_xzacpjebut2xunpks7x1.jpg"
   );
@@ -51,6 +57,8 @@ const UserComment = () => {
     setShowComments(!showComments);
   };
 
+  console.log(commentData.likes.length);
+
   return (
     <div className="singleCommentContainer">
       <div className="commentAuthorAvatar">
@@ -63,8 +71,8 @@ const UserComment = () => {
 
       <div className="commentBody">
         <div className="commentHeader">
-          <h3 className="commentAuthor">PoG Username #{commentAuthor}</h3>
-          <h4 className="commentDate">{commentDate}</h4>
+          <h3 className="commentAuthor">{commentData.user.name}</h3>
+          <h4 className="commentDate">{commentData.created}</h4>
         </div>
         <div className="commentLower">
           {commentImg && (
@@ -77,7 +85,7 @@ const UserComment = () => {
                 : "commentText textAndImgComment"
             }
           >
-            {commentText}
+            {commentData.content}
           </p>
           <div className="commentActions">
             <div className="commentLikeButtonDiv">
@@ -87,13 +95,13 @@ const UserComment = () => {
               >
                 favorite
               </span>
-              {commentLikes}
+              {commentData.likes.length}
             </div>
             <div className="commentCommentButtonDiv" onClick={showHideComments}>
               <span className="material-symbols-outlined commentSymbol">
                 comment
               </span>
-              {commentComments}
+              {commentData.comments.length}
             </div>
           </div>
 

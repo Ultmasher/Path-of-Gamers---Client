@@ -3,10 +3,11 @@ import Modal from './Modal';
 import axios from 'axios';
 import '../styles/HomeFeed.css';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router';
+
+import UserComment from './UserComment';
 
 const HomeFeed = () => {
-
-
   const [loading, setLoading] = useState(true);
   const [showCommentsId, setShowCommentsId] = useState(null);
   const [postImage, setPostImage] = useState(null);
@@ -20,6 +21,7 @@ const HomeFeed = () => {
     content: '',
     game: '',
   });
+  const navigate = useNavigate()
 
   const handleCommentInputChange = (e) => {
     setComment(e.target.value);
@@ -31,7 +33,6 @@ const HomeFeed = () => {
         content: comment,
         userId: user._id,
         postId: postId
-
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +44,6 @@ const HomeFeed = () => {
       console.error("Error submitting comment:", error);
     }
   };
-
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -69,7 +69,6 @@ const HomeFeed = () => {
     fetchGames();
     fetchPosts();
   }, []);
-
 
   const handleLikePost = async (postId) => {
     try {
@@ -101,7 +100,6 @@ const HomeFeed = () => {
     }
   };
 
-
   const handleGameChange = (e) => {
     setSelectedGame(e.target.value);
     setPostData({ ...postData, game: e.target.value });
@@ -121,11 +119,9 @@ const HomeFeed = () => {
     newPostData.append('userId', user._id);
     newPostData.append('picture', postImage); // No need to convert to base64
 
-
     try {
       const response = await axios.post('http://localhost:8000/post', newPostData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
           'Authorization': token ? `Bearer ${token}` : null,
         },
       });
@@ -137,22 +133,30 @@ const HomeFeed = () => {
       console.error("Error submitting post:", error);
     }
   };
-  //formating for date
+
   const formattedDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
     return date.toLocaleDateString(undefined, options);
   };
 
-  console.log(posts)
-
   const handleToggleComments = (postId) => {
     setShowCommentsId(showCommentsId === postId ? null : postId);
   };
 
+  const [selectedFilterGame, setSelectedFilterGame] = useState('');
 
+  const handleFilterGameChange = (e) => {
+    setSelectedFilterGame(e.target.value);
+  };
+
+  const handleAvatarClick = (userId) => {
+    navigate(`profile/${userId}`);
+  }
+
+  console.log(posts)
   return (
-    <div>
+    <div className='homefeedContainer'>
       <form onSubmit={handlePostSubmit} className='eventPostWrapper'>
         <label htmlFor="post">Create a post:</label>
         <textarea
@@ -172,11 +176,12 @@ const HomeFeed = () => {
           value={selectedGame}
           onChange={handleGameChange}
         >
-          <option value="">Select a game</option>
+          <option value="">All Games</option>
           {games.map(game => (
             <option key={game._id} value={game._id}>{game.name}</option>
           ))}
         </select>
+
         <div htmlFor="profile-picture" >
           <label htmlFor="profile-picture" className="custom-file-upload">
             Upload Picture
@@ -193,8 +198,21 @@ const HomeFeed = () => {
           <button className='changeAvatarButton'>Post</button>
         </div>
       </form>
+      <label htmlFor="filterByGame">Filter Posts By Game:</label>
+      <select
+        id="filterByGame"
+        name="filterByGame"
+        value={selectedFilterGame}
+        onChange={handleFilterGameChange}
+      >
+        <option value="">All Games</option>
+        {games.map(game => (
+          <option key={game._id} value={game._id}>{game.name}</option>
 
+        ))}
+      </select>
       <div className='postsWrap'>
+
         {posts.length ? posts.map((post, index) => (
           <div className="singleCommentContainer" key={index}>
             <div className="commentAuthorAvatar">
@@ -208,81 +226,93 @@ const HomeFeed = () => {
               <div className="commentLower">
                 {post && post.image ? <img className="commentMediaImg" src={post.image} alt='blankProfile' /> : null}
 
-                <p
-                  className={!post.commentImg ? "commentText soloTextComment" : "commentText textAndImgComment"}
-                >
-                  {post.content}
-                </p>
-                <div className="commentActions">
-                  <div className="commentLikeButtonDiv">
-                    <span className="material-symbols-outlined likeSymbol" onClick={() => handleLikePost(post._id)}>
-                      favorite
-                    </span>
-                    {post.likes.length}
-                  </div>
-                  <div className="commentCommentButtonDiv" onClick={() => handleToggleComments(post._id)}>
-                    <span className="material-symbols-outlined commentSymbol">
-                      comment
-                    </span>
-                    {post.comments.length}
-                  </div>
+
+              </div>
+              <div className="commentBody">
+                <div className="commentHeader">
+                  <h3 className="commentAuthor">PoG Username #{post.user.name}</h3>
+                  <h4 className="commentDate">{formattedDate(post.created)}</h4>
                 </div>
-
-                {showCommentsId === post._id && (
-                  <div className="commentComments">
-                    <div className="subcommentList">
-                      {post.comments.map(comment => (
-                        <div className="singleSubcomment" key={comment._id}>
-                          <div className="subcommentBody">
-
-                            <div className="subcommentHeader">
-                              <div className="subcommentAuthorAvatar">
-                                {comment && post.image ? <img className="commentMediaImg" src={`data:image/jpeg;base64,${comment.userId.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+                <div className="commentLower">
+                  {post && post.image ? <img className="commentMediaImg" src={post.image} alt='blankProfile' /> : null}
+                  <p
+                    className={!post.commentImg ? "commentText soloTextComment" : "commentText textAndImgComment"}
+                  >
+                    {post.content}
+                  </p>
+                  <div className="commentActions">
+                    <div className="commentLikeButtonDiv">
+                      <span
+                        className={`material-symbols-outlined likeSymbol ${post.likes.includes(user._id) ? 'liked' : ''}`}
+                        onClick={() => handleLikePost(post._id)}
+                      >
+                        favorite
+                      </span>
+                      {post.likes.length}
+                    </div>
+                    <div className="commentCommentButtonDiv" onClick={() => handleToggleComments(post._id)}>
+                      <span className="material-symbols-outlined commentSymbol">
+                        comment
+                      </span>
+                      {post.comments.length}
+                    </div>
+                  </div>
+                  {showCommentsId === post._id && (
+                    <div className="commentComments">
+                      <div className="subcommentList">
+                        {post.comments.map(comment => (
+                          <div className="singleSubcomment" key={comment._id}>
+                            <div className="subcommentBody">
+                              <div className="subcommentHeader">
+                                <div className="subcommentAuthorAvatar">
+                                  {post ? <img className="subcommentAvatar" src={comment.userId.avatar} alt='userAvatar' /> : <img src='https://asets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+                                </div>
+                                <div className="subcommentHeaderInfo">
+                                  <h3 className="subcommentAuthor">PoG Username #{comment.userId.name}</h3>
+                                  <h4 className="subcommentDate">{formattedDate(comment.created)}</h4>
+                                </div>
                               </div>
-                              <div className="subcommentHeaderInfo">
-                                <h3 className="subcommentAuthor">PoG Username #{comment.userId.name}</h3>
-
-                                <h4 className="subcommentDate">{formattedDate(comment.created)}</h4>
+                              <div className="subcommentTextDiv">
+                                <p className="subcommentText">{comment.content}</p>
                               </div>
-                            </div>
-                            <div className="subcommentTextDiv">
-                              <p className="subcommentText">{comment.content}</p>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                      <div className="subcommentInputDiv">
+                        {post ? <img className="subcommentSubmitAvatar" src={user.avatar} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+                        <input
+                          type="text"
+                          placeholder="Write a comment..."
+                          className="subcommentInput"
+                          value={comment}
+                          onChange={handleCommentInputChange}
+                        />
+                        <button
+                          className="subcommentSubmitButton"
+                          onClick={() => handleSubmitComment(post._id)}
+                          disabled={!comment.trim()}
+                        >
+                          Submit
+                        </button>
+                      </div>
                     </div>
-
-
-                    <div className="subcommentInputDiv">
-                      {post && post.image ? <img className="subcommentSubmitAvatar" src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
-                      <input
-                        type="text"
-                        placeholder="Write a comment..."
-                        className="subcommentInput"
-                        value={comment}
-                        onChange={handleCommentInputChange}
-                      />
-                      <button
-                        className="subcommentSubmitButton"
-                        onClick={() => handleSubmitComment(post._id)}
-                        disabled={!comment.trim()}
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
+
           </div>
         )): null}
+
       </div>
       <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
         Your post has been posted!
       </Modal>
+      <UserComment />
     </div>
   );
+
 };
 
 export default HomeFeed;
