@@ -212,17 +212,20 @@ const HomeFeed = () => {
         ))}
       </select>
       <div className='postsWrap'>
-        {posts.map((post, index) => {
-          // Filter posts based on selected game
-          if (selectedFilterGame && post.game._id !== selectedFilterGame) {
-            return null;
-          }
-          return (
-            <div className="singleCommentContainer" key={index}>
-              <div className="commentAuthorAvatar">
-                {post && post.user.avatar && (
-                  <img className='commentAvatar' src={post.user.avatar} alt='userAvatar' onClick={() => handleAvatarClick(post.user._id)} />
-                )}
+
+        {posts.length ? posts.map((post, index) => (
+          <div className="singleCommentContainer" key={index}>
+            <div className="commentAuthorAvatar">
+              {post && post.user.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${post.user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+            </div>
+            <div className="commentBody">
+              <div className="commentHeader">
+                <h3 className="commentAuthor">PoG Username #{post.user.name}</h3>
+                <h4 className="commentDate">{formattedDate(post.created)}</h4>
+              </div>
+              <div className="commentLower">
+                {post && post.image ? <img className="commentMediaImg" src={post.image} alt='blankProfile' /> : null}
+
 
               </div>
               <div className="commentBody">
@@ -298,8 +301,10 @@ const HomeFeed = () => {
                 </div>
               </div>
             </div>
-          );
-        })}
+
+          </div>
+        )): null}
+
       </div>
       <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
         Your post has been posted!
