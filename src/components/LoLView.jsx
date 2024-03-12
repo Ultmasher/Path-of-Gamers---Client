@@ -10,10 +10,6 @@ const LoLView = () => {
     const [loading, setLoading] = useState(true);
     const { getLoLData } = API();
 
-
-
-
-
     const fetchData = async () => {
         try {
             setLoading(true);

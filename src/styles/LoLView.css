@@ -1,31 +1,120 @@
 .userData {
-    margin-top: 20px;
+    margin-top: 0rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+
+}
+
+.LoLStatsDiv {
+}
+
+.userDataContainer {
+    background-color: var(--main-bg-color-dark);
+    border-radius: 0.6rem;
+    display: flex;
+    padding: 0.6rem 1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 2px solid var(--main-orange-color);
+
+}
+
+.recentMatchesHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1rem;
+    margin-top: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.recentMatchesHeaderDropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+
+.recentMatchesHeader h4 {
+    margin: 0;
+    padding: 0;
+}
+
+
+.userStatsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.tierLogo {
+    width: 30px;
+    height: 30px;
+    margin-left: 0.4rem;
+}
+
+.tierSpan {
+    display: flex;
+}
+
+.statsColLeft, .statsColMiddle, .statsColRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    line-height: 1;
+    padding-right: 2rem;
+}
+
+.statsColMiddle, .statsColRight {
+    line-height: 1.5;
+}
+
+.winLossDiv {
+    color: var(--main-text-color);
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.winLossDiv p {
+    padding: 0;
+    margin: 0;
 }
 
 .userData img {
-    width: 250px;
+    width: 80px;
     border-radius: 20px;
 }
 
 .userLevel {
     width: 50px;
     height: 25px;
-    text-align: center;
     border-radius: 10px;
     background-color: var(--main-text-color);
     margin-top: -10px;
     font-size: 20px;
     color: var(--main-orange-color);
     font-weight: 700;
+    padding-top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .summonerName {
     color: var(--main-orange-color);
-    font-size: 44px;
-    margin-top: -5px;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .matchHistoryCardLoL {
@@ -40,4 +129,55 @@
 
 .matchHistoryLoLPlayerCard {
     height: 30px;
+}
+
+.rankSpan {
+    font-size: 0.8rem;
+    font-weight: 900;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.2rem 0.5rem;
+    background-image: url('../assets/shieldLogo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.matchNumberTitle {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--main-text-color);
+    margin: 0rem 1rem;
+    border-bottom: 2px solid white;
+
+}
+
+.recentMatchCardDiv {
+    display: flex;
+    padding: 1rem;
+    padding-top: 0.6rem;
+}
+
+.teamOneContainer, .teamTwoContainer {
+    width: 50%;
+}
+
+.recentPlayerCard {
+    display: flex;
+    padding: 0.2rem;
+    margin: 0.2rem 0rem;
+    border-radius: 0.6rem;
+}
+
+.recentPlayerCard:hover {
+    background-color: var(--main-bg-color-dark);
+    color: var(--main-bg-color);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
+.recentPlayerCard img {
+    width: 50px;
+    height: 50px;
+    margin-right: 0.5rem;
 }

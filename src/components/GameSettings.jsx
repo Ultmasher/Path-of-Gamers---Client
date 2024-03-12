@@ -42,8 +42,8 @@ const GameSettings = () => {
       logo: legaueOfLegendsLogo
     },
     {
-      name: 'EA: FC24',
-      logo: fifa24Logo
+      name: 'Teamfight Tactics',
+      logo: 'https://i.pinimg.com/originals/fb/68/c8/fb68c8477c5d95f462f56421810e24d6.png'
     },
     {
       name: 'Fortnite',
@@ -81,14 +81,7 @@ const GameSettings = () => {
                     <p className='gameSettingsGameTitle'>{game.name}</p>
                   </div>
                 ))}
-                {gameList.map((game, index) => {
-                  return (
-                    <div key={index} className={selectedGame === game.name ? 'selectedGameItem gameSettingsGameItem' : 'gameSettingsGameItem'} onClick={() => handleSelectGame(game)} >
-                      <img src={game.logo} alt={game.name} />
-                      <p className='gameSettingsGameTitle'>{game.name}</p>
-                    </div>
-                  )
-                })}
+
               </div>
               <div className='gameSettingsAddGameBtnDiv'>
                 <button
