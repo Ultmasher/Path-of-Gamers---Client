@@ -6,7 +6,6 @@ import '../styles/GameSettings.css';
 import AddGameInformation from './AddGameInformation.jsx';
 
 import legaueOfLegendsLogo from '../assets/GameAssets/leagueoflegends.png';
-import fifa24Logo from '../assets/GameAssets/eafc24.png';
 import fortniteLogo from '../assets/GameAssets/fortnite.png';
 
 const GameSettings = () => {
