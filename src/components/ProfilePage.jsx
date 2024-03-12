@@ -39,16 +39,12 @@ const ProfilePage = () => {
 
     const handleFollow = async () => {
       try {
-          // Assuming your endpoint for toggling follow/unfollow is '/user/follow/{id}'
-          // And 'id' is the ID of the user to be followed/unfollowed
-          // 'user._id' is the ID of the current logged-in user performing the action
           const response = await axios.post(`http://localhost:8000/user/follow/${user1._id}`, {}, {
               headers: {
                   'Authorization': `Bearer ${token}`
               }
           });
   
-          // After toggling the follow state, refresh the user1's information to reflect changes
           const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
               headers: {
                   'Content-Type': 'application/json',
@@ -56,7 +52,7 @@ const ProfilePage = () => {
               }
           });
           setUser1(updatedUserResponse.data);
-          console.log(response.data.message); // Log the success message
+          console.log(response.data.message); 
       } catch (error) {
           if (error.response) {
               console.error('Request failed with status code', error.response.status);
