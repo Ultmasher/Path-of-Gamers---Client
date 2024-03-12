@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { id } = useParams();
-    console.log(id);
+    
     const { user, token } = useAuth();
     const [user1, setUser1] = useState({});
 
@@ -37,14 +37,7 @@ const ProfilePage = () => {
         }
     }, [id, token]);
 
-    const handleFollow = async () => {
-      try {
-          const response = await axios.post(`http://localhost:8000/user/follow/${user1._id}`, {}, {
-              headers: {
-                  'Authorization': `Bearer ${token}`
-              }
-          });
-  
+
           const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
               headers: {
                   'Content-Type': 'application/json',
@@ -61,6 +54,7 @@ const ProfilePage = () => {
           }
       }
   };
+
 
     return (
         <div className='profilePageContainer'>
