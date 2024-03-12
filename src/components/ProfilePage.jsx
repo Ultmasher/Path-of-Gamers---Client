@@ -11,6 +11,8 @@ const ProfilePage = () => {
     const { user, token } = useAuth();
     const [user1, setUser1] = useState({});
 
+    //const isFollowing = (followers) => followers.includes(currentUserID);
+
     useEffect(() => {
         const getSingleUser = async () => {
             try {
@@ -35,36 +37,62 @@ const ProfilePage = () => {
         }
     }, [id, token]);
 
-    console.log(user1);
-
+    const handleFollow = async () => {
+      try {
+          // Assuming your endpoint for toggling follow/unfollow is '/user/follow/{id}'
+          // And 'id' is the ID of the user to be followed/unfollowed
+          // 'user._id' is the ID of the current logged-in user performing the action
+          const response = await axios.post(`http://localhost:8000/user/follow/${user1._id}`, {}, {
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          });
+  
+          // After toggling the follow state, refresh the user1's information to reflect changes
+          const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+              }
+          });
+          setUser1(updatedUserResponse.data);
+          console.log(response.data.message); // Log the success message
+      } catch (error) {
+          if (error.response) {
+              console.error('Request failed with status code', error.response.status);
+          } else {
+              console.error('Error during request:', error.message);
+          }
+      }
+  };
 
     return (
         <div className='profilePageContainer'>
 
-            {id ? (
+            {Object.keys(user1).length && Object.keys(user).length  ? (
+              <>
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user1.avatar} alt='blankProfile' />
                     <h2>{user1.username}</h2>
-                    <button className='followBtn pogBtn'>Follow +</button>
+                    <button className='followBtn pogBtn' onClick={handleFollow}>{user1.followers.some(follower => follower._id === user._id) ? 'Unfollow' : 'Follow' }</button>
                 </div>
-            ) : (
-                <div className='profilePageLeft'>
-                    <img className='userAvatarSettingsImg' src={user.avatar} alt='blankProfile' />
-                    <h2>{user.username}</h2>
-                    <button className='followBtn pogBtn'>Follow +</button>
-                </div>
-            )}
-
-            <div className='profilePageRight'>
-                <div className='profilePageTopContent' >
-                    <h1>User Profile</h1>
-                    <h3><span className='lastSeenTitle'>Last seen:</span> 12 Hours Ago</h3>
-                    <p className='bioText'>{id ? user1.bio : user.bio}</p>
+                <div className='profilePageRight'>
+                  <div className='profilePageTopContent' >
+                      <h1>User Profile</h1>
+                      <h3><span className='lastSeenTitle'>Last seen:</span> 12 Hours Ago</h3>
+                      <p className='bioText'>{id ? user1.bio : user.bio}</p>
                 </div>
                 <div className='profilePageTabMenu'>
                     <ProfileTabMenu user1={user1} id={id} />
                 </div>
             </div>
+
+            </>
+
+
+            ) : null}
+
+            
         </div>
     );
 };
