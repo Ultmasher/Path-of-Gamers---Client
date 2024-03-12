@@ -26,7 +26,14 @@
     align-items: center;
     margin-top: 2rem;
     z-index: 1;
-    border: 2px solid red;
+    width: 100%;
+}
+
+.profilePageUserCard img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
 }
 
 .userAvatarSettingsImg {
@@ -44,7 +51,6 @@
     padding-right: 2rem;
     position: relative;
     padding-bottom: 2rem;
-    margin-left: 3rem;
 }
 
 
@@ -90,7 +96,7 @@
     background-color: var(--main-bg-color-darkest);
     border-radius: 0.8rem;
     padding: 2rem;
-    margin: 0rem 3rem 2rem 0rem;
+    margin: 0rem 0rem 2rem 0rem;
 }
 
 @media (max-width: 768px) {

@@ -37,8 +37,10 @@ const ProfilePage = () => {
 
     console.log(user1);
 
+
     return (
         <div className='profilePageContainer'>
+
             {id ? (
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user1.avatar} alt='blankProfile' />
@@ -52,6 +54,7 @@ const ProfilePage = () => {
                     <button className='followBtn pogBtn'>Follow +</button>
                 </div>
             )}
+
             <div className='profilePageRight'>
                 <div className='profilePageTopContent' >
                     <h1>User Profile</h1>

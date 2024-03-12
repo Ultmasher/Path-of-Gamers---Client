@@ -5,6 +5,8 @@ import '../styles/HomeFeed.css';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router';
 
+import UserComment from './UserComment';
+
 const HomeFeed = () => {
   const [loading, setLoading] = useState(true);
   const [showCommentsId, setShowCommentsId] = useState(null);
@@ -147,7 +149,7 @@ const HomeFeed = () => {
 
   console.log(posts)
   return (
-    <div>
+    <div className='homefeedContainer'>
       <form onSubmit={handlePostSubmit} className='eventPostWrapper'>
         <label htmlFor="post">Create a post:</label>
         <textarea
@@ -199,6 +201,7 @@ const HomeFeed = () => {
         <option value="">All Games</option>
         {games.map(game => (
           <option key={game._id} value={game._id}>{game.name}</option>
+
         ))}
       </select>
       <div className='postsWrap'>
@@ -294,6 +297,7 @@ const HomeFeed = () => {
       <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
         Your post has been posted!
       </Modal>
+      <UserComment />
     </div>
   );
 

@@ -8,6 +8,7 @@ import AddGameInformation from './AddGameInformation';
 import Footer from './Footer';
 import { Route, Routes } from 'react-router';
 
+
 import '../styles/HomePage.css';
 
 const HomePage = () => {
