@@ -7,12 +7,10 @@ import { useAuth } from '../context/AuthContext';
 
 
 const AccountSettings = () => {
-  // const [avatarUrl, setAvatarUrl] = useState(null);
+
   const [avatar, setAvatar] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  // const [base64Image, setBase64Image] = useState('');
   const { user, token } = useAuth();
-
   const navigate = useNavigate()
   const [formData, setFormData] = useState({});
 
@@ -25,9 +23,11 @@ const AccountSettings = () => {
   };
 
 
+
   const [avatarData, setAvatarData] = useState({
     avatar: "",
   });
+
   const navigateToGameSettings = () => {
     navigate('/account/game-settings')
   };
@@ -60,7 +60,13 @@ const AccountSettings = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setUser(response.data);
+
+      // Update the avatar state with the URL of the uploaded image
+      setAvatar(response.data.avatar);
+
+      // Open the modal
+      setIsOpen(true);
+
       console.log("Avatar submitted:", response.data);
     } catch (error) {
       console.error("Error submitting Avatar:", error);
