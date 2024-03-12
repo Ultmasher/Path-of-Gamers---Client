@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("jwt") || null);
     const [user, setUser] = useState({});
+    const [games, setGames] = useState([])
 
     const login = async (formData, setLoading, setError) => {
         setLoading(true);
@@ -60,12 +61,37 @@ export const AuthProvider = ({ children }) => {
 
                 }
             }
+
+
+        }
+
+
+        const fetchGames = async () => {
+
+            try {
+                const response = await axios.get("http://localhost:8000/games/", {
+                    headers: {
+                        'Content-Type': 'application/json'
+
+                    }
+                });
+                setGames(response.data);
+
+            } catch (e) {
+                console.log(e)
+                logout();
+
+            }
+
+
+
         }
         fetchUser();
+        fetchGames();
     }, [token])
 
     return (
-        <AuthContext.Provider value={{ user, token, login, logout }}>
+        <AuthContext.Provider value={{ user, token, login, logout, games }}>
             {children}
         </AuthContext.Provider>
     )

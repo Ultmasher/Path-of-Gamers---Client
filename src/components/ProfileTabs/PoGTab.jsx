@@ -1,42 +1,68 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/PoGTab.css';
 import TestLoL from '../TestLoL';
 import fortniteLogo from '../../assets/GameAssets/fortnite.png';
+import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
 
 const PoGTab = () => {
 
+    const { user } = useAuth();
+    const [games, setGames] = useState([]);
+    const [gameData, setGameData] = useState({});
     const [showLoLInfo, setShowLoLInfo] = useState(false);
 
-    const handleLoLClick = () => {
-        setShowLoLInfo(!showLoLInfo);
+    const handleLoLClick = async (region, tag, key) => {
+        setGameData({});
+        try {
+            const gamesResponse = await axios.get(`http://localhost:8000/getInfo/${region}/${tag}/${key}`);
+            setGameData(gamesResponse.data);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+            // Set loading to false in case of error
+        }
+        // setShowLoLInfo(!showLoLInfo);
     };
 
-  return (
-    <div className='pogTabContainer'>
-        
-        <div className='pogGameList'>
+    console.log(gameData);
 
-            <div className={`pogGameCard ${showLoLInfo ? 'activeGameCard' : null}`} onClick={handleLoLClick}>
-                <img src="https://brand.riotgames.com/static/a91000434ed683358004b85c95d43ce0/8a20a/lol-logo.png" alt="gameLogo" className="pogGameCardLogo"/>
-                <h4 className="pogGameCardTitle">League of Legends</h4>
-            </div>
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const gamesResponse = await axios.get(`http://localhost:8000/gameSettings/${user._id}`);
+                setGames(gamesResponse.data);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+                // Set loading to false in case of error
+            }
+        };
 
-            {showLoLInfo ? <TestLoL /> : null}
+        fetchData();
+    }, [user]);
 
-            <div className='pogGameCard'>
-                <img src="https://i.pinimg.com/originals/fb/68/c8/fb68c8477c5d95f462f56421810e24d6.png" alt="gameLogo" className="pogGameCardLogo"/>
-                <h4 className="pogGameCardTitle">Teamfight Tactics</h4>
-            </div>
 
-            <div className='pogGameCard'>
-                <img src={fortniteLogo} alt="gameLogo" className="pogGameCardLogo"/>
-                <h4 className="pogGameCardTitle">Fortnite</h4>
+    return (
+        <div className='pogTabContainer'>
+
+            <div className='pogGameList'>
+
+                {games.length ? games.map((gameSetting) => (
+                    <>
+                        <div key={gameSetting.game._id} className={`pogGameCard ${showLoLInfo ? 'activeGameCard' : null}`} onClick={() => handleLoLClick(gameSetting.region, gameSetting.gamerTag, gameSetting.game.key)}>
+                            <img src={gameSetting.game.image} alt="gameLogo" className="pogGameCardLogo" />
+                            <h4 className="pogGameCardTitle">{gameSetting.game.name}</h4>
+                        </div>
+
+                        {Object.keys(gameData).length ? <TestLoL data={gameData} /> : null}
+                    </>
+                )) : <div>Ciarans message</div>}
+
+
+
             </div>
 
         </div>
-
-    </div>
-  )
+    )
 }
 
 export default PoGTab

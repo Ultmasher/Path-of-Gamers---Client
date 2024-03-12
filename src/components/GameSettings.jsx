@@ -1,57 +1,35 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import '../styles/GameSettings.css';
-
 import AddGameInformation from './AddGameInformation.jsx';
-
-import legaueOfLegendsLogo from '../assets/GameAssets/leagueoflegends.png';
-import fortniteLogo from '../assets/GameAssets/fortnite.png';
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 
 const GameSettings = () => {
-  const [selectedGame, setSelectedGame] = useState('');
+  const [selectedGame, setSelectedGame] = useState(null);
   const [showAddGameInfo, setShowAddGameInfo] = useState(false);
   const navigate = useNavigate();
-
-
+  const { games } = useAuth();
 
   const handleSelectGame = (game) => {
-    selectedGame === game.name ? setSelectedGame('') : setSelectedGame(game.name);
+    setSelectedGame(selectedGame === game ? null : game);
   };
 
+
   const handleAddGame = () => {
-    console.log('Add Game');
     setShowAddGameInfo(true);
-    navigate('/addgame');
+    navigate('/addgame', { state: { selectedGame } });
   };
+
 
   const navigateToAccountSettings = () => {
     navigate('/account');
   };
 
-  const handleAddGameInfoClose = () => {
-    setShowAddGameInfo(false);
-    console.log('Close Add Game Info');
-  }
-
-
-  const gameList = [
-    {
-      name: 'League of Legends',
-      logo: legaueOfLegendsLogo
-    },
-    {
-      name: 'Teamfight Tactics',
-      logo: 'https://i.pinimg.com/originals/fb/68/c8/fb68c8477c5d95f462f56421810e24d6.png'
-    },
-    {
-      name: 'Fortnite',
-      logo: fortniteLogo
-    }
-  ];
 
   return (
     <>
+
       <div className='gameSettingsContainer'>
         <div className='gameSettingsContent'>
           <h1 className='gameSettingsTitle'>Game Settings</h1>
@@ -70,17 +48,16 @@ const GameSettings = () => {
             </div>
             <div className='gameSettingsRight'>
               <div className='gameSettingsGameList'>
-                {gameList.map((game, index) => (
+                {games.map((game, index) => (
                   <div
                     key={index}
-                    className={selectedGame === game.name ? 'selectedGameItem gameSettingsGameItem' : 'gameSettingsGameItem'}
+                    className={selectedGame && selectedGame.name === game.name ? 'selectedGameItem gameSettingsGameItem' : 'gameSettingsGameItem'}
                     onClick={() => handleSelectGame(game)}
                   >
-                    <img src={game.logo} alt={game.name} />
+                    <img src={game.image} alt={game.name} />
                     <p className='gameSettingsGameTitle'>{game.name}</p>
                   </div>
                 ))}
-
               </div>
               <div className='gameSettingsAddGameBtnDiv'>
                 <button
@@ -90,16 +67,14 @@ const GameSettings = () => {
                 >
                   Add Game&nbsp;&nbsp;+
                 </button>
-
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      {showAddGameInfo && <AddGameInformation closeGame={handleAddGameInfoClose} />}
-    </>
 
+      {showAddGameInfo && <AddGameInformation selectedGame={selectedGame} />}
+    </>
   );
 };
 
