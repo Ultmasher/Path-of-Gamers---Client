@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { id } = useParams();
-    console.log(id);
+    
     const { user, token } = useAuth();
     const [user1, setUser1] = useState({});
 
@@ -35,7 +35,7 @@ const ProfilePage = () => {
         }
     }, [id, token]);
 
-    console.log(user1);
+
 
 
     return (
