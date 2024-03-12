@@ -9,7 +9,6 @@ const DiscordCallback = () => {
 
 
   useEffect(() => {
-    console.log('entra useeffect')
     const urlParams = new URLSearchParams(window.location.search);
    
     const code = urlParams.get('code');
@@ -31,7 +30,7 @@ const DiscordCallback = () => {
             localStorage.setItem("jwt", token)
             setToken(token);
             setUser(user);
-      navigate('/'); // Redirect to home or dashboard upon successful login
+            navigate('/');
     } catch (error) {
       console.error("Error exchanging code for token:", error);
       // Handle error, possibly showing an error message or redirecting
