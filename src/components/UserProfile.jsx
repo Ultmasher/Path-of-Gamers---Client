@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import '../styles/ProfilePage.css';
 import ProfileTabMenu from './ProfileTabMenu';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
-import { useParams } from 'react-router';
 
-const ProfilePage = () => {
+const UserProfile = () => {
   const { currentUser } = useAuth();
   const [user, setUser] = useState({
     id: 2,
@@ -17,6 +15,10 @@ const ProfilePage = () => {
   // const {userid} = useParams();
 
   // console.log(currentUser);
+  const handleFollow = () => {
+    const url = isFollowing ? '/unfollow' : '/follow';
+    followUser(user.id);
+  };
 
   const followUser = async (userId) => {  
     fetch(`http://localhost:8000/follow/${userId}`, {
@@ -26,13 +28,15 @@ const ProfilePage = () => {
         Authorization: `Bearer ${currentUser.token}`,
       },
       body: JSON.stringify({
-         followerId: userId}),
-    }).then((res) => res.json())
-    .then((data) => {
-      setIsFollowing(!isFollowing)
-      console.log(data);
-    });
-  }; // Added closing parenthesis here
+        followerId: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsFollowing(!isFollowing);
+        console.log(data);
+      });
+  };
 
   return (
     <div className='profilePageContainer'>
@@ -45,7 +49,7 @@ const ProfilePage = () => {
           )}
           <h2>{user.username}</h2>
           <p>{user ? `Followers: ${user.followers}` : 'Loading...'}</p>
-            <button onClick={() => followUser(user.id)} className='followBtn pogBtn'>
+            <button onClick={handleFollow} className='followBtn pogBtn'>
               {isFollowing ? 'Followed' : 'Follow +'}
             </button>
         </div>
@@ -66,4 +70,5 @@ const ProfilePage = () => {
     </div>
   );
 };
-export default ProfilePage;
+
+export default UserProfile;
