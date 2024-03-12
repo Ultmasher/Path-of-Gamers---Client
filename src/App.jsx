@@ -7,8 +7,12 @@ import LoLView from './components/LoLView';
 import { Route, Routes } from 'react-router';
 import './styles/App.css';
 import './styles/ColourPalette.css';
+import { Cloudinary } from "@cloudinary/url-gen";
+
+
 
 function App() {
+  const cld = new Cloudinary({ cloud: { cloudName: 'doheyrauw' } });
 
   return (
     <>

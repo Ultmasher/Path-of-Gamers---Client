@@ -70,26 +70,28 @@ const AccountSettings = () => {
   return (
     <div className='accountSettingsContainer'>
       <div className='accountSettingsLeft'>
-        {user && user.avatar ? <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.avatar}`} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
-        {/* <img className='userAvatarSettingsImg' src={`data:image/jpeg;base64,${user.data.avatar}`} alt='blankProfile' >} */}
-        {/* <img className='userAvatarSettingsImg' src={previewSrc ? previewSrc : 'https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png'} alt='blankProfile' > */}
+        {user && user.avatar && (
+          <img className='userAvatarSettingsImg' src={user.avatar} alt='User Avatar' />
+        )}
+
 
         <form onSubmit={avatarSubmit}>
-          <input type="file" id="profile-picture" name="profile-picture" value={formData.avatar} accept="image/*" onChange={(e) => {
+          <label htmlFor="profile-picture" className="custom-file-upload">
+            Upload Picture
+          </label>
+          <input type="file" id="profile-picture" name="profile-picture" className="profile hidden-input" value={formData.avatar} accept="image/*" onChange={(e) => {
             const file = e.target.files[0];
             setAvatarData({
               ...avatarData,
               avatar: file,
             });
-            //setPreviewSrc(URL.createObjectURL(file));
-            //setIsPhotoUploaded(true);
           }} />
           <button className='changeAvatarButton' onClick={() => setIsOpen(true)}>Change Avatar</button>
         </form>
         <Modal className='Modaltext' open={isOpen} onClose={() => setIsOpen(false)}>
           Your avatar picture has been changed!
         </Modal>
-        <h2>PoG Username #117</h2>
+        <h2> #{user.username}</h2>
       </div>
       <div>
       </div>
@@ -113,7 +115,7 @@ const AccountSettings = () => {
 
                 <div className='accountSettingsFormRight'>
                   <label htmlFor='birthdate'>Birth Date:</label>
-                  <input type='text' id='birthdate' name='birthdate' defaultValue={user.birthdate} onChange={handleChange} placeholder='11.11.1111' />
+                  <input type='date' id='birthdate' name='birthdate' defaultValue={user.birthdate} onChange={handleChange} placeholder='YYYY-MM-DD' />
 
                   <label htmlFor='name'>First Name:</label>
 
