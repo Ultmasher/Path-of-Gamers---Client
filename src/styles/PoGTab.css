@@ -1,5 +1,3 @@
-.pogTabContainer {
-}
 
 .pogGameList {
     gap: 1rem;
@@ -18,6 +16,11 @@
 
 .pogGameCard:hover {
     border: 2px solid var(--main-orange-color);
+}
+
+.activeGameCard {
+    border: 2px solid var(--main-orange-color);
+
 }
 
 .pogGameCard img {
