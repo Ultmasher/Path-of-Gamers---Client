@@ -31,21 +31,23 @@ function App() {
         <Route path="/lol" element={<LoLView />} />
       </Routes> */}
 
-        <div className='homepageWrapper'>
+      <div className='homepageWrapper'>
         <MainHeader />
 
-            <div className='homepageContent'>
-                <Routes>
-                    <Route path='/' element={<HomeFeed />} />
-                    <Route path='/account' element={<AccountSettings />} />
-                    <Route path='/account/game-settings' element={<GameSettings />} />
-                    <Route path='/profile' element={<ProfilePage />} />
-                    <Route path='/addgame' element={<AddGameInformation />} />
-                </Routes>
-            </div>
+        <div className='homepageContent'>
+          <Routes>
+            <Route path='/' element={<HomeFeed />} />
+            <Route path='/account' element={<AccountSettings />} />
+            <Route path='/account/game-settings' element={<GameSettings />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/profile/:id' element={<ProfilePage />} />
+            <Route path='/addgame' element={<AddGameInformation />} />
+          </Routes>
+        </div>
 
         <Footer />
-        </div>
+      </div>
     </>
   )
 }
