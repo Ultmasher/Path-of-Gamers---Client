@@ -8,12 +8,18 @@ const ProfilePage = () => {
     const { user } = useAuth();
 
 
+
     return (
         <div className='profilePageContainer'>
             <div className='profilePageLeft'>
+                 
+            <div className='profilePageUserCard'>
+
                 {user && user.avatar ? <img className='userAvatarSettingsImg' src={user.avatar} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+
                 <h2>{user.username}</h2>
                 <button className='followBtn pogBtn'>Follow +</button>
+                </div>
             </div>
 
             <div className='profilePageRight'>
