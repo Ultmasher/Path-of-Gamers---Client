@@ -34,6 +34,31 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const loginDiscord = async (setLoading, setError) => {
+        setLoading(true);
+        try {
+            const response = await axios.get("http://localhost:8000/user/login/discord", { headers: { 'Content-Type': 'application/json' } })
+            console.log(response, 'response')
+            // const { token, user } = response.data;
+            // localStorage.setItem("jwt", token)
+            // setToken(token);
+            // setUser(user);
+
+            // setTimeout(() => {
+            //     navigate("/")
+            // }, 2000)
+
+        } catch (e) {
+            console.log(e)
+            setError(e.response.data)
+            setTimeout(() => {
+                setError(null)
+            }, 3000)
+        } finally {
+            setLoading(false);
+        }
+    }
+
     const logout = () => {
         localStorage.removeItem("jwt");
         setToken(null)
@@ -43,6 +68,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchUser = async () => {
+            console.log(token, 'authcontext')
 
             if (token) {
                 try {
@@ -65,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     }, [token])
 
     return (
-        <AuthContext.Provider value={{ user, token, login, logout }}>
+        <AuthContext.Provider value={{ user, token, login, logout, loginDiscord, setUser, setToken }}>
             {children}
         </AuthContext.Provider>
     )

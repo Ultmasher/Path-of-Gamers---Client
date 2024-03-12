@@ -46,21 +46,28 @@ const HomeFeed = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchGames = async () => {
       try {
-        const gamesResponse = await axios.get('http://localhost:8000/games');
-        setGames(gamesResponse.data);
-
-        const postsResponse = await axios.get('http://localhost:8000/post');
-        setPosts(postsResponse.data);
-        setLoading(false); // Set loading to false once data is fetched
+        const response = await axios.get('http://localhost:8000/games');
+        setGames(response.data);
       } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-        setLoading(false); // Set loading to false in case of error
+        console.error('There was a problem fetching games:', error);
       }
     };
-
-    fetchData();
+  
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/post');
+        setPosts(response.data);
+      } catch (error) {
+        console.error('There was a problem fetching posts:', error);
+      } finally {
+        setLoading(false); // Set loading to false once this request is done
+      }
+    };
+  
+    fetchGames();
+    fetchPosts();
   }, []);
 
   const handleLikePost = async (postId) => {

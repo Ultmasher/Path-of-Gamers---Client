@@ -37,25 +37,6 @@ const ProfilePage = () => {
         }
     }, [id, token]);
 
-
-          const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`
-              }
-          });
-          setUser1(updatedUserResponse.data);
-          console.log(response.data.message); 
-      } catch (error) {
-          if (error.response) {
-              console.error('Request failed with status code', error.response.status);
-          } else {
-              console.error('Error during request:', error.message);
-          }
-      }
-  };
-
-
     return (
         <div className='profilePageContainer'>
 
@@ -64,7 +45,7 @@ const ProfilePage = () => {
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user1.avatar} alt='blankProfile' />
                     <h2>{user1.username}</h2>
-                    <button className='followBtn pogBtn' onClick={handleFollow}>{user1.followers.some(follower => follower._id === user._id) ? 'Unfollow' : 'Follow' }</button>
+                    <button className='followBtn pogBtn' >{user1.followers.some(follower => follower._id === user._id) ? 'Unfollow' : 'Follow' }</button>
                 </div>
                 <div className='profilePageRight'>
                   <div className='profilePageTopContent' >
