@@ -28,6 +28,8 @@
 .commentAvatar {
     border-radius: 50%;
     height: 100%;
+    cursor: pointer;
+
 }
 
 .commentBody {

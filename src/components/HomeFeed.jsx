@@ -3,6 +3,7 @@ import Modal from './Modal';
 import axios from 'axios';
 import '../styles/HomeFeed.css';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router';
 
 const HomeFeed = () => {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ const HomeFeed = () => {
     content: '',
     game: '',
   });
+  const navigate = useNavigate()
 
   const handleCommentInputChange = (e) => {
     setComment(e.target.value);
@@ -139,6 +141,10 @@ const HomeFeed = () => {
     setSelectedFilterGame(e.target.value);
   };
 
+  const handleAvatarClick = (userId) => {
+    navigate(`profile/${userId}`);
+  }
+
   console.log(posts)
   return (
     <div>
@@ -204,7 +210,10 @@ const HomeFeed = () => {
           return (
             <div className="singleCommentContainer" key={index}>
               <div className="commentAuthorAvatar">
-                {post && post.user.avatar ? <img className='commentAvatar' src={post.user.avatar} alt='userAvatar' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
+                {post && post.user.avatar && (
+                  <img className='commentAvatar' src={post.user.avatar} alt='userAvatar' onClick={() => handleAvatarClick(post.user._id)} />
+                )}
+
               </div>
               <div className="commentBody">
                 <div className="commentHeader">
