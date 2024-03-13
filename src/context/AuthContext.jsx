@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
             setTimeout(() => {
                 navigate("/")
-            }, 2000)
+            }, 1000)
 
         } catch (e) {
             console.log(e)
