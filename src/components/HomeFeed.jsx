@@ -234,11 +234,8 @@ const HomeFeed = () => {
           value={selectedFilterGame}
           onChange={handleFilterGameChange}
         >
-          <option value="">All Games</option>
-          {games.map((game) => (
-            <option key={game._id} value={game._id}>
-              {game.name}
-            </option>
+          {games.map(game => (
+            <option key={game._id} value={game._id}>{game.name}</option>
 
           ))}
         </select>

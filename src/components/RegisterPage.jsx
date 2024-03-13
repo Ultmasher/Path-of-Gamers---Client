@@ -40,6 +40,7 @@ function RegisterPage() {
 
   return (
     <>
+
       <div className="registerContainer">
         <img src={pogLogo} className="landingHeaderLogo" />
         <form onSubmit={handleFormSubmit}>
