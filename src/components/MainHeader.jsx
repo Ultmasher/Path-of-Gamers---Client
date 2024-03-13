@@ -5,7 +5,13 @@ import DropdownSettings from "./DropdownSettings";
 import HamburgerMenu from "./HamburgerMenu";
 import pogBigLogo from "../assets/PogBigLogo.png";
 
-const MainHeader = () => {
+import { useAuth } from "../context/AuthContext";
+
+
+const MainHeader = ({ token }) => {
+
+  const {user} = useAuth();
+  console.log(user.avatar);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [showMenuClass, setShowMenuClass] = useState(
@@ -45,6 +51,7 @@ const MainHeader = () => {
 
   const navigateToHome = () => {
     navigate("/");
+    window.location.reload();
   };
 
   const handleHamburgerClick = () => {
@@ -65,7 +72,6 @@ const MainHeader = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
   return (
     <div className="mainHeaderWrapper">
       <div className="mainHeaderContainer">
@@ -76,43 +82,30 @@ const MainHeader = () => {
           alt="POG Logo"
         />
 
-        <div className="mainHeaderRight">
-          {notifications ? (
+        {token ? (
+          <div className="mainHeaderRight">
             <span
-              onClick={handleNotificationClick}
-              className="material-symbols-outlined notificationIcon notificationUnread"
+              className="accountSettingsIcon"
+              onClick={handleDropdownClick}
+              ref={dropdownArrowRef}
             >
-              notifications_unread
+              <img
+                className="mainHeaderProfileImg"
+                src={user.avatar}
+                alt="ProfilePic"
+              />
+              <p className={`dropdownArrow ${showDropdown ? "open" : ""}`}>⏵</p>
             </span>
-          ) : (
+
             <span
-              onClick={handleNotificationClick}
-              className="material-symbols-outlined notificationIcon"
+              className="accountSettingsHamburger material-symbols-outlined"
+              onClick={handleHamburgerClick}
             >
-              notifications
+              menu
             </span>
-          )}
+          </div>
+        ) : null}
 
-          <span
-            className="accountSettingsIcon"
-            onClick={handleDropdownClick}
-            ref={dropdownArrowRef}
-          >
-            <img
-              className="mainHeaderProfileImg"
-              src="https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png"
-              alt="ProfilePic"
-            />
-            <p className={`dropdownArrow ${showDropdown ? "open" : ""}`}>⏵</p>
-          </span>
-
-          <span
-            className="accountSettingsHamburger material-symbols-outlined"
-            onClick={handleHamburgerClick}
-          >
-            menu
-          </span>
-        </div>
         <HamburgerMenu
           handleHamburgerClick={handleHamburgerClick}
           showMenuClass={showMenuClass}
