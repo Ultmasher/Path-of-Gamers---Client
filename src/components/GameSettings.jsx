@@ -12,6 +12,8 @@ const GameSettings = () => {
   const { games } = useAuth();
   console.log(games)
 
+  console.log(games)
+
   const handleSelectGame = (game) => {
     setSelectedGame(selectedGame === game ? null : game);
   };
