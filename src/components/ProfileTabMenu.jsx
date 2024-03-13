@@ -14,6 +14,31 @@ const ProfileTabMenu = () => {
     setToggleState(index);
   };
 
+  console.log(user);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const gamesResponse = await axios.get("http://localhost:8000/games");
+        setGames(gamesResponse.data);
+
+        const postsResponse = await axios.get(`http://localhost:8000/post/${user._id}/all`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token ? `Bearer ${token}` : null,
+          }
+        });
+        setPosts(postsResponse.data);
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+        setLoading(false); // Set loading to false in case of error
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="tabContainer">
       <div className="blockTabs">
