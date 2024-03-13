@@ -39,7 +39,7 @@ function RegisterPage() {
 
   return (
     <>
-      <LandingHeader />
+
 
       <div className='registerContainer'>
         <form onSubmit={handleFormSubmit}>

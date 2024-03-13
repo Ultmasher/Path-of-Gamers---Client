@@ -86,8 +86,8 @@ const AddGameInformation = ({ closeGame }) => {
                                     required
                                 >
                                     <option value="" disabled>---</option>
-                                    <option value="EUW">Europe West</option>
-                                    <option value="EUE">Europe East</option>
+                                    <option value="euw1">Europe West</option>
+                                    <option value="eun1">Europe East</option>
                                 </select>
                             </div>
 

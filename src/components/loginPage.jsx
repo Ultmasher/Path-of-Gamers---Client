@@ -43,7 +43,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <LandingHeader />
+
       {error ? <p>Error: {error}</p> : (
         <div className='registerContainer'>
           <form onSubmit={handleSubmit}>

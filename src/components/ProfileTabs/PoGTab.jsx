@@ -4,13 +4,16 @@ import TestLoL from '../TestLoL';
 import fortniteLogo from '../../assets/GameAssets/fortnite.png';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const PoGTab = () => {
+
 
     const { user } = useAuth();
     const [games, setGames] = useState([]);
     const [gameData, setGameData] = useState({});
     const [showLoLInfo, setShowLoLInfo] = useState(false);
+    const { id } = useParams();
 
     const handleLoLClick = async (region, tag, key) => {
         setGameData({});
@@ -29,7 +32,11 @@ const PoGTab = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const gamesResponse = await axios.get(`http://localhost:8000/gameSettings/${user._id}`);
+                let userId = user._id; // Initialize userId with user._id
+                if (id) {
+                    userId = id; // If id parameter exists, use it instead
+                }
+                const gamesResponse = await axios.get(`http://localhost:8000/gameSettings/${userId}`);
                 setGames(gamesResponse.data);
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
@@ -38,8 +45,7 @@ const PoGTab = () => {
         };
 
         fetchData();
-    }, [user]);
-
+    }, [user, id]); // Include id in the dependency array
 
     return (
         <div className='pogTabContainer'>
@@ -55,7 +61,7 @@ const PoGTab = () => {
 
                         {Object.keys(gameData).length ? <TestLoL data={gameData} /> : null}
                     </>
-                )) : <div>Ciarans message</div>}
+                )) : <div>No games added</div>}
 
 
 
