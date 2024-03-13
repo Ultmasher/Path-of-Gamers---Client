@@ -38,22 +38,22 @@ const ProfilePage = () => {
     }, [id, token]);
 
 
-          const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`
-              }
-          });
-          setUser1(updatedUserResponse.data);
-          console.log(response.data.message); 
-      } catch (error) {
-          if (error.response) {
-              console.error('Request failed with status code', error.response.status);
-          } else {
-              console.error('Error during request:', error.message);
-          }
-      }
-  };
+//           const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
+//               headers: {
+//                   'Content-Type': 'application/json',
+//                   'Authorization': `Bearer ${token}`
+//               }
+//           });
+//           setUser1(updatedUserResponse.data);
+//           console.log(response.data.message); 
+//       } catch (error) {
+//           if (error.response) {
+//               console.error('Request failed with status code', error.response.status);
+//           } else {
+//               console.error('Error during request:', error.message);
+//           }
+//       }
+//   };
 
 
     return (
