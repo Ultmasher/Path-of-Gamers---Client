@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
-import axios from "axios";
-import "../styles/HomeFeed.css";
-import { useAuth } from "../context/AuthContext";
+
+import React, { useState, useEffect } from 'react';
+import Modal from './Modal';
+import axios from 'axios';
+import '../styles/HomeFeed.css';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router';
 
 import UserComment from "./UserComment";
 
@@ -25,6 +27,7 @@ const HomeFeed = () => {
     content: "",
     game: "",
   });
+  const navigate = useNavigate()
 
   const handleCommentInputChange = (e) => {
     setComment(e.target.value);
@@ -177,6 +180,11 @@ const HomeFeed = () => {
     setSelectedFilterGame(e.target.value);
   };
 
+
+  const handleAvatarClick = (userId) => {
+    navigate(`profile/${userId}`);
+  }
+
   return (
     <div className="homefeedContainer">
       <div className="postsWrap">
@@ -235,42 +243,36 @@ const HomeFeed = () => {
           </div>
         </form>
         <div className="filterPostsDropdownDiv">
-        <label htmlFor="filterByGame">Filter Posts By Game:</label>
-        <select
-          id="filterByGame"
-          name="filterByGame"
-          value={selectedFilterGame}
-          onChange={handleFilterGameChange}
-        >
-          <option value="">All Games</option>
-          {games.map((game) => (
-            <option key={game._id} value={game._id}>
-              {game.name}
-            </option>
-          ))}
-        </select>
+          <label htmlFor="filterByGame">Filter Posts By Game:</label>
+          <select
+            id="filterByGame"
+            name="filterByGame"
+            value={selectedFilterGame}
+            onChange={handleFilterGameChange}
+          >
+            {games.map(game => (
+              <option key={game._id} value={game._id}>{game.name}</option>
+
+            ))}
+          </select>
         </div>
         {posts.map((post, index) => {
           // Filter posts based on selected game
-          if (selectedFilterGame && post.game._id !== selectedFilterGame) {
+          if (selectedFilterGame && post.game && post.game._id !== selectedFilterGame) {
             return null;
           }
           return (
             <div className="singleCommentContainer" key={index}>
               <div className="commentAuthorAvatar">
-                {post && post.user.avatar ? (
-                  <img
-                    className="commentAvatar"
-                    src={post.user.avatar}
-                    alt="userAvatar"
-                  />
-                ) : (
-                  <img src="https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png" />
+
+                {post && post.user.avatar && (
+                  <img className='commentAvatar' src={post.user.avatar} alt='userAvatar' onClick={() => handleAvatarClick(post.user._id)} />
                 )}
+
               </div>
               <div className="commentBody">
                 <div className="commentHeader">
-                  <h3 className="commentAuthor">{post.user.name}</h3>
+                  <h3 className="commentAuthor">PoG Username #{post.user.username}</h3>
                   <h4 className="commentDate">{formattedDate(post.created)}</h4>
                 </div>
                 <div className="commentLower">
@@ -293,9 +295,8 @@ const HomeFeed = () => {
                   <div className="commentActions">
                     <div className="commentLikeButtonDiv">
                       <span
-                        className={`material-symbols-outlined likeSymbol ${
-                          post.likes.includes(user._id) ? "liked" : ""
-                        }`}
+                        className={`material-symbols-outlined likeSymbol ${post.likes.includes(user._id) ? "liked" : ""
+                          }`}
                         onClick={() => handleLikePost(post._id)}
                       >
                         favorite
@@ -388,7 +389,6 @@ const HomeFeed = () => {
       >
         Your post has been posted!
       </Modal>
-      <UserComment />
     </div>
   );
 };

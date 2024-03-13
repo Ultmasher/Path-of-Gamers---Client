@@ -1,39 +1,116 @@
-import React from 'react';
-import '../styles/ProfilePage.css';
-import ProfileTabMenu from './ProfileTabMenu';
-import { useAuth } from '../context/AuthContext';
+import React, { useState, useEffect } from "react";
+import "../styles/ProfilePage.css";
+import ProfileTabMenu from "./ProfileTabMenu";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
+  const { id } = useParams();
+  console.log(id);
+  const { user, token } = useAuth();
+  const [user1, setUser1] = useState({});
 
-    const { user } = useAuth();
+  useEffect(() => {
+    const getSingleUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/user/user/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUser1(response.data);
+      } catch (error) {
+        if (error.response) {
+          console.error(
+            "Request failed with status code",
+            error.response.status
+          );
+        } else {
+          console.error("Error during request setup:", error.message);
+        }
+      }
+    };
 
+    getSingleUser(); // Call the function to fetch user data
+  }, [id, token]); // Dependency array indicating when the effect should run
 
+  const handleFollow = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/user/follow/${user1._id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    return (
-        <div className='profilePageContainer'>
-            <div className='profilePageLeft'>
-                 
-            <div className='profilePageUserCard'>
+      // After toggling the follow state, refresh the user1's information to reflect changes
+      const updatedUserResponse = await axios.get(
+        `http://localhost:8000/user/user/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUser1(updatedUserResponse.data);
+      console.log(response.data.message); // Log the success message
+    } catch (error) {
+      if (error.response) {
+        console.error("Request failed with status code", error.response.status);
+      } else {
+        console.error("Error during request:", error.message);
+      }
+    }
+  };
 
-                {user && user.avatar ? <img className='userAvatarSettingsImg' src={user.avatar} alt='blankProfile' /> : <img src='https://assets.practice365.co.uk/wp-content/uploads/sites/1005/2023/03/Default-Profile-Picture-Transparent.png' />}
-
-                <h2>{user.username}</h2>
-                <button className='followBtn pogBtn'>Follow +</button>
-                </div>
-            </div>
-
-            <div className='profilePageRight'>
-                <div className='profilePageTopContent' >
-                    <h1>User Profile</h1>
-                    <h3><span className='lastSeenTitle'>Last seen:</span> 12 Hours Ago</h3>
-                    <p className='bioText'>{user.bio}</p>
-                </div>
-                <div className='profilePageTabMenu'>
-                    <ProfileTabMenu />
-                </div>
-            </div>
+  return (
+    <div className="profilePageContainer">
+      {id ? (
+        <div className="profilePageLeft">
+          <img
+            className="userAvatarSettingsImg"
+            src={user1.avatar}
+            alt="blankProfile"
+          />
+          <h2>{user1.username}</h2>
+          <button className="followBtn pogBtn" onClick={handleFollow}>
+            Follow +
+          </button>
         </div>
-    )
-}
+      ) : (
+        <div className="profilePageLeft">
+          <img
+            className="userAvatarSettingsImg"
+            src={user.avatar}
+            alt="blankProfile"
+          />
+          <h2>{user.username}</h2>
+          <button className="followBtn pogBtn">Follow +</button>
+        </div>
+      )}
+      <div className="profilePageRight">
+        <div className="profilePageTopContent">
+          <h1>User Profile</h1>
+          <h3>
+            <span className="lastSeenTitle">Last seen:</span> 12 Hours Ago
+          </h3>
+          <p className="bioText">{id ? user1.bio : user.bio}</p>
+        </div>
+        <div className="profilePageTabMenu">
+          <ProfileTabMenu user1={user1} id={id} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;

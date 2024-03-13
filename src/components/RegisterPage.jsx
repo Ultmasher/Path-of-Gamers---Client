@@ -19,6 +19,12 @@ function RegisterPage() {
     email: "",
     password: "",
   });
+  const handleDiscordLogin = () => {
+    console.log("Discord login clicked");
+
+    // Here you would typically send the data to your server
+    window.location.href = "https://discord.com/oauth2/authorize?client_id=1214873733408358450&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fuser%2Fauth%2Fdiscord%2Fcallback&scope=identify+email";
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +46,7 @@ function RegisterPage() {
 
   return (
     <>
+
       <div className="registerContainer">
         <img src={pogLogo} className="landingHeaderLogo" />
         <form onSubmit={handleFormSubmit}>
@@ -79,14 +86,7 @@ function RegisterPage() {
           </div>
 
           <div className="registerButtonsWrapper">
-            <button className="discordButton">
-              Register with Discord{" "}
-              <img
-                className="discordLogo"
-                src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"
-                alt="discordLogo"
-              />
-            </button>
+            
             <button
               className="registerButton"
               type="button"
@@ -96,6 +96,16 @@ function RegisterPage() {
             </button>
           </div>
         </form>
+        <div className="registerButtonsWrapper">
+              <button className="discordButton" onClick={handleDiscordLogin}>
+                Register with Discord{" "}
+                <img
+                  className="discordLogo"
+                  src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"
+                  alt="discordLogo"
+                />
+              </button>
+            </div>
       </div>
     </>
   );

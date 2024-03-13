@@ -17,7 +17,7 @@ const LoginForm = () => {
     password: "",
   });
 
-  const { login } = useAuth();
+  const { login, loginDiscord } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,13 +29,15 @@ const LoginForm = () => {
 
   const handleDiscordLogin = () => {
     console.log("Discord login clicked");
+
     // Here you would typically send the data to your server
-  };
+    window.location.href = "https://discord.com/oauth2/authorize?client_id=1214873733408358450&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fuser%2Fauth%2Fdiscord%2Fcallback&scope=identify+email";
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await login(formData, setError);
+    await login(formData, setLoading, setError);
   };
 
   return (
@@ -54,6 +56,12 @@ const LoginForm = () => {
           </div>
         </>
       )}
+
+      {error ? (
+        <div className="registerContainer">
+          {error}
+          </div> 
+      ) : null}
       {!loading && !error && (
         <div className="registerContainer">
           <img src={pogLogo} className="landingHeaderLogo" />
@@ -83,8 +91,10 @@ const LoginForm = () => {
             <button disabled={loading} className="registerButton" type="submit">
               Login
             </button>
-            <div className="registerButtonsWrapper">
-              <button className="discordButton" onClick={handleDiscordLogin}>
+            
+          </form>
+          <div className="registerButtonsWrapper">
+              <button className="discordButton"  onClick={handleDiscordLogin}>
                 Login with Discord{" "}
                 <img
                   className="discordLogo"
@@ -93,7 +103,6 @@ const LoginForm = () => {
                 />
               </button>
             </div>
-          </form>
         </div>
       )}
     </>
