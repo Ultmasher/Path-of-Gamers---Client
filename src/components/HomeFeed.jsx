@@ -213,8 +213,8 @@ const HomeFeed = () => {
             <div className="gameFilterDiv">
               <label htmlFor="game">Select Game:</label>
 
-              {games.map((game) => (
-                <img src={game.image} className={selectedGameClass} onClick={handleGameChange} />
+              {games.map((game, index) => (
+                <img key={index} src={game.image} className={selectedGameClass} onClick={handleGameChange} />
               ))}
             </div>
             <div className="postButtonsDiv">
