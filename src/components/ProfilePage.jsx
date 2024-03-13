@@ -4,12 +4,16 @@ import ProfileTabMenu from './ProfileTabMenu';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { set } from 'react-hook-form';
 
 const ProfilePage = () => {
     const { id } = useParams();
     console.log(id);
     const { user, token } = useAuth();
+    console.log(user._id);
     const [user1, setUser1] = useState({});
+    const [user2, setUser2] = useState({});
+    const [follow, setFollow] = useState(false);
 
     useEffect(() => {
         const getSingleUser = async () => {
@@ -21,6 +25,7 @@ const ProfilePage = () => {
                     }
                 });
                 setUser1(response.data);
+                
             } catch (error) {
                 if (error.response) {
                     console.error('Request failed with status code', error.response.status);
@@ -44,6 +49,8 @@ const ProfilePage = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            setUser2(response.data);
+            console.log(user2); 
     
             // After toggling the follow state, refresh the user1's information to reflect changes
             const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
@@ -53,7 +60,10 @@ const ProfilePage = () => {
                 }
             });
             setUser1(updatedUserResponse.data);
+            setFollow(!follow);
+            console.log(user1)
             console.log(response.data.message); // Log the success message
+
         } catch (error) {
             if (error.response) {
                 console.error('Request failed with status code', error.response.status);
@@ -62,6 +72,8 @@ const ProfilePage = () => {
             }
         }
     };
+    
+
 
     
 
@@ -71,13 +83,14 @@ const ProfilePage = () => {
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user1.avatar} alt='blankProfile' />
                     <h2>{user1.username}</h2>
-                    <button className='followBtn pogBtn'onClick={handleFollow} >Follow +</button>
+                    
+                    {follow ? <button className='followBtn pogBtn'onClick={handleFollow} >Unfollow </button> : <button className='followBtn pogBtn' onClick={handleFollow}>Follow </button>}
                 </div>
             ) : (
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user.avatar} alt='blankProfile' />
                     <h2>{user.username}</h2>
-                    <button className='followBtn pogBtn'>Follow +</button>
+                
                 </div>
             )}
             <div className='profilePageRight'>
