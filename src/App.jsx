@@ -14,12 +14,10 @@ import Footer from './components/Footer';
 import { Route, Routes } from 'react-router';
 import './styles/App.css';
 import './styles/ColourPalette.css';
-import { Cloudinary } from "@cloudinary/url-gen";
-
+import DiscordCallback from './components/DiscordCallback';
 
 
 function App() {
-  const cld = new Cloudinary({ cloud: { cloudName: 'doheyrauw' } });
 
   return (
     <>
@@ -27,6 +25,10 @@ function App() {
         <Route path="/welcome" element={<LandingPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginForm />} />
+
+        <Route path="/user/auth/discord/callback" element={<DiscordCallback />} />
+        <Route path="*" element={<HomePage />} />
+
         <Route path="/newevent" element={<NewEvent />} />
         <Route path="/lol" element={<LoLView />} />
       </Routes> */}

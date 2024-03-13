@@ -7,9 +7,11 @@ import { useParams } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { id } = useParams();
-    console.log(id);
+    
     const { user, token } = useAuth();
     const [user1, setUser1] = useState({});
+
+    //const isFollowing = (followers) => followers.includes(currentUserID);
 
     useEffect(() => {
         const getSingleUser = async () => {
@@ -35,36 +37,52 @@ const ProfilePage = () => {
         }
     }, [id, token]);
 
-    console.log(user1);
+
+//           const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
+//               headers: {
+//                   'Content-Type': 'application/json',
+//                   'Authorization': `Bearer ${token}`
+//               }
+//           });
+//           setUser1(updatedUserResponse.data);
+//           console.log(response.data.message); 
+//       } catch (error) {
+//           if (error.response) {
+//               console.error('Request failed with status code', error.response.status);
+//           } else {
+//               console.error('Error during request:', error.message);
+//           }
+//       }
+//   };
 
 
     return (
         <div className='profilePageContainer'>
 
-            {id ? (
+            {Object.keys(user1).length && Object.keys(user).length  ? (
+              <>
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user1.avatar} alt='blankProfile' />
                     <h2>{user1.username}</h2>
-                    <button className='followBtn pogBtn'>Follow +</button>
+                    <button className='followBtn pogBtn' onClick={handleFollow}>{user1.followers.some(follower => follower._id === user._id) ? 'Unfollow' : 'Follow' }</button>
                 </div>
-            ) : (
-                <div className='profilePageLeft'>
-                    <img className='userAvatarSettingsImg' src={user.avatar} alt='blankProfile' />
-                    <h2>{user.username}</h2>
-                    <button className='followBtn pogBtn'>Follow +</button>
-                </div>
-            )}
-
-            <div className='profilePageRight'>
-                <div className='profilePageTopContent' >
-                    <h1>User Profile</h1>
-                    <h3><span className='lastSeenTitle'>Last seen:</span> 12 Hours Ago</h3>
-                    <p className='bioText'>{id ? user1.bio : user.bio}</p>
+                <div className='profilePageRight'>
+                  <div className='profilePageTopContent' >
+                      <h1>User Profile</h1>
+                      <h3><span className='lastSeenTitle'>Last seen:</span> 12 Hours Ago</h3>
+                      <p className='bioText'>{id ? user1.bio : user.bio}</p>
                 </div>
                 <div className='profilePageTabMenu'>
                     <ProfileTabMenu user1={user1} id={id} />
                 </div>
             </div>
+
+            </>
+
+
+            ) : null}
+
+            
         </div>
     );
 };
