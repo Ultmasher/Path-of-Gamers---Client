@@ -4,6 +4,7 @@ import ProfileTabMenu from "./ProfileTabMenu";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+
 import { set } from "react-hook-form";
 import { NineKPlus } from "@mui/icons-material";
 
@@ -78,14 +79,51 @@ const ProfilePage = () => {
             } else {
                 console.error('Error during request:', error.message);
             }
+
         }
+      }
     };
     
 
     
 
 
-    
+    getSingleUser(); // Call the function to fetch user data
+  }, [id, token]); // Dependency array indicating when the effect should run
+
+  const handleFollow = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/user/follow/${user1._id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // After toggling the follow state, refresh the user1's information to reflect changes
+      const updatedUserResponse = await axios.get(
+        `http://localhost:8000/user/user/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUser1(updatedUserResponse.data);
+      console.log(response.data.message); // Log the success message
+    } catch (error) {
+      if (error.response) {
+        console.error("Request failed with status code", error.response.status);
+      } else {
+        console.error("Error during request:", error.message);
+      }
+    }
+  };
+
 
     return (
         
@@ -118,8 +156,14 @@ const ProfilePage = () => {
                     <ProfileTabMenu user1={user1} id={id} />
                 </div>
             </div>
+
         </div>
-    );
+        <div className="profilePageTabMenu">
+          <ProfileTabMenu user1={user1} id={id} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProfilePage;
