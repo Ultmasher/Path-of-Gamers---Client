@@ -10,6 +10,7 @@ const GameSettings = () => {
   const [showAddGameInfo, setShowAddGameInfo] = useState(false);
   const navigate = useNavigate();
   const { games } = useAuth();
+  console.log(games)
 
   console.log(games)
 

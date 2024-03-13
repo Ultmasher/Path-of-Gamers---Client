@@ -63,6 +63,7 @@ const ProfileTabMenu = ({ user1, id }) => {
     fetchData();
   }, []);
 
+
   return (
     <div className="tabContainer">
       <div className="blockTabs">
@@ -94,8 +95,10 @@ const ProfileTabMenu = ({ user1, id }) => {
         </div>
       </div>
 
-      <div className="tabContentWrapper">
-        <div className={toggleState === 1 ? 'tabContent activeTabContent' : 'tabContent'}>
+
+
+      <div className={toggleState === 1 ? 'tabContent activeTabContent' : 'tabContent'}>
+
           <div className="filterPostsDropdownDiv">
             <label htmlFor="filterByGame">Filter Posts By Game:</label>
             <select
@@ -255,7 +258,7 @@ const ProfileTabMenu = ({ user1, id }) => {
           <Following />
         </div>
       </div>
-    </div>
+
   );
 };
 
