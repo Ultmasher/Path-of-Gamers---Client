@@ -15,6 +15,8 @@ import "./styles/App.css";
 import "./styles/ColourPalette.css";
 import { useAuth } from "./context/AuthContext";
 import DiscordCallback from "./components/DiscordCallback";
+import AuthProvider from "../src/context/AuthoriseProvider"
+
 
 
 
@@ -34,13 +36,13 @@ function App() {
             <Route path="/welcome" element={<LandingPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/" element={<HomeFeed />} />
-            <Route path="/account" element={<AccountSettings />} />
-            <Route path="/account/game-settings" element={<GameSettings />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/profile/:id" element={<ProfilePage />} />
-            <Route path="/addgame" element={<AddGameInformation />} />
-            <Route path="/user/auth/discord/callback" element={<DiscordCallback />} />
+            <Route path="/" element={<AuthProvider><HomeFeed /></AuthProvider>} />
+            <Route path="/account" element={<AuthProvider><AccountSettings /></AuthProvider>} />
+            <Route path="/account/game-settings" element={<AuthProvider><GameSettings /></AuthProvider>} />
+            <Route path="/profile" element={<AuthProvider><ProfilePage /></AuthProvider>} />
+            <Route path="/profile/:id" element={<AuthProvider><ProfilePage /></AuthProvider>} />
+            <Route path="/addgame" element={<AuthProvider><AddGameInformation /></AuthProvider>} />
+            <Route path="/user/auth/discord/callback" element={<AuthProvider><DiscordCallback /></AuthProvider>} />
 
           </Routes>
         </div>
