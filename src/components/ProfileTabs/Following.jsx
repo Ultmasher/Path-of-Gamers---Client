@@ -59,7 +59,7 @@ const Following = () => {
     
     return (
             <>
-            {fetchedUser.length === 0 ? <h1>No followers</h1> : 
+            {fetchedUser.length === 0 ? <h1>No followings</h1> : 
             <div >
                 {fetchedUser.map((following, index) => (
                     <div className='card' key={index}>
