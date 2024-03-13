@@ -103,11 +103,24 @@ const HomeFeed = () => {
     }
   };
 
-  const handleGameChange = (e) => {
-    let newGame = e.target.value;
-    console.log(newGame);
-    setSelectedGame(newGame);
-    setPostData({ ...postData, game: e.target.value });
+  const changeSelectedGameClass = (game) => {
+    if (game === selectedGame) {
+      setSelectedGameClass("gameFilterLogo selectedGameFilterLogo");
+    } else {
+      setSelectedGameClass("gameFilterLogo");
+    }
+  };
+
+  // const handleGameChange = (e, gameSelected) => {
+  //   console.log(gameSelected);
+  //   setSelectedGame(selectedGame);
+  //   changeSelectedGameClass(gameSelected);
+  //   setPostData({ ...postData, game: selectedGame });
+  // };
+
+  const handleGameChange = (game) => {
+    setSelectedGame(game._id);
+    setPostData({ ...postData, game: game._id });
   };
 
   const handlePostImageChange = (e) => {
@@ -210,13 +223,17 @@ const HomeFeed = () => {
             />
           </div>
           <div className="newPostFormBottom">
-            <div className="gameFilterDiv">
-              <label htmlFor="game">Select Game:</label>
-
-              {games.map((game, index) => (
-                <img key={index} src={game.image} className={selectedGameClass} onClick={handleGameChange} />
-              ))}
-            </div>
+          <div className="gameFilterDiv">
+        <label htmlFor="game">Select Game:</label>
+        {games.map((game) => (
+          <img
+            key={game._id}
+            src={game.image}
+            className={`gameFilterLogo ${game._id === selectedGame ? 'selectedGameFilterLogo' : ''}`}
+            onClick={() => handleGameChange(game)}
+          />
+        ))}
+      </div>
             <div className="postButtonsDiv">
               <div htmlFor="profile-picture"></div>
               <div>
@@ -352,7 +369,7 @@ const HomeFeed = () => {
                         <button
                           className="subcommentSubmitButton"
                           onClick={() => handleSubmitComment(post._id)}
-                          disabled={!comment.trim()}
+                          disabled={!selectedGame || !comment}
                         >
                           Submit
                         </button>

@@ -97,8 +97,8 @@
 .profilePageTabMenu {
     background-color: var(--main-bg-color-darkest);
     border-radius: 0.8rem;
-    padding: 2rem;
-    margin: 0rem 0rem 2rem 0rem;
+    padding: 1rem;
+    margin: 0rem 0rem 0rem 0rem;
 }
 
 @media (max-width: 768px) {

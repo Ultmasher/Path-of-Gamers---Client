@@ -63,7 +63,6 @@ const ProfileTabMenu = ({ user1, id }) => {
     fetchData();
   }, []);
 
-  console.log(posts)
   return (
     <div className="tabContainer">
       <div className="blockTabs">
