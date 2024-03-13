@@ -67,6 +67,7 @@
 
 .registerContainer, .landingContainer {
     height: 100%;
+    width: 100%;
     background-color: var(--main-bg-color-darkest);
 }
 

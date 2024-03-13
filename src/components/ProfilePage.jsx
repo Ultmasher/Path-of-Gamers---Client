@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import '../styles/ProfilePage.css';
 import ProfileTabMenu from './ProfileTabMenu';
@@ -70,12 +71,11 @@ const ProfilePage = () => {
             } else {
                 console.error('Error during request:', error.message);
             }
-        }
-    };
-    
 
+      }
+    }
+  };
 
-    
 
     return (
         <div className='profilePageContainer'>
@@ -103,9 +103,14 @@ const ProfilePage = () => {
                     <ProfileTabMenu user1={user1} id={id} />
                 </div>
             </div>
+
         </div>
-    );
+        <div className="profilePageTabMenu">
+          <ProfileTabMenu user1={user1} id={id} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProfilePage;
-

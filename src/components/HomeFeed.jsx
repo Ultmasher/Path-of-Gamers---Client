@@ -172,7 +172,6 @@ const HomeFeed = () => {
     navigate(`profile/${userId}`);
   }
 
-  console.log(posts)
   return (
     <div className="homefeedContainer">
       <div className="postsWrap">
@@ -214,8 +213,8 @@ const HomeFeed = () => {
             <div className="gameFilterDiv">
               <label htmlFor="game">Select Game:</label>
 
-              {games.map((game) => (
-                <img src={game.image} className={selectedGameClass} onClick={handleGameChange}/>
+              {games.map((game, index) => (
+                <img key={index} src={game.image} className={selectedGameClass} onClick={handleGameChange} />
               ))}
             </div>
             <div className="postButtonsDiv">
@@ -227,18 +226,18 @@ const HomeFeed = () => {
           </div>
         </form>
         <div className="filterPostsDropdownDiv">
-        <label htmlFor="filterByGame">Filter Posts By Game:</label>
-        <select
-          id="filterByGame"
-          name="filterByGame"
-          value={selectedFilterGame}
-          onChange={handleFilterGameChange}
-        >
-          {games.map(game => (
-            <option key={game._id} value={game._id}>{game.name}</option>
+          <label htmlFor="filterByGame">Filter Posts By Game:</label>
+          <select
+            id="filterByGame"
+            name="filterByGame"
+            value={selectedFilterGame}
+            onChange={handleFilterGameChange}
+          >
+            {games.map(game => (
+              <option key={game._id} value={game._id}>{game.name}</option>
 
-          ))}
-        </select>
+            ))}
+          </select>
         </div>
         {posts.map((post, index) => {
           // Filter posts based on selected game
@@ -279,9 +278,8 @@ const HomeFeed = () => {
                   <div className="commentActions">
                     <div className="commentLikeButtonDiv">
                       <span
-                        className={`material-symbols-outlined likeSymbol ${
-                          post.likes.includes(user._id) ? "liked" : ""
-                        }`}
+                        className={`material-symbols-outlined likeSymbol ${post.likes.includes(user._id) ? "liked" : ""
+                          }`}
                         onClick={() => handleLikePost(post._id)}
                       >
                         favorite
@@ -374,7 +372,6 @@ const HomeFeed = () => {
       >
         Your post has been posted!
       </Modal>
-      <UserComment />
     </div>
   );
 };

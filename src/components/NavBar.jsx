@@ -19,7 +19,7 @@ const Navbar = () => {
         <img href="/public/image2.png" alt="Icon 1" className="navbar-icon" />
         <img href="/public/image.png" alt="Icon 2" className="navbar-icon" />
         <div className="navbar-dropdown">
-          <img className="navbar-dropdown-arrow" src="/png" onClick={toggleDropdown} alt="dropdown arrow" />
+          <img className="navbar-dropdown-arrow" src="/public/image3.png" onClick={toggleDropdown} alt="dropdown arrow" />
           {dropdownOpen && (
             <div className="navbar-dropdown-menu">
               <a href="/settings">Settings</a>

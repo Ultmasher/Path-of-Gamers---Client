@@ -37,12 +37,11 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await login(formData, setError);
+    await login(formData, setLoading, setError);
   };
 
   return (
     <>
-
       {loading && (
         <>
           <div className="registerContainer">
@@ -57,6 +56,12 @@ const LoginForm = () => {
           </div>
         </>
       )}
+
+      {error ? (
+        <div className="registerContainer">
+          {error}
+          </div> 
+      ) : null}
       {!loading && !error && (
         <div className="registerContainer">
           <img src={pogLogo} className="landingHeaderLogo" />
