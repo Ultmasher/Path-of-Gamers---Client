@@ -93,11 +93,12 @@ const ProfileTabMenu = ({ user1, id }) => {
           onClick={() => toggleTab(5)}>
           FOLLOWINGS
         </div>
-
       </div>
 
 
+
       <div className={toggleState === 1 ? 'tabContent activeTabContent' : 'tabContent'}>
+
           <div className="filterPostsDropdownDiv">
             <label htmlFor="filterByGame">Filter Posts By Game:</label>
             <select
@@ -257,7 +258,7 @@ const ProfileTabMenu = ({ user1, id }) => {
           <Following />
         </div>
       </div>
-    
+
   );
 };
 
