@@ -16,7 +16,6 @@ import './styles/App.css';
 import './styles/ColourPalette.css';
 import DiscordCallback from './components/DiscordCallback';
 
-
 function App() {
 
   return (
@@ -45,6 +44,8 @@ function App() {
             <Route path='/profile' element={<ProfilePage />} />
             <Route path='/profile/:id' element={<ProfilePage />} />
             <Route path='/addgame' element={<AddGameInformation />} />
+            <Route path="/user/auth/discord/callback" element={<DiscordCallback />} />
+
           </Routes>
         </div>
 
