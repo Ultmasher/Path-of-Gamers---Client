@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+.landingHeaderLogo {
+    width: 50%;
+    margin-bottom: 2rem;
+} 
+
 
 .loginButtonsWrapper{
     padding: 1rem;
@@ -58,5 +63,10 @@
 .discordButton:hover {
     transition: 0.3s;
     border: 2px solid var(--main-text-color)
+}
+
+.registerContainer, .landingContainer {
+    height: 100%;
+    background-color: var(--main-bg-color-darkest);
 }
 

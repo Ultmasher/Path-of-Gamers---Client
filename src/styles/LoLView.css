@@ -5,11 +5,8 @@
     align-items: center;
     justify-content: center;
     margin-right: 1rem;
-
 }
 
-.LoLStatsDiv {
-}
 
 .userDataContainer {
     background-color: var(--main-bg-color-dark);
