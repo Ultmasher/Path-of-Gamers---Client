@@ -34,34 +34,34 @@ const ProfilePage = () => {
             getSingleUser(); // Call the function to fetch user data only if id is not null
         }
     }, [id, token]);
-    // const handleFollow = async () => {
-    //     try {
-    //         // Assuming your endpoint for toggling follow/unfollow is '/user/follow/{id}'
-    //         // And 'id' is the ID of the user to be followed/unfollowed
-    //         // 'user._id' is the ID of the current logged-in user performing the action
-    //         const response = await axios.post(`http://localhost:8000/user/follow/${user1._id}`, {}, {
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`
-    //             }
-    //         });
+    const handleFollow = async () => {
+        try {
+            // Assuming your endpoint for toggling follow/unfollow is '/user/follow/{id}'
+            // And 'id' is the ID of the user to be followed/unfollowed
+            // 'user._id' is the ID of the current logged-in user performing the action
+            const response = await axios.post(`http://localhost:8000/user/follow/${user1._id}`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
     
-    //         // After toggling the follow state, refresh the user1's information to reflect changes
-    //         const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${token}`
-    //             }
-    //         });
-    //         setUser1(updatedUserResponse.data);
-    //         console.log(response.data.message); // Log the success message
-    //     } catch (error) {
-    //         if (error.response) {
-    //             console.error('Request failed with status code', error.response.status);
-    //         } else {
-    //             console.error('Error during request:', error.message);
-    //         }
-    //     }
-    // };
+            // After toggling the follow state, refresh the user1's information to reflect changes
+            const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setUser1(updatedUserResponse.data);
+            console.log(response.data.message); // Log the success message
+        } catch (error) {
+            if (error.response) {
+                console.error('Request failed with status code', error.response.status);
+            } else {
+                console.error('Error during request:', error.message);
+            }
+        }
+    };
 
     console.log(user1);
 
@@ -71,7 +71,7 @@ const ProfilePage = () => {
                 <div className='profilePageLeft'>
                     <img className='userAvatarSettingsImg' src={user1.avatar} alt='blankProfile' />
                     <h2>{user1.username}</h2>
-                    <button className='followBtn pogBtn'>Follow +</button>
+                    <button className='followBtn pogBtn'onClick={handleFollow} >Follow +</button>
                 </div>
             ) : (
                 <div className='profilePageLeft'>

@@ -11,7 +11,6 @@ import { useAuth } from "../context/AuthContext";
 const MainHeader = ({ token }) => {
 
   const {user} = useAuth();
-  console.log(user.avatar);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [showMenuClass, setShowMenuClass] = useState(

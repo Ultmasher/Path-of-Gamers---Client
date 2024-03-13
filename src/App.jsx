@@ -13,8 +13,9 @@ import Footer from "./components/Footer";
 import { Route, Routes } from "react-router";
 import "./styles/App.css";
 import "./styles/ColourPalette.css";
-import DiscordCallback from './components/DiscordCallback';
 import { useAuth } from "./context/AuthContext";
+import DiscordCallback from "./components/DiscordCallback";
+
 
 
 function App() {
@@ -37,7 +38,10 @@ function App() {
             <Route path="/account" element={<AccountSettings />} />
             <Route path="/account/game-settings" element={<GameSettings />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/:id" element={<ProfilePage />} />
             <Route path="/addgame" element={<AddGameInformation />} />
+            <Route path="/user/auth/discord/callback" element={<DiscordCallback />} />
+
           </Routes>
         </div>
 
