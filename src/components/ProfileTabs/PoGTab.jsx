@@ -27,7 +27,7 @@ const PoGTab = () => {
         // setShowLoLInfo(!showLoLInfo);
     };
 
-    console.log(gameData);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,7 +46,7 @@ const PoGTab = () => {
 
         fetchData();
     }, [user, id]); // Include id in the dependency array
-
+    console.log(gameData);
     return (
         <div className='pogTabContainer'>
 
