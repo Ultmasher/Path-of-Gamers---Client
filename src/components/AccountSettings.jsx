@@ -125,7 +125,7 @@ const AccountSettings = () => {
 
 
                   <label htmlFor="bio"> Bio:</label>
-                  <textarea rows="5" cols="50" maxLength="150" id='bio' name='bio' defaultValue={user.bio} onChange={handleChange} placeholder='Write something about yourself' />
+                  <textarea rows="5" cols="50" maxLength="300" id='bio' name='bio' defaultValue={user.bio} onChange={handleChange} placeholder='Write something about yourself' />
                 </div>
 
                 <div className='accountSettingsFormRight'>
