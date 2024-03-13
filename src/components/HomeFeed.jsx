@@ -207,7 +207,7 @@ const HomeFeed = () => {
       <div className='postsWrap'>
         {posts.map((post, index) => {
           // Filter posts based on selected game
-          if (selectedFilterGame && post.game._id !== selectedFilterGame) {
+          if (selectedFilterGame && post.game && post.game._id !== selectedFilterGame) {
             return null;
           }
           return (
@@ -220,7 +220,7 @@ const HomeFeed = () => {
               </div>
               <div className="commentBody">
                 <div className="commentHeader">
-                  <h3 className="commentAuthor">PoG Username #{post.user.name}</h3>
+                  <h3 className="commentAuthor">PoG Username #{post.user.username}</h3>
                   <h4 className="commentDate">{formattedDate(post.created)}</h4>
                 </div>
                 <div className="commentLower">
