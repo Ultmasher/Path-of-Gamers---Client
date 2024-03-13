@@ -11,6 +11,8 @@ const GameSettings = () => {
   const navigate = useNavigate();
   const { games } = useAuth();
 
+  console.log(games)
+
   const handleSelectGame = (game) => {
     setSelectedGame(selectedGame === game ? null : game);
   };
