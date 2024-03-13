@@ -63,7 +63,7 @@ const ProfilePage = () => {
         }
     };
 
-    console.log(user1);
+    
 
     return (
         <div className='profilePageContainer'>
