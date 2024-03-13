@@ -65,6 +65,9 @@ const ProfilePage = () => {
     };
 
 
+    
+
+
   //         // After toggling the follow state, refresh the user1's information to reflect changes
   //         const updatedUserResponse = await axios.get(`http://localhost:8000/user/user/${id}`, {
   //             headers: {
@@ -82,6 +85,7 @@ const ProfilePage = () => {
   //         }
   //     }
   // };
+
 
 
     return (
