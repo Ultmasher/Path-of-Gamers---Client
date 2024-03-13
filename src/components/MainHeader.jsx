@@ -76,7 +76,7 @@ const MainHeader = () => {
         />
 
         <div className="mainHeaderRight">
-          {notifications ? (
+          {/* {notifications ? (
             <span
               onClick={handleNotificationClick}
               className="material-symbols-outlined notificationIcon notificationUnread"
@@ -90,7 +90,7 @@ const MainHeader = () => {
             >
               notifications
             </span>
-          )}
+          )} */}
 
           <span
             className="accountSettingsIcon"

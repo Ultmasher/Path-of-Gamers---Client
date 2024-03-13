@@ -121,7 +121,7 @@ const UserComment = ({props}) => {
                         </div>
                         <div className="subcommentHeaderInfo">
                           <h3 className="subcommentAuthor">
-                            PoG Username #{comment.commentAuthor}
+                          {comment.username}
                           </h3>
                           <h4 className="subcommentDate">
                             {comment.commentDate}
