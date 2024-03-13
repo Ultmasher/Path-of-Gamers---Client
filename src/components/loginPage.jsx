@@ -17,7 +17,7 @@ const LoginForm = () => {
     password: "",
   });
 
-  const { login } = useAuth();
+  const { login, loginDiscord } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,8 +29,10 @@ const LoginForm = () => {
 
   const handleDiscordLogin = () => {
     console.log("Discord login clicked");
+
     // Here you would typically send the data to your server
-  };
+    window.location.href = "https://discord.com/oauth2/authorize?client_id=1214873733408358450&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fuser%2Fauth%2Fdiscord%2Fcallback&scope=identify+email";
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();

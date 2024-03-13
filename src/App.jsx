@@ -1,7 +1,6 @@
 import RegisterPage from "./components/RegisterPage";
 import LandingPage from "./components/LandingPage";
 import LoginForm from "./components/loginPage";
-// import HomePage from './components/HomePage';
 import NewEvent from "./components/NewEvent";
 import LoLView from "./components/LoLView";
 import MainHeader from "./components/MainHeader";
@@ -14,8 +13,9 @@ import Footer from "./components/Footer";
 import { Route, Routes } from "react-router";
 import "./styles/App.css";
 import "./styles/ColourPalette.css";
-
+import DiscordCallback from './components/DiscordCallback';
 import { useAuth } from "./context/AuthContext";
+
 
 function App() {
 
@@ -24,10 +24,6 @@ function App() {
   console.log(token)
   return (
     <>
-      {/* <Routes>
-        <Route path="/newevent" element={<NewEvent />} />
-      </Routes> */}
-
       <div className="homepageWrapper">
         
         <MainHeader token={token} />
@@ -44,6 +40,7 @@ function App() {
             <Route path="/addgame" element={<AddGameInformation />} />
           </Routes>
         </div>
+
         <Footer />
       </div>
     </>
