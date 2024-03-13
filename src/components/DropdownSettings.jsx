@@ -15,11 +15,17 @@ const DropdownSettings = ({ dropdownRef, setShowDropdown }) => {
         } else if (target === 'PROFILE') {
             navigate('/profile');
             setShowDropdown(false);
+        } else {
+            setShowDropdown(false);
         }
     }
 
-
     const { logout } = useAuth();
+
+    const handleLogout = () => {
+        setShowDropdown(false);
+        logout;
+    }
 
     const navigate = useNavigate();
 

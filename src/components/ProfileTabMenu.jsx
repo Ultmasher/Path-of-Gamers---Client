@@ -4,8 +4,8 @@ import PoGTab from "./ProfileTabs/PoGTab";
 import UserComment from "./UserComment";
 import UserEventPost from "./UserEventPost";
 import "../styles/ProfileTabMenu.css";
-
-
+import Followers from "./ProfileTabs/Follower";
+import Following from "./ProfileTabs/Following";
 const ProfileTabMenu = ({ user1, id }) => {
 
   const [toggleState, setToggleState] = useState(1);
@@ -14,7 +14,6 @@ const ProfileTabMenu = ({ user1, id }) => {
     setToggleState(index);
   };
 
-  console.log(user1)
 
   return (
     <div className="tabContainer">
@@ -43,7 +42,7 @@ const ProfileTabMenu = ({ user1, id }) => {
         <div
           className={toggleState === 5 ? 'profileTab activeProfileTab' : 'profileTab'}
           onClick={() => toggleTab(5)}>
-          FOLLOWING
+          FOLLOWINGS
         </div>
 
       </div>
@@ -68,13 +67,11 @@ const ProfileTabMenu = ({ user1, id }) => {
         </div>
 
         <div className={toggleState === 4 ? 'tabContent activeTabContent' : 'tabContent'}>
-          <h2>Content 4</h2>
-          <p>Here is even more content!</p>
+        <Followers/>
         </div>
 
         <div className={toggleState === 5 ? 'tabContent activeTabContent' : 'tabContent'}>
-          <h2>Content 5</h2>
-          <p>Here is even more content!</p>
+          <Following/>
         </div>
 
 
