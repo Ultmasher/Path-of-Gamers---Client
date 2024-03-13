@@ -13,63 +13,46 @@ import diamondLogo from '../assets/RankedEmblemsLatest/Rank=Diamond.png';
 import masterLogo from '../assets/RankedEmblemsLatest/Rank=Master.png';
 import grandmasterLogo from '../assets/RankedEmblemsLatest/Rank=Grandmaster.png';
 import challengerLogo from '../assets/RankedEmblemsLatest/Rank=Challenger.png';
+import axios from "axios";
 
-const TestLoL = () => {
-  const [data, setData] = useState({});
-  const [loading, setLoading] = useState(true);
+const TestLoL = ({ data }) => {
   const [showRecentMatches, setShowRecentMatches] = useState(false);
-  const { getLoLData } = API();
+  const loading = false;
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await getLoLData();
-      setData(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleShowRecentMatches = () => {
     setShowRecentMatches(!showRecentMatches);
   };
 
-const parseUserTier = (tier) => {
+  const parseUserTier = (tier) => {
     console.log(tier);
     switch (tier) {
-            case "IRON":
-                    return <img src={ironLogo} alt="Iron" className="tierLogo" />;
-            case "BRONZE":
-                    return <img src={bronzeLogo} alt="Bronze" className="tierLogo" />;
-            case "SILVER":
-                    return <img src={silverLogo} alt="Silver" className="tierLogo" />;
-            case "GOLD":
-                    return <img src={goldLogo} alt="Gold" className="tierLogo" />;
-            case "EMERALD":
-                    return <img src={emeraldLogo} alt="Emerald" className="tierLogo" />;
-            case "PLATINUM":
-                    return <img src={platinumLogo} alt="Platinum" className="tierLogo" />;
-            case "DIAMOND":
-                    return <img src={diamondLogo} alt="Diamond" className="tierLogo" />;
-            case "MASTER":
-                    return <img src={masterLogo} alt="Master" className="tierLogo" />;
-            case "GRANDMASTER":
-                    return <img src={grandmasterLogo} alt="Grandmaster" className="tierLogo" />;
-            case "CHALLENGER":
-                    return <img src={challengerLogo} alt="Challenger" className="tierLogo" />;
-            default:
-                    return null;
+      case "IRON":
+        return <img src={ironLogo} alt="Iron" className="tierLogo" />;
+      case "BRONZE":
+        return <img src={bronzeLogo} alt="Bronze" className="tierLogo" />;
+      case "SILVER":
+        return <img src={silverLogo} alt="Silver" className="tierLogo" />;
+      case "GOLD":
+        return <img src={goldLogo} alt="Gold" className="tierLogo" />;
+      case "EMERALD":
+        return <img src={emeraldLogo} alt="Emerald" className="tierLogo" />;
+      case "PLATINUM":
+        return <img src={platinumLogo} alt="Platinum" className="tierLogo" />;
+      case "DIAMOND":
+        return <img src={diamondLogo} alt="Diamond" className="tierLogo" />;
+      case "MASTER":
+        return <img src={masterLogo} alt="Master" className="tierLogo" />;
+      case "GRANDMASTER":
+        return <img src={grandmasterLogo} alt="Grandmaster" className="tierLogo" />;
+      case "CHALLENGER":
+        return <img src={challengerLogo} alt="Challenger" className="tierLogo" />;
+      default:
+        return null;
     }
-};
+  };
 
-  useEffect(() => {
-    fetchData();
-    console.log(data);
-  }, []);
 
-  console.log(data);
 
   return (
     <>
@@ -101,7 +84,7 @@ const parseUserTier = (tier) => {
                     </div>
                   </div>
                   <div className="statsColMiddle">
-                   <span className="tierSpan"><p>Tier: </p>{parseUserTier(entry.tier)}</span>
+                    <span className="tierSpan"><p>Tier: </p>{parseUserTier(entry.tier)}</span>
                     <p>
                       Rank: <span className="rankSpan">{entry.rank}</span>
                     </p>
@@ -131,151 +114,151 @@ const parseUserTier = (tier) => {
             </div>
           </div>
 
-        {showRecentMatches ? (
-          <div className="recentMatchesDiv">
-          {data.matchData.map((game, index) => (
-            <>
-              <h3 className="matchNumberTitle">Match {index + 1}</h3>
-              <div className="recentMatchCardDiv">
-                <div className="teamOneContainer">
-                  <h3>Team One:</h3>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[0].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[0].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[0].kills}/
-                        {game.info.participants[0].deaths}/
-                        {game.info.participants[0].assists}
-                      </p>
+          {showRecentMatches ? (
+            <div className="recentMatchesDiv">
+              {data.matchData.map((game, index) => (
+                <div key={index}>
+                  <h3 className="matchNumberTitle">Match {index + 1}</h3>
+                  <div className="recentMatchCardDiv">
+                    <div className="teamOneContainer">
+                      <h3>Team One:</h3>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[0].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[0].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[0].kills}/
+                            {game.info.participants[0].deaths}/
+                            {game.info.participants[0].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[1].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[1].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[1].kills}/
+                            {game.info.participants[1].deaths}/
+                            {game.info.participants[1].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[2].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[2].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[2].kills}/
+                            {game.info.participants[2].deaths}/
+                            {game.info.participants[2].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[3].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[3].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[3].kills}/
+                            {game.info.participants[3].deaths}/
+                            {game.info.participants[3].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[4].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[4].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[4].kills}/
+                            {game.info.participants[4].deaths}/
+                            {game.info.participants[4].assists}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[1].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[1].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[1].kills}/
-                        {game.info.participants[1].deaths}/
-                        {game.info.participants[1].assists}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[2].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[2].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[2].kills}/
-                        {game.info.participants[2].deaths}/
-                        {game.info.participants[2].assists}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[3].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[3].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[3].kills}/
-                        {game.info.participants[3].deaths}/
-                        {game.info.participants[3].assists}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[4].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[4].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[4].kills}/
-                        {game.info.participants[4].deaths}/
-                        {game.info.participants[4].assists}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="teamTwoContainer">
-                  <h3>Team Two:</h3>
+                    <div className="teamTwoContainer">
+                      <h3>Team Two:</h3>
 
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[5].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[5].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[5].kills}/
-                        {game.info.participants[5].deaths}/
-                        {game.info.participants[5].assists}
-                      </p>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[5].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[5].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[5].kills}/
+                            {game.info.participants[5].deaths}/
+                            {game.info.participants[5].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[6].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[6].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[6].kills}/
+                            {game.info.participants[6].deaths}/
+                            {game.info.participants[6].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[7].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[7].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[7].kills}/
+                            {game.info.participants[7].deaths}/
+                            {game.info.participants[7].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[8].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[8].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[8].kills}/
+                            {game.info.participants[8].deaths}/
+                            {game.info.participants[8].assists}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="recentPlayerCard">
+                        <img
+                          src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[9].championName}.png`}
+                        />
+                        <div className="recentPlayerCardStats">
+                          <p>{game.info.participants[9].summonerName}</p>
+                          <p>
+                            KDA: {game.info.participants[9].kills}/
+                            {game.info.participants[9].deaths}/
+                            {game.info.participants[9].assists}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[6].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[6].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[6].kills}/
-                        {game.info.participants[6].deaths}/
-                        {game.info.participants[6].assists}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[7].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[7].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[7].kills}/
-                        {game.info.participants[7].deaths}/
-                        {game.info.participants[7].assists}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[8].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[8].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[8].kills}/
-                        {game.info.participants[8].deaths}/
-                        {game.info.participants[8].assists}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="recentPlayerCard">
-                    <img
-                      src={`https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/${game.info.participants[9].championName}.png`}
-                    />
-                    <div className="recentPlayerCardStats">
-                      <p>{game.info.participants[9].summonerName}</p>
-                      <p>
-                        KDA: {game.info.participants[9].kills}/
-                        {game.info.participants[9].deaths}/
-                        {game.info.participants[9].assists}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* <div
+                  {/* <div
                 key={index}
                 style={{ backgroundColor: "gray" }}
                 className="matchHistoryCardLoL"
@@ -298,10 +281,10 @@ const parseUserTier = (tier) => {
                   )
                 )}
               </div> */}
-            </>
-          ))}
-        </div>
-        ) : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
 
         </div>
       ) : (

@@ -176,7 +176,7 @@ const HomeFeed = () => {
           value={selectedGame}
           onChange={handleGameChange}
         >
-          <option value="">All Games</option>
+
           {games.map(game => (
             <option key={game._id} value={game._id}>{game.name}</option>
           ))}
