@@ -94,8 +94,22 @@ function RegisterPage() {
             >
               REGISTER
             </button>
+<<<<<<< Updated upstream
           </div>
         </form>
+=======
+              <button className="discordButton" onClick={handleDiscordLogin}>
+                Register with Discord{" "}
+                <img
+                  className="discordLogo"
+                  src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"
+                  alt="discordLogo"
+                />
+              </button>
+            </div>
+        </form>
+
+>>>>>>> Stashed changes
       </div>
     </>
   );

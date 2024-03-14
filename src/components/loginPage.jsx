@@ -84,7 +84,11 @@ const LoginForm = () => {
               Login
             </button>
             <div className="registerButtonsWrapper">
+<<<<<<< Updated upstream
               <button className="discordButton" onClick={handleDiscordLogin}>
+=======
+              <button className="discordButton"  onClick={handleDiscordLogin}>
+>>>>>>> Stashed changes
                 Login with Discord{" "}
                 <img
                   className="discordLogo"
@@ -94,6 +98,10 @@ const LoginForm = () => {
               </button>
             </div>
           </form>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         </div>
       )}
     </>
