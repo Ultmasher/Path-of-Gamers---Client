@@ -7,7 +7,7 @@ const UserComment = ({props}) => {
   let commentData = props;
 
   if (!commentData) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   console.log(commentData);
