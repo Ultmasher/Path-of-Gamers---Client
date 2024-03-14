@@ -94,8 +94,7 @@ function RegisterPage() {
             >
               REGISTER
             </button>
-          </div>
-        </form>
+
         <div className="registerButtonsWrapper">
               <button className="discordButton" onClick={handleDiscordLogin}>
                 Register with Discord{" "}
@@ -106,6 +105,8 @@ function RegisterPage() {
                 />
               </button>
             </div>
+        </form>
+
       </div>
     </>
   );

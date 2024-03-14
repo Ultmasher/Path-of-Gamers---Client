@@ -91,8 +91,8 @@ const LoginForm = () => {
             <button disabled={loading} className="registerButton" type="submit">
               Login
             </button>
+
             
-          </form>
           <div className="registerButtonsWrapper">
               <button className="discordButton"  onClick={handleDiscordLogin}>
                 Login with Discord{" "}
@@ -103,6 +103,8 @@ const LoginForm = () => {
                 />
               </button>
             </div>
+          </form>
+
         </div>
       )}
     </>

@@ -61,6 +61,7 @@
 }
 
 .discordButton {
+    width: 100%;
     border: 2px solid var( --main-discord-color);
     background-color: var( --main-discord-color);
     display: flex;

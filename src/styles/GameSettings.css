@@ -182,13 +182,16 @@
 
 @media (max-width: 768px) {
     .gameSettingsContainer {
-        padding: 1rem;
+        padding: 0rem;
         overflow-y: scroll;
+        width: 100%;
+        margin: 0;
     }
 
     .gameSettingsContent {
-        padding: 1rem;
+        padding: 2rem;
         flex-direction: column;
+        margin-bottom: 3rem;
     }
 
     .gameSettingsTitle {
